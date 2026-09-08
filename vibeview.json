@@ -1,0 +1,26 @@
+{
+  "defaultPlatform": "ios",
+  "metroCommand": "npx expo start",
+  "metroPort": 8081,
+  "platforms": {
+    "ios": {
+      "deviceCategory": "phone",
+      "build": {
+        "command": "npm ci && npx expo run:ios --configuration Debug --no-install --no-bundler",
+        "artifact": "ios/build/Build/Products/Debug-iphonesimulator/*.app",
+        "autoIncrement": true
+      }
+    },
+    "android": {
+      "deviceCategory": "phone",
+      "build": {
+        "command": "npm ci && npx expo run:android --variant debug --no-install --no-bundler",
+        "artifact": "android/app/build/outputs/apk/debug/*.apk",
+        "autoIncrement": true
+      },
+      "submit": {
+        "track": "internal"
+      }
+    }
+  }
+}
