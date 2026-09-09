@@ -33,6 +33,8 @@ const config: ExpoConfig = {
     favicon: './assets/images/favicon.png',
   },
   plugins: [
+    './plugins/with-bundled-debug',
+    './plugins/with-vibeview-signing',
     'expo-router',
     'expo-font',
     [

@@ -55,11 +55,24 @@ vibeview submit --platform android --track internal
 
 ### `vibeview.json`
 
-The build blocks use the documented Expo managed-project defaults: there is no
-`ios/` or `android/` directory in this repo, and `npx expo run:*` prebuilds one
-during the build. `npm ci` is part of each command because a cloud build starts
-from a clean checkout with no `node_modules`. `--no-bundler` keeps the build
-from starting a Metro server it would then wait on.
+The build blocks follow the same shape as the Expo production defaults: there
+is no `ios/` or `android/` directory in this repo, so each command runs
+`npx expo prebuild` to generate one and then drives the native build tool
+directly (`xcodebuild` for the simulator `.app`, Gradle for the debug `.apk`).
+`npx expo run:*` is the wrong tool for a cloud build: it expects a booted
+simulator or a connected Android device to install onto, and the builder has
+neither. `npm ci` comes first because a cloud build starts from a clean
+checkout with no `node_modules`; the iOS prebuild also runs `pod install`.
+
+Both simulator builds embed the JavaScript bundle, which a stock debug build
+does not: React Native expects Metro and shows a red "No script URL" screen
+without it. On a cloud device there is no Metro unless you are running
+`vibeview dev`, so share links and test runs need the bundle inside the app.
+The small config plugin in `plugins/with-bundled-debug.js` takes care of it on
+both platforms: it empties Gradle's `debuggableVariants` and writes an
+`ios/.xcode.env.local` that makes the bundle step produce a production bundle
+for Debug too (a dev bundle cannot run without its dev server). When Metro *is*
+running the app still prefers it, so the dev loop is unchanged.
 
 JSON has no comments, so two notes live here instead:
 

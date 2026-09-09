@@ -6,17 +6,21 @@
     "ios": {
       "deviceCategory": "phone",
       "build": {
-        "command": "npm ci && npx expo run:ios --configuration Debug --no-install --no-bundler",
+        "command": "npm ci && npx expo prebuild --platform ios && xcodebuild -workspace ios/Atlas.xcworkspace -scheme Atlas -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build CODE_SIGNING_ALLOWED=NO",
         "artifact": "ios/build/Build/Products/Debug-iphonesimulator/*.app",
-        "autoIncrement": true
+        "autoIncrement": true,
+        "productionCommand": "npm ci && npx expo prebuild --platform ios && xcodebuild archive -workspace ios/Atlas.xcworkspace -scheme Atlas -configuration Release -archivePath ios/build/Atlas.xcarchive CODE_SIGN_STYLE=Manual ${VIBEVIEW_DEVELOPMENT_TEAM:+\"DEVELOPMENT_TEAM=$VIBEVIEW_DEVELOPMENT_TEAM\"} ${VIBEVIEW_PROVISIONING_PROFILE:+\"PROVISIONING_PROFILE_SPECIFIER=$VIBEVIEW_PROVISIONING_PROFILE\"} ${VIBEVIEW_CODE_SIGN_IDENTITY:+\"CODE_SIGN_IDENTITY=$VIBEVIEW_CODE_SIGN_IDENTITY\"} && xcodebuild -exportArchive -archivePath ios/build/Atlas.xcarchive -exportPath ios/build -exportOptionsPlist \"$VIBEVIEW_EXPORT_OPTIONS_PLIST\"",
+        "productionArtifact": "ios/build/*.ipa"
       }
     },
     "android": {
       "deviceCategory": "phone",
       "build": {
-        "command": "npm ci && npx expo run:android --variant debug --no-install --no-bundler",
+        "command": "npm ci && npx expo prebuild --platform android --no-install && cd android && ./gradlew assembleDebug",
         "artifact": "android/app/build/outputs/apk/debug/*.apk",
-        "autoIncrement": true
+        "autoIncrement": true,
+        "productionCommand": "npm ci && npx expo prebuild --platform android --no-install && cd android && ./gradlew bundleRelease",
+        "productionArtifact": "android/app/build/outputs/bundle/release/*.aab"
       },
       "submit": {
         "track": "internal"
