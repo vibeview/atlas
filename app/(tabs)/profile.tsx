@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { Screen } from '../../src/components/Screen';
+import { Screen, ScreenHeader } from '../../src/components/Screen';
 import { Avatar } from '../../src/components/Avatar';
 import { ChevronRightIcon } from '../../src/components/icons';
 import { useAppState } from '../../src/state/AppState';
@@ -32,13 +32,15 @@ export default function ProfileScreen() {
   return (
     <Screen>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.identity}>
-          <Avatar size={64} />
-          <Text testID="profile-name" style={styles.name}>
-            Ava Moreno
-          </Text>
-          <Text style={styles.since}>Exploring since 2021</Text>
-        </View>
+        <ScreenHeader>
+          <View style={styles.identity}>
+            <Avatar size={64} />
+            <Text testID="profile-name" style={styles.name}>
+              Ava Moreno
+            </Text>
+            <Text style={styles.since}>Exploring since 2021</Text>
+          </View>
+        </ScreenHeader>
 
         <View testID="profile-stats" style={styles.stats}>
           {stats.map((s) => (

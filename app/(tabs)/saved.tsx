@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { Screen } from '../../src/components/Screen';
+import { Screen, ScreenHeader } from '../../src/components/Screen';
 import { Chip } from '../../src/components/Chip';
 import { DestinationCard } from '../../src/components/DestinationCard';
 import { EmptyState } from '../../src/components/EmptyState';
 import { HeartIcon } from '../../src/components/icons';
 import { destinationsById } from '../../src/data/destinations';
+import { useTopTrailingClearance } from '../../src/layout/AdaptiveLayout';
 import { useHighlightedId, useOpenDestination } from '../../src/layout/useOpenDestination';
 import { useAppState } from '../../src/state/AppState';
 import { colors, font, spacing } from '../../src/theme/theme';
@@ -30,6 +31,9 @@ export default function SavedScreen() {
   const highlighted = useHighlightedId();
   const { saved, isSaved, toggleSaved } = useAppState();
   const [collection, setCollection] = useState('all');
+  // Keep the chips beside a corner status bar (iPhone Duo) clear of it.
+  const clearance = useTopTrailingClearance();
+  const beside = { marginRight: Math.max(0, clearance - spacing.screen + 8) };
   // Two columns, sized from the grid's measured width (the phone screen or
   // the list pane beside a fold).
   const [gridWidth, setGridWidth] = useState(0);
@@ -46,30 +50,33 @@ export default function SavedScreen() {
   return (
     <Screen>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
-          <Text testID="saved-title" style={styles.title}>
-            Saved
-          </Text>
-          <Text testID="saved-subtitle" style={styles.subtitle}>
-            {saved.length} {saved.length === 1 ? 'place' : 'places'} · 2 collections
-          </Text>
-        </View>
+        <ScreenHeader>
+          <View style={styles.header}>
+            <Text testID="saved-title" style={styles.title}>
+              Saved
+            </Text>
+            <Text testID="saved-subtitle" style={styles.subtitle}>
+              {saved.length} {saved.length === 1 ? 'place' : 'places'} · 2 collections
+            </Text>
+          </View>
 
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.chips}
-        >
-          {COLLECTIONS.map((c) => (
-            <Chip
-              key={c.id}
-              testID={`collection-${c.id}`}
-              label={c.label}
-              active={collection === c.id}
-              onPress={() => setCollection(c.id)}
-            />
-          ))}
-        </ScrollView>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={[styles.chipsRow, beside]}
+            contentContainerStyle={styles.chips}
+          >
+            {COLLECTIONS.map((c) => (
+              <Chip
+                key={c.id}
+                testID={`collection-${c.id}`}
+                label={c.label}
+                active={collection === c.id}
+                onPress={() => setCollection(c.id)}
+              />
+            ))}
+          </ScrollView>
+        </ScreenHeader>
 
         {saved.length === 0 ? (
           <EmptyState
@@ -126,6 +133,8 @@ const styles = StyleSheet.create({
     color: colors.secondary,
     marginTop: 3,
   },
+  // A ScrollView grows by default; the header may be taller than its rows.
+  chipsRow: { flexGrow: 0 },
   chips: { gap: 6, paddingVertical: 12 },
   grid: {
     flexDirection: 'row',

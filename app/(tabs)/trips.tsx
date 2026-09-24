@@ -2,7 +2,7 @@ import { Image } from 'expo-image';
 import React from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { Screen } from '../../src/components/Screen';
+import { Screen, ScreenHeader } from '../../src/components/Screen';
 import { EmptyState } from '../../src/components/EmptyState';
 import { ChevronRightIcon, MapIcon } from '../../src/components/icons';
 import { destinationsById } from '../../src/data/destinations';
@@ -18,14 +18,16 @@ export default function TripsScreen() {
   return (
     <Screen>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.header}>
-          <Text testID="trips-title" style={styles.title}>
-            Trips
-          </Text>
-          <Text style={styles.subtitle}>
-            {trips.length} planned {trips.length === 1 ? 'trip' : 'trips'}
-          </Text>
-        </View>
+        <ScreenHeader>
+          <View style={styles.header}>
+            <Text testID="trips-title" style={styles.title}>
+              Trips
+            </Text>
+            <Text style={styles.subtitle}>
+              {trips.length} planned {trips.length === 1 ? 'trip' : 'trips'}
+            </Text>
+          </View>
+        </ScreenHeader>
 
         {trips.length === 0 ? (
           <EmptyState

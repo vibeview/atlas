@@ -176,29 +176,48 @@ export function useAdaptiveLayout(): AdaptiveLayout {
   return useContext(AdaptiveLayoutContext);
 }
 
+/** The status-bar block at the top trailing corner of the list pane. */
+export type CornerBlock = {
+  /** How far in from the pane's trailing edge it reaches, in points. */
+  width: number;
+  /** How far down from the pane's top it reaches, in points. */
+  bottom: number;
+};
+
+const NO_CORNER: CornerBlock = { width: 0, bottom: 0 };
+
 /**
- * How far in from its trailing edge the list pane's top is covered, in
- * points: iPhone Duo keeps the status bar in a block at the top trailing
- * corner of each display. Safe-area insets report that block as a
- * full-height trailing inset; the reserved region says it is only as tall as
- * the status bar, so only the rows beside it need to make room.
+ * iPhone Duo keeps the status bar in a block at the top trailing corner of
+ * each display. Safe-area insets report that block as a full-height trailing
+ * inset; the reserved region says it is only as tall as the status bar, so
+ * only what sits beside it needs to make room.
  */
-export function useTopTrailingClearance(): number {
+export function useTopTrailingBlock(): CornerBlock {
   const layout = useAdaptiveLayout();
   const occlusions = useContext(OcclusionContext);
   const { width, height } = useWindowDimensions();
   const pane = layout.mode === 'split' ? layout.list : { x: 0, y: 0, width, height };
   const right = pane.x + pane.width;
-  let clearance = 0;
+  let block = NO_CORNER;
   for (const o of occlusions) {
     const atTop = o.y <= pane.y + 8 && o.y + o.height > pane.y;
     const atTrailingEdge = o.x < right && o.x + o.width >= right - 1;
     // A block that also reaches the leading edge is a full-width status bar
     // (ordinary iPhones on iOS 27.2), already covered by the top safe area.
     const corner = o.x > pane.x;
-    if (atTop && atTrailingEdge && corner) clearance = Math.max(clearance, right - o.x);
+    if (atTop && atTrailingEdge && corner) {
+      block = {
+        width: Math.max(block.width, right - o.x),
+        bottom: Math.max(block.bottom, o.y + o.height - pane.y),
+      };
+    }
   }
-  return clearance;
+  return block;
+}
+
+/** How far in from its trailing edge the list pane's top is covered, in points. */
+export function useTopTrailingClearance(): number {
+  return useTopTrailingBlock().width;
 }
 
 export function useIsSplit(): boolean {
