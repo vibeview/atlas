@@ -37,3 +37,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# VibeView live-session state (local machine state)
+.vibeview/
