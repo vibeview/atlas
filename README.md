@@ -117,8 +117,8 @@ React Native 0.88 yet, hence `legacy-peer-deps` in `.npmrc`.
 ## Run it on VibeView
 
 With [VibeView](https://vibeview.io) you can build and run Atlas without a
-local native toolchain: every native build runs in the cloud, and the app
-streams from a cloud simulator or emulator to your browser.
+local native toolchain: build it in the cloud, and the app streams from a
+cloud simulator or emulator to your browser.
 
 ```bash
 npm install -g vibeview     # or run any command below with npx vibeview
