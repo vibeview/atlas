@@ -17,7 +17,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type { Destination } from '../data/destinations';
-import { useTopTrailingClearance } from '../layout/AdaptiveLayout';
+import { useAdaptiveLayout, useTopTrailingClearance } from '../layout/AdaptiveLayout';
 import { useAppState } from '../state/AppState';
 import { colors, font, radius, spacing } from '../theme/theme';
 import { ChevronLeftIcon, HeartIcon, ShareIcon, StarIcon } from './icons';
@@ -43,6 +43,10 @@ export function DestinationDetail({ destination, variant, onBack }: Props) {
   const pane = variant === 'pane';
   // A status bar in the top trailing corner (iPhone Duo) would sit on Share.
   const cornerTaken = useTopTrailingClearance() > 0;
+  // Above a horizontal fold the pane ends mid-display, where a full-width
+  // bar would read as a stray toolbar; the booking row floats as a card.
+  const layout = useAdaptiveLayout();
+  const floatingCta = pane && layout.mode === 'split' && layout.axis === 'column';
 
   // Picking another place in the list fades the pane in, rather than
   // swapping it abruptly, and starts it from the top.
@@ -71,9 +75,13 @@ export function DestinationDetail({ destination, variant, onBack }: Props) {
   const onLayout = (e: LayoutChangeEvent) => setMeasured(e.nativeEvent.layout.height);
   // The phone page gives the photo 46% of the screen; a pane is shorter than
   // the display, so its card takes a larger share of the pane, within limits.
-  const heroHeight = pane
-    ? Math.round(Math.min(440, Math.max(220, height * 0.5)))
-    : Math.round(height * 0.46);
+  // Above a horizontal fold the pane is short, so the photo becomes a wide
+  // banner that leaves the rating, tags and booking card in view.
+  const heroHeight = floatingCta
+    ? Math.round(Math.min(260, Math.max(140, height - insets.top - 240)))
+    : pane
+      ? Math.round(Math.min(440, Math.max(220, height * 0.5)))
+      : Math.round(height * 0.46);
 
   const heroButtons = (
     <View
@@ -115,7 +123,7 @@ export function DestinationDetail({ destination, variant, onBack }: Props) {
           ref={scroll}
           testID={pane ? 'detail-pane-scroll' : 'destination-scroll'}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 24 }}
+          contentContainerStyle={{ paddingBottom: floatingCta ? 110 : 24 }}
         >
           <View
             style={[
@@ -192,49 +200,103 @@ export function DestinationDetail({ destination, variant, onBack }: Props) {
           </View>
         </ScrollView>
 
-        <View
-          style={[
-            styles.cta,
-            pane && styles.ctaPane,
-            { paddingBottom: Math.max(insets.bottom, 12) },
-          ]}
-        >
-          <View style={styles.price}>
-            <Text style={styles.priceLabel}>from</Text>
-            <View style={styles.priceLine}>
-              <Text testID="destination-price" style={styles.priceValue}>
-                ${destination.priceFrom}
-              </Text>
-              <Text style={styles.priceNights}>{destination.nights} nights</Text>
+        {floatingCta ? (
+          <View pointerEvents="box-none" style={styles.ctaDock}>
+            <LinearGradient
+              pointerEvents="none"
+              colors={['rgba(243,245,247,0)', colors.mist]}
+              locations={[0, 0.3]}
+              style={StyleSheet.absoluteFill}
+            />
+            <View
+              style={[
+                styles.cta,
+                pane && styles.ctaPane,
+                floatingCta ? styles.ctaFloating : { paddingBottom: Math.max(insets.bottom, 12) },
+              ]}
+            >
+              <View style={styles.price}>
+                <Text style={styles.priceLabel}>from</Text>
+                <View style={styles.priceLine}>
+                  <Text testID="destination-price" style={styles.priceValue}>
+                    ${destination.priceFrom}
+                  </Text>
+                  <Text style={styles.priceNights}>{destination.nights} nights</Text>
+                </View>
+              </View>
+
+              <Pressable
+                testID="save-button"
+                accessibilityLabel={saved ? 'Saved' : 'Save'}
+                accessibilityRole="button"
+                accessibilityState={{ selected: saved }}
+                onPress={() => toggleSaved(destination.id)}
+                style={[
+                  styles.ghostButton,
+                  pane && styles.ctaButtonPane,
+                  pane && { width: 42 },
+                  saved && styles.ghostButtonSaved,
+                ]}
+              >
+                <HeartIcon size={18} color={saved ? colors.amber : colors.ink} filled={saved} />
+              </Pressable>
+
+              <Pressable
+                testID="plan-trip-button"
+                accessibilityLabel="Plan trip"
+                accessibilityRole="button"
+                onPress={onPlanTrip}
+                style={[styles.primaryButton, pane && styles.ctaButtonPane]}
+              >
+                <Text style={styles.primaryText}>Plan trip</Text>
+              </Pressable>
             </View>
           </View>
-
-          <Pressable
-            testID="save-button"
-            accessibilityLabel={saved ? 'Saved' : 'Save'}
-            accessibilityRole="button"
-            accessibilityState={{ selected: saved }}
-            onPress={() => toggleSaved(destination.id)}
+        ) : (
+          <View
             style={[
-              styles.ghostButton,
-              pane && styles.ctaButtonPane,
-              pane && { width: 42 },
-              saved && styles.ghostButtonSaved,
+              styles.cta,
+              pane && styles.ctaPane,
+              floatingCta ? styles.ctaFloating : { paddingBottom: Math.max(insets.bottom, 12) },
             ]}
           >
-            <HeartIcon size={18} color={saved ? colors.amber : colors.ink} filled={saved} />
-          </Pressable>
+            <View style={styles.price}>
+              <Text style={styles.priceLabel}>from</Text>
+              <View style={styles.priceLine}>
+                <Text testID="destination-price" style={styles.priceValue}>
+                  ${destination.priceFrom}
+                </Text>
+                <Text style={styles.priceNights}>{destination.nights} nights</Text>
+              </View>
+            </View>
 
-          <Pressable
-            testID="plan-trip-button"
-            accessibilityLabel="Plan trip"
-            accessibilityRole="button"
-            onPress={onPlanTrip}
-            style={[styles.primaryButton, pane && styles.ctaButtonPane]}
-          >
-            <Text style={styles.primaryText}>Plan trip</Text>
-          </Pressable>
-        </View>
+            <Pressable
+              testID="save-button"
+              accessibilityLabel={saved ? 'Saved' : 'Save'}
+              accessibilityRole="button"
+              accessibilityState={{ selected: saved }}
+              onPress={() => toggleSaved(destination.id)}
+              style={[
+                styles.ghostButton,
+                pane && styles.ctaButtonPane,
+                pane && { width: 42 },
+                saved && styles.ghostButtonSaved,
+              ]}
+            >
+              <HeartIcon size={18} color={saved ? colors.amber : colors.ink} filled={saved} />
+            </Pressable>
+
+            <Pressable
+              testID="plan-trip-button"
+              accessibilityLabel="Plan trip"
+              accessibilityRole="button"
+              onPress={onPlanTrip}
+              style={[styles.primaryButton, pane && styles.ctaButtonPane]}
+            >
+              <Text style={styles.primaryText}>Plan trip</Text>
+            </Pressable>
+          </View>
+        )}
       </Animated.View>
     </View>
   );
@@ -350,6 +412,19 @@ const styles = StyleSheet.create({
   // Matches the tab bar across the fold: 6 + 42 + home indicator.
   ctaPane: { paddingHorizontal: spacing.screen + 4, paddingTop: 6 },
   ctaButtonPane: { height: 42 },
+  ctaDock: { position: 'absolute', left: 0, right: 0, bottom: 0, paddingTop: 36 },
+  ctaFloating: {
+    marginHorizontal: spacing.screen,
+    marginBottom: 10,
+    paddingHorizontal: 14,
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: radius.lg,
+    borderTopWidth: 0,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.border,
+    boxShadow: '0 4px 16px rgba(17, 24, 39, 0.08)',
+  },
   price: { flex: 1 },
   priceLabel: { fontFamily: font.semibold, fontSize: 10, color: colors.secondary },
   priceLine: { flexDirection: 'row', alignItems: 'baseline', gap: 4 },

@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useAdaptiveLayout } from '../layout/AdaptiveLayout';
 import { colors } from '../theme/theme';
 
 /**
@@ -12,7 +13,12 @@ import { colors } from '../theme/theme';
  */
 export function Screen({ children }: { children: React.ReactNode }) {
   const insets = useSafeAreaInsets();
-  return <View style={[styles.screen, { paddingTop: Math.max(insets.top, 16) }]}>{children}</View>;
+  const layout = useAdaptiveLayout();
+  // Below a horizontal fold the pane does not reach the display's corners.
+  const minTop = layout.mode === 'split' && layout.axis === 'column' ? 0 : 16;
+  return (
+    <View style={[styles.screen, { paddingTop: Math.max(insets.top, minTop) }]}>{children}</View>
+  );
 }
 
 const styles = StyleSheet.create({
