@@ -14,8 +14,10 @@ type Props = {
   onToggleSaved: () => void;
   /** Shown in the detail pane of the two-pane layout. */
   selected?: boolean;
-  /** `rail` is the fixed-width horizontal card; `grid` fills its column. */
+  /** `rail` is the fixed-width horizontal card; `grid` is sized by its grid. */
   variant?: 'rail' | 'grid';
+  /** Width of a `grid` card in points; its height follows the 3:4 shape. */
+  width?: number;
 };
 
 export function DestinationCard({
@@ -25,7 +27,12 @@ export function DestinationCard({
   onToggleSaved,
   selected = false,
   variant = 'rail',
+  width,
 }: Props) {
+  // Grid cards get explicit points: React Native 0.88 leaves a card with a
+  // percentage width and an aspect ratio at zero height inside a wrapping row.
+  const size =
+    variant === 'grid' && width !== undefined ? { width, height: (width * 4) / 3 } : null;
   return (
     <Pressable
       testID={`destination-card-${destination.id}`}
@@ -33,7 +40,7 @@ export function DestinationCard({
       accessibilityRole="button"
       accessibilityState={{ selected }}
       onPress={onPress}
-      style={[styles.card, variant === 'rail' ? styles.rail : styles.grid]}
+      style={[styles.card, variant === 'rail' ? styles.rail : size]}
     >
       <Image source={destination.photo} style={StyleSheet.absoluteFill} contentFit="cover" />
       <LinearGradient
@@ -78,11 +85,6 @@ const styles = StyleSheet.create({
   },
   rail: {
     width: 150,
-    aspectRatio: 3 / 4,
-  },
-  grid: {
-    // Two columns inside a wrapping row with a 10pt gap.
-    width: '48.5%',
     aspectRatio: 3 / 4,
   },
   selectedRing: {

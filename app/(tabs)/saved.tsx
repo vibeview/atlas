@@ -11,6 +11,8 @@ import { useHighlightedId, useOpenDestination } from '../../src/layout/useOpenDe
 import { useAppState } from '../../src/state/AppState';
 import { colors, font, spacing } from '../../src/theme/theme';
 
+const GRID_GAP = 10;
+
 const COLLECTIONS = [
   { id: 'all', label: 'All places' },
   { id: 'summer-2027', label: 'Summer 2027' },
@@ -28,6 +30,10 @@ export default function SavedScreen() {
   const highlighted = useHighlightedId();
   const { saved, isSaved, toggleSaved } = useAppState();
   const [collection, setCollection] = useState('all');
+  // Two columns, sized from the grid's measured width (the phone screen or
+  // the list pane beside a fold).
+  const [gridWidth, setGridWidth] = useState(0);
+  const cardWidth = gridWidth > 0 ? Math.floor((gridWidth - GRID_GAP) / 2) : 0;
 
   const places = useMemo(() => {
     const ids =
@@ -80,18 +86,24 @@ export default function SavedScreen() {
             body="Saved places in this collection show up here."
           />
         ) : (
-          <View testID="saved-grid" style={styles.grid}>
-            {places.map((d) => (
-              <DestinationCard
-                key={d.id}
-                variant="grid"
-                destination={d}
-                saved={isSaved(d.id)}
-                selected={highlighted === d.id}
-                onPress={() => open(d.id)}
-                onToggleSaved={() => toggleSaved(d.id)}
-              />
-            ))}
+          <View
+            testID="saved-grid"
+            style={styles.grid}
+            onLayout={(e) => setGridWidth(e.nativeEvent.layout.width)}
+          >
+            {cardWidth > 0 &&
+              places.map((d) => (
+                <DestinationCard
+                  key={d.id}
+                  variant="grid"
+                  width={cardWidth}
+                  destination={d}
+                  saved={isSaved(d.id)}
+                  selected={highlighted === d.id}
+                  onPress={() => open(d.id)}
+                  onToggleSaved={() => toggleSaved(d.id)}
+                />
+              ))}
           </View>
         )}
       </ScrollView>
@@ -118,7 +130,8 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 10,
+    justifyContent: 'space-between',
+    rowGap: GRID_GAP,
     marginTop: 2,
   },
 });
