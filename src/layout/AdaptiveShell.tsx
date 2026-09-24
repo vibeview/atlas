@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useRef } from 'react';
-import { StyleSheet, View, type ViewStyle } from 'react-native';
+import { StyleSheet, View, type ViewProps } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { DestinationDetail } from '../components/DestinationDetail';
@@ -22,15 +22,22 @@ import { useAdaptiveLayout } from './AdaptiveLayout';
  * Each pane has its own safe-area provider, so a pane only pads for the
  * edges of the display it actually touches.
  */
+/**
+ * A style a View accepts. Not `ViewStyle`: expo/types widens that for the web
+ * (`position: 'fixed' | 'sticky'`), and React Native 0.88's View no longer
+ * takes the widened type.
+ */
+type PaneStyle = ViewProps['style'];
+
 export function AdaptiveShell({ children }: { children: React.ReactNode }) {
   const layout = useAdaptiveLayout();
   const split = layout.mode === 'split';
   useContinuity(split);
 
-  let root: ViewStyle = styles.fill;
-  let listPane: ViewStyle = styles.fill;
-  let gap: ViewStyle = styles.hidden;
-  let detailPane: ViewStyle = styles.hidden;
+  let root: PaneStyle = styles.fill;
+  let listPane: PaneStyle = styles.fill;
+  let gap: PaneStyle = styles.hidden;
+  let detailPane: PaneStyle = styles.hidden;
 
   if (layout.mode === 'split') {
     const row = layout.axis === 'row';
