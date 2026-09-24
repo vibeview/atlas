@@ -8,7 +8,7 @@ const buildNumber = process.env.VIBEVIEW_BUILD_NUMBER ?? '1';
 const config: ExpoConfig = {
   name: 'Atlas',
   slug: 'atlas',
-  version: '1.1.0',
+  version: '1.1.1',
   // Every orientation: iPhone Duo's inner display is landscape when open, and
   // iOS 27 resizes iPhone apps like iPad apps.
   orientation: 'default',
