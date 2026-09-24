@@ -2,30 +2,131 @@
 
 A small travel app: find a place, open it, save it.
 
-Atlas is **VibeView's demo app** — the one on the device in the screenshots on
-[vibeview.io](https://vibeview.io) and in the live demo — and it doubles as the
-public **reference project for VibeView cloud builds**. It is a plain Expo
-project with no backend, no sign-in and no persistence, so every session starts
-identical: the same six saved places, the same two trips, the same photos.
+No account, no server, no persistence: every session starts identical, with
+the same six saved places, the same two trips and the same photos.
+
+**This is a sample app.** It is the app on the device in the screenshots on
+[vibeview.io](https://vibeview.io), and it shows a complete
+[VibeView](https://vibeview.io) setup for an Expo project: cloud builds, live
+development on cloud simulators and emulators, signing and store submission.
+It is also a worked example of an adaptive React Native layout for iPhone Duo.
+Copy the parts you need; do not expect much from the app itself.
 
 React Native + Expo (SDK 58 preview), TypeScript, Expo Router. One codebase,
 iOS and Android.
 
-<!-- screenshot: docs/screenshots/atlas-explore.png — Explore, Destination, Saved, Profile -->
-_Screenshots: Explore · Destination · Saved · Profile._
+<p align="center">
+  <img src="docs/screenshots/duo-open-two-pane.png" alt="Atlas on iPhone Duo's inner display: the Explore tab beside the Kyoto destination, one on each side of the fold" width="100%">
+</p>
+<p align="center">
+  <img src="docs/screenshots/duo-open-rotated.png" alt="iPhone Duo open and rotated: the destination above the fold and the list below it" width="49%">
+  <img src="docs/screenshots/duo-closed-cover.png" alt="iPhone Duo closed: the cover display shows the one-pane phone layout" width="48%">
+</p>
+
+## The app
+
+- **Explore**: search, category chips (Beaches, Mountains, Cities, Islands),
+  a *Popular this week* rail of photo cards and a *Weekend escapes* list.
+- **Destination**: a hero photo, rating, tags, a short description, *Top
+  experiences*, and a booking bar with Save and Plan trip.
+- **Saved**: collections and a two-column grid of saved places.
+- **Trips**: the planned trips.
+- **Profile**: stats, settings rows and Sign out.
+
+State is kept in memory and seeded on launch. The seven destination photos
+are bundled in the app, so it looks the same everywhere and never waits on
+the network. The generated `ios/` and `android/` directories are not checked
+in; `expo prebuild` recreates them for every build.
+
+## iPhone Duo
+
+Atlas adapts to iPhone Duo's two displays and its fold:
+
+- **Closed (cover display)**: one pane, the phone app.
+- **Open, or partly folded (inner display)**: two panes. The tabs sit on one
+  side of the fold and the selected destination (Kyoto until you pick
+  another) on the other. Nothing is drawn under the fold, and the split stays
+  in the same place between partly folded and open flat, so the layout does
+  not jump.
+- **Open and rotated**: the fold runs across the display, so the panes stack:
+  the destination above the fold, as a wide banner photo with a floating
+  booking card, and the list below it.
+- **Folding and unfolding keep your place**: the navigator is never
+  remounted, so the tab, search text and scroll positions survive. A
+  destination open on the cover display moves into the pane when you open
+  the phone; the one you picked in the pane stays on screen when you close it.
+- **Status bar corner**: iPhone Duo keeps the status bar in a block at the
+  top trailing corner. Rows beside it make room for it, and the photo in the
+  destination pane runs underneath.
+
+### How it finds the fold
+
+React Native and Expo have no fold API, so Atlas reads it from UIKit through
+a small local Expo module, [`modules/atlas-fold`](modules/atlas-fold):
+
+- `FoldObserverView` is an invisible, full-window native view. It asks UIKit
+  for the window's reserved regions (`reservedRegionsOfKind:options:`, iOS
+  27.1): the fold of a foldable display (a *division* region) and hardware
+  that covers content, such as the cameras (an *occlusion* region). Each
+  region comes with its frame and whether it is active (partly folded) or
+  not (flat).
+- It re-reads them whenever UIKit lays the view out (resizing, rotating,
+  moving between the cover and inner displays), and on a short timer while
+  it is on screen, because a fold can go from flat to partly folded without
+  any size change. Only changes are sent to JavaScript, as an
+  `onRegionsChange` event.
+- The call lives in Objective-C behind `__has_include`, so the project still
+  builds with older SDKs; there, and on older iOS versions, the module simply
+  reports no regions.
+
+[`src/layout/AdaptiveLayout.tsx`](src/layout/AdaptiveLayout.tsx) turns the
+window size and those regions into a layout: a vertical fold splits the
+window into side-by-side panes, a horizontal fold into stacked ones, and each
+pane must be at least 300 points. Without a fold, a window of at least
+700 × 500 points (an iPad, say) still gets two panes, split by width;
+anything smaller gets the phone layout. On Android the module is absent and
+the same size rule applies.
+[`src/layout/AdaptiveShell.tsx`](src/layout/AdaptiveShell.tsx) places the
+navigator and the destination pane without ever remounting the navigator.
+
+The full inner display needs a build against the iOS 27.1 SDK (Xcode 27.1).
+Built with an older SDK, Atlas runs on iPhone Duo in compatibility mode, in
+a phone-sized window, and keeps the one-pane layout.
+
+## Run it locally
+
+Requirements: Node.js 22.13+ or 24.3+, and Xcode or Android Studio for a
+local native build.
+
+```bash
+npm ci
+npx expo start
+```
+
+Then press `i` for an iOS simulator or `a` for an Android emulator (this
+needs a development build, e.g. `npx expo run:ios`). Other scripts:
+
+```bash
+npm run typecheck   # tsc --noEmit
+npm run lint        # expo lint
+```
+
+Expo SDK 58 is a preview, and a few of its optional peer ranges do not list
+React Native 0.88 yet, hence `legacy-peer-deps` in `.npmrc`.
 
 ## Run it on VibeView
 
-Atlas is built and run entirely through VibeView — no Mac, no Android Studio,
-no local native toolchain.
+With [VibeView](https://vibeview.io) you can build and run Atlas without a
+local native toolchain: every native build runs in the cloud, and the app
+streams from a cloud simulator or emulator to your browser.
 
 ```bash
 npm install -g vibeview     # or run any command below with npx vibeview
 vibeview login
 ```
 
-**Live development** — stream the app from a cloud device with Metro
-hot-reload. The `metroCommand` in `vibeview.json` starts Metro for you:
+**Live development**: stream the app from a cloud device with Metro
+hot-reload. The `metroCommand` in `vibeview.json` starts Metro for you.
 
 ```bash
 vibeview dev                      # defaultPlatform (ios)
@@ -33,8 +134,8 @@ vibeview dev --platform android
 vibeview dev --build              # rebuild and upload first
 ```
 
-**Cloud builds** — compile a simulator/emulator build in the cloud and drop it
-into the app's Build history:
+**Cloud builds**: compile a simulator / emulator build in the cloud and
+register it as a build you can start a session on.
 
 ```bash
 vibeview build --cloud --platform ios
@@ -44,8 +145,22 @@ vibeview build --cloud --platform all
 
 Drop `--cloud` to build locally with the same commands from `vibeview.json`.
 
-**Production builds and store submission** — a signed release artifact needs a
-signing credential uploaded first (see the App Signing guide):
+**iPhone Duo**: the session starts closed, on the cover display.
+
+```bash
+vibeview list-devices --models                    # find "iPhone Duo"
+vibeview dev --detach --json --platform ios --model "iPhone Duo"
+S=<session_id>
+vibeview set-posture open --session $S            # or partial, closed
+vibeview set-posture --angle 75 --session $S      # an exact hinge angle
+vibeview rotate --session $S                      # a quarter turn
+vibeview ui-tree --session $S                     # both panes, with their test ids
+vibeview dev-stop                                 # sessions bill minutes while they run
+```
+
+**Production builds and store submission**: a signed release build needs a
+signing credential uploaded to your VibeView organization first (see
+[App signing](https://vibeview.io/docs/app-signing)).
 
 ```bash
 vibeview build --cloud --production --platform ios
@@ -55,108 +170,42 @@ vibeview submit --platform android --track internal
 
 ### `vibeview.json`
 
-The build blocks follow the same shape as the Expo production defaults: there
-is no `ios/` or `android/` directory in this repo, so each command runs
-`npx expo prebuild` to generate one and then drives the native build tool
-directly (`xcodebuild` for the simulator `.app`, Gradle for the debug `.apk`).
-`npx expo run:*` is the wrong tool for a cloud build: it expects a booted
-simulator or a connected Android device to install onto, and the builder has
-neither. `npm ci` comes first because a cloud build starts from a clean
-checkout with no `node_modules`; the iOS prebuild also runs `pod install`.
+| Key | What it does |
+|---|---|
+| `defaultPlatform` | Platform `vibeview build` / `vibeview dev` use when `--platform` is omitted. |
+| `metroCommand`, `metroPort` | How `vibeview dev` starts Metro when nothing is listening on the port. |
+| `platforms.<p>.build.command` / `.artifact` | The debug (simulator / emulator) build. Each command runs `npm ci` (a cloud build starts from a clean checkout), `expo prebuild` for the platform, then drives `xcodebuild` (simulator SDK, no code signing) or `gradlew assembleDebug` directly. `npx expo run:*` expects a booted simulator or a connected device to install onto, which a build machine does not have. |
+| `platforms.<p>.build.productionCommand` / `.productionArtifact` | The signed release build used by `vibeview build --cloud --production`: `xcodebuild archive` + `-exportArchive` producing an `.ipa`, or `gradlew bundleRelease` producing an `.aab`. |
+| `platforms.<p>.build.autoIncrement` | Each production build receives the next build number as `VIBEVIEW_BUILD_NUMBER`; `app.config.ts` maps it to `ios.buildNumber` and `android.versionCode`. |
+| `platforms.android.submit.track` | The Google Play track `vibeview submit` uses. |
 
-Both simulator builds embed the JavaScript bundle, which a stock debug build
-does not: React Native expects Metro and shows a red "No script URL" screen
-without it. On a cloud device there is no Metro unless you are running
-`vibeview dev`, so share links and test runs need the bundle inside the app.
-The small config plugin in `plugins/with-bundled-debug.js` takes care of it on
-both platforms: it empties Gradle's `debuggableVariants` and writes an
-`ios/.xcode.env.local` that makes the bundle step produce a production bundle
-for Debug too (a dev bundle cannot run without its dev server). When Metro *is*
-running the app still prefers it, so the dev loop is unchanged.
+There is deliberately no `appId`: the first `vibeview build` writes it back
+into `vibeview.json`, either linking to an app you pick or creating one from
+the build.
 
-JSON has no comments, so two notes live here instead:
+Two small Expo config plugins in `plugins/` cover what a managed project has
+no native files for:
 
-- **There is deliberately no `appId`.** The first `vibeview build` writes it
-  back into `vibeview.json` itself — either linking to an app you pick, or
-  creating one from the build. Committing someone else's app id would just get
-  in the way.
-- **`autoIncrement: true`** hands each production build the next build number
-  through the `VIBEVIEW_BUILD_NUMBER` environment variable, which
-  `app.config.ts` reads into the iOS `buildNumber` and the Android
-  `versionCode`. It applies to production builds only and needs the platform
-  linked to an app.
+- `with-bundled-debug.js` embeds the JavaScript bundle in debug builds too. A
+  stock debug build expects Metro and shows a red "No script URL" screen
+  without it; a share link or a test run on a cloud device has no Metro. It
+  empties Gradle's `debuggableVariants` on Android and writes an
+  `ios/.xcode.env.local` that makes the iOS bundle step produce a production
+  bundle for Debug (a development bundle cannot run embedded). When Metro is
+  running the app still prefers it, so the dev loop is unchanged.
+- `with-vibeview-signing.js` appends a guarded `signingConfigs.release` block
+  to the generated `android/app/build.gradle`, reading the four
+  `VIBEVIEW_*` Gradle properties a production build provides. Without them
+  the block is inert, so every other build is untouched.
 
-## iPhone Duo
-
-On iPhone Duo's inner display Atlas becomes a two-pane app: the tabs on one
-side of the fold and the selected destination (Kyoto until you pick another)
-on the other. Nothing sits under the fold, which is read from UIKit's reserved
-regions (iOS 27.1) by the small local module in `modules/atlas-fold`. The
-cover display gets the phone layout.
-
-- **Partly folded or open flat**: the panes split exactly at the fold, so the
-  layout does not jump between the two.
-- **Rotated**: the fold runs across, so the destination sits above it and the
-  list below.
-- **Folding and unfolding keep your place**: the navigator is never remounted,
-  so the tab, search and scroll positions survive. A destination open on the
-  cover moves into the pane when you open the phone; the one you picked in
-  the pane stays on screen when you close it.
-- **Status bar corner**: iPhone Duo keeps the status bar in a block at the top
-  trailing corner. Rows beside it make room (using the occlusion region, not
-  the full-height safe-area inset), and the photo in the pane runs under it.
-
-Without the iOS 27.1 SDK the module reports no regions, and any window at
-least 700 × 500 points (an iPad, say) still gets two panes, split by width.
-
-Expo SDK 58 is a preview, and a few of its optional peer ranges do not list
-React Native 0.88 yet, hence `legacy-peer-deps` in `.npmrc`.
-
-## Run locally
-
-```bash
-npm install
-npx expo start
-```
-
-Then press `i` for an iOS simulator or `a` for an Android emulator. Other
-scripts:
-
-```bash
-npm run typecheck   # tsc --noEmit
-npm run lint        # expo lint
-```
-
-## Project structure
-
-```
-app/                        Expo Router routes
-  _layout.tsx               fonts, splash, providers, adaptive shell, stack
-  (tabs)/_layout.tsx        the four tabs
-  (tabs)/index.tsx          Explore — search, categories, rail, list
-  (tabs)/saved.tsx          Saved — collections and a 2-column grid
-  (tabs)/trips.tsx          Trips — planned trips
-  (tabs)/profile.tsx        Profile — stats, settings, sign out
-  destination/[id].tsx      Destination — hero, tags, experiences, sticky bar
-src/
-  components/               DestinationCard, DestinationRow, DestinationDetail,
-                            Screen, Chip, Avatar, EmptyState, icons
-  layout/                   one pane or two: fold-aware layout, shell,
-                            opening destinations
-  data/destinations.ts      the seven destinations
-  state/AppState.tsx        saved places and trips (in memory, seeded)
-  theme/theme.ts            colours, fonts, radii
-modules/atlas-fold/         native view reporting the fold and cameras (iOS)
-assets/photos/              the seven bundled photos
-app.config.ts               app name, ids, icon, splash, build number
-vibeview.json               VibeView build and dev configuration
-```
+No signing credentials are in the repository.
 
 ## Test ids
 
 Every interactive element carries a stable `testID` and an
-`accessibilityLabel`, so VibeView's recorder and AI agent can address it by
-name rather than by coordinate.
+`accessibilityLabel`, so tests and agents can address it by name rather than
+by coordinate. A React Native `testID` is the accessibility identifier on iOS
+and the resource id on Android.
 
 | Test id | Element |
 | --- | --- |
@@ -183,22 +232,49 @@ name rather than by coordinate.
 Destination ids are `santorini`, `kyoto`, `bali`, `lago-di-braies`, `porto`,
 `zermatt` and `tulum`.
 
+## Project structure
+
+```
+app/                        Expo Router routes
+  _layout.tsx               fonts, splash, providers, adaptive shell, stack
+  (tabs)/_layout.tsx        the four tabs
+  (tabs)/index.tsx          Explore: search, categories, rail, list
+  (tabs)/saved.tsx          Saved: collections and a 2-column grid
+  (tabs)/trips.tsx          Trips: planned trips
+  (tabs)/profile.tsx        Profile: stats, settings, sign out
+  destination/[id].tsx      Destination (one-pane layout)
+src/
+  components/               DestinationCard, DestinationRow, DestinationDetail,
+                            Screen, Chip, Avatar, EmptyState, icons
+  layout/                   one pane or two: fold-aware layout, shell,
+                            opening destinations
+  data/destinations.ts      the seven destinations
+  state/AppState.tsx        saved places and trips (in memory, seeded)
+  theme/theme.ts            colours, fonts, radii
+modules/atlas-fold/         native view reporting the fold and cameras (iOS)
+plugins/                    Expo config plugins for cloud builds and signing
+assets/photos/              the seven bundled photos
+docs/screenshots/           the images in this README
+app.config.ts               app name, ids, icon, splash, build number
+vibeview.json               VibeView build and dev configuration
+```
+
 ## Photo credits
 
 The seven photos in `assets/photos/` are from [Unsplash](https://unsplash.com)
-and used under the [Unsplash licence](https://unsplash.com/license). They are
-bundled in the app so every session looks identical and loads instantly.
+and used under the [Unsplash License](https://unsplash.com/license), resized
+to 720 pixels wide.
 
-| File | Used for |
-| --- | --- |
-| `santorini.jpg` | Santorini, Greece |
-| `kyoto.jpg` | Kyoto, Japan |
-| `bali.jpg` | Bali, Indonesia |
-| `dolomites.jpg` | Lago di Braies, Italy |
-| `porto.jpg` | Porto, Portugal |
-| `lake.jpg` | Zermatt, Switzerland |
-| `beach.jpg` | Tulum, Mexico |
+| File | Used for | Source |
+| --- | --- | --- |
+| `santorini.jpg` | Santorini, Greece | [photo-1533105079780-92b9be482077](https://images.unsplash.com/photo-1533105079780-92b9be482077) |
+| `kyoto.jpg` | Kyoto, Japan | [photo-1493976040374-85c8e12f0c0e](https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e) |
+| `bali.jpg` | Bali, Indonesia | [photo-1537996194471-e657df975ab4](https://images.unsplash.com/photo-1537996194471-e657df975ab4) |
+| `dolomites.jpg` | Lago di Braies, Italy | [photo-1476514525535-07fb3b4ae5f1](https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1) |
+| `porto.jpg` | Porto, Portugal | [photo-1555881400-74d7acaacd8b](https://images.unsplash.com/photo-1555881400-74d7acaacd8b) |
+| `lake.jpg` | Zermatt, Switzerland | [photo-1506905925346-21bda4d32df4](https://images.unsplash.com/photo-1506905925346-21bda4d32df4) |
+| `beach.jpg` | Tulum, Mexico | [photo-1507525428034-b723cf961d3e](https://images.unsplash.com/photo-1507525428034-b723cf961d3e) |
 
-## Licence
+## License
 
-MIT © 2026 ScriptX. See [LICENSE](./LICENSE).
+MIT. See [LICENSE](LICENSE).
