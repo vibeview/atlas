@@ -193,7 +193,10 @@ export function useTopTrailingClearance(): number {
   for (const o of occlusions) {
     const atTop = o.y <= pane.y + 8 && o.y + o.height > pane.y;
     const atTrailingEdge = o.x < right && o.x + o.width >= right - 1;
-    if (atTop && atTrailingEdge) clearance = Math.max(clearance, right - o.x);
+    // A block that also reaches the leading edge is a full-width status bar
+    // (ordinary iPhones on iOS 27.2), already covered by the top safe area.
+    const corner = o.x > pane.x;
+    if (atTop && atTrailingEdge && corner) clearance = Math.max(clearance, right - o.x);
   }
   return clearance;
 }
