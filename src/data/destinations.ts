@@ -1,11 +1,12 @@
-import type { ImageSourcePropType } from 'react-native';
+/** A bundled photo: Metro resolves `require('./x.jpg')` to an asset id. */
+type Photo = number;
 
 export type Category = 'beaches' | 'mountains' | 'cities' | 'islands';
 
 export type Experience = {
   title: string;
   meta: string;
-  photo: ImageSourcePropType;
+  photo: Photo;
 };
 
 export type Destination = {
@@ -22,18 +23,18 @@ export type Destination = {
   priceBand: string;
   tags: string[];
   blurb: string;
-  photo: ImageSourcePropType;
+  photo: Photo;
   experiences: Experience[];
 };
 
 const photos = {
-  santorini: require('../../assets/photos/santorini.jpg') as ImageSourcePropType,
-  kyoto: require('../../assets/photos/kyoto.jpg') as ImageSourcePropType,
-  bali: require('../../assets/photos/bali.jpg') as ImageSourcePropType,
-  dolomites: require('../../assets/photos/dolomites.jpg') as ImageSourcePropType,
-  porto: require('../../assets/photos/porto.jpg') as ImageSourcePropType,
-  zermatt: require('../../assets/photos/lake.jpg') as ImageSourcePropType,
-  tulum: require('../../assets/photos/beach.jpg') as ImageSourcePropType,
+  santorini: require('../../assets/photos/santorini.jpg') as Photo,
+  kyoto: require('../../assets/photos/kyoto.jpg') as Photo,
+  bali: require('../../assets/photos/bali.jpg') as Photo,
+  dolomites: require('../../assets/photos/dolomites.jpg') as Photo,
+  porto: require('../../assets/photos/porto.jpg') as Photo,
+  zermatt: require('../../assets/photos/lake.jpg') as Photo,
+  tulum: require('../../assets/photos/beach.jpg') as Photo,
 };
 
 export const destinations: Destination[] = [
