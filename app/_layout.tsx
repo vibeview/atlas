@@ -12,6 +12,8 @@ import React, { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { AdaptiveLayoutProvider } from '../src/layout/AdaptiveLayout';
+import { AdaptiveShell } from '../src/layout/AdaptiveShell';
 import { AppStateProvider } from '../src/state/AppState';
 import { colors } from '../src/theme/theme';
 
@@ -35,13 +37,20 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <AppStateProvider>
-          <StatusBar style="dark" />
-          <Stack
-            screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.mist } }}
-          >
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="destination/[id]" options={{ animation: 'slide_from_right' }} />
-          </Stack>
+          <AdaptiveLayoutProvider>
+            <StatusBar style="dark" />
+            <AdaptiveShell>
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: { backgroundColor: colors.mist },
+                }}
+              >
+                <Stack.Screen name="(tabs)" />
+                <Stack.Screen name="destination/[id]" options={{ animation: 'slide_from_right' }} />
+              </Stack>
+            </AdaptiveShell>
+          </AdaptiveLayoutProvider>
         </AppStateProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

@@ -9,17 +9,21 @@ import { StarIcon } from './icons';
 export function DestinationRow({
   destination,
   onPress,
+  selected = false,
 }: {
   destination: Destination;
   onPress: () => void;
+  /** Shown in the detail pane of the two-pane layout. */
+  selected?: boolean;
 }) {
   return (
     <Pressable
       testID={`destination-row-${destination.id}`}
       accessibilityLabel={`${destination.name}, ${destination.country}`}
       accessibilityRole="button"
+      accessibilityState={{ selected }}
       onPress={onPress}
-      style={styles.row}
+      style={[styles.row, selected && styles.rowSelected]}
     >
       <Image source={destination.photo} style={styles.thumb} contentFit="cover" />
       <View style={styles.text}>
@@ -44,6 +48,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.hairline,
+  },
+  rowSelected: {
+    backgroundColor: colors.lagoonTint,
+    borderRadius: radius.sm,
+    borderBottomColor: 'transparent',
+    marginHorizontal: -8,
+    paddingHorizontal: 8,
   },
   thumb: {
     width: 54,

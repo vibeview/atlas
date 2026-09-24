@@ -8,8 +8,8 @@ public **reference project for VibeView cloud builds**. It is a plain Expo
 project with no backend, no sign-in and no persistence, so every session starts
 identical: the same six saved places, the same two trips, the same photos.
 
-React Native + Expo (SDK 57), TypeScript, Expo Router. One codebase, iOS and
-Android.
+React Native + Expo (SDK 58 preview), TypeScript, Expo Router. One codebase,
+iOS and Android.
 
 <!-- screenshot: docs/screenshots/atlas-explore.png — Explore, Destination, Saved, Profile -->
 _Screenshots: Explore · Destination · Saved · Profile._
@@ -86,6 +86,32 @@ JSON has no comments, so two notes live here instead:
   `versionCode`. It applies to production builds only and needs the platform
   linked to an app.
 
+## iPhone Duo
+
+On iPhone Duo's inner display Atlas becomes a two-pane app: the tabs on one
+side of the fold and the selected destination (Kyoto until you pick another)
+on the other. Nothing sits under the fold, which is read from UIKit's reserved
+regions (iOS 27.1) by the small local module in `modules/atlas-fold`. The
+cover display gets the phone layout.
+
+- **Partly folded or open flat**: the panes split exactly at the fold, so the
+  layout does not jump between the two.
+- **Rotated**: the fold runs across, so the destination sits above it and the
+  list below.
+- **Folding and unfolding keep your place**: the navigator is never remounted,
+  so the tab, search and scroll positions survive. A destination open on the
+  cover moves into the pane when you open the phone; the one you picked in
+  the pane stays on screen when you close it.
+- **Status bar corner**: iPhone Duo keeps the status bar in a block at the top
+  trailing corner. Rows beside it make room (using the occlusion region, not
+  the full-height safe-area inset), and the photo in the pane runs under it.
+
+Without the iOS 27.1 SDK the module reports no regions, and any window at
+least 700 × 500 points (an iPad, say) still gets two panes, split by width.
+
+Expo SDK 58 is a preview, and a few of its optional peer ranges do not list
+React Native 0.88 yet, hence `legacy-peer-deps` in `.npmrc`.
+
 ## Run locally
 
 ```bash
@@ -105,7 +131,7 @@ npm run lint        # expo lint
 
 ```
 app/                        Expo Router routes
-  _layout.tsx               fonts, splash, app state provider, stack
+  _layout.tsx               fonts, splash, providers, adaptive shell, stack
   (tabs)/_layout.tsx        the four tabs
   (tabs)/index.tsx          Explore — search, categories, rail, list
   (tabs)/saved.tsx          Saved — collections and a 2-column grid
@@ -113,11 +139,14 @@ app/                        Expo Router routes
   (tabs)/profile.tsx        Profile — stats, settings, sign out
   destination/[id].tsx      Destination — hero, tags, experiences, sticky bar
 src/
-  components/               DestinationCard, DestinationRow, Chip, Avatar,
-                            EmptyState, icons
+  components/               DestinationCard, DestinationRow, DestinationDetail,
+                            Screen, Chip, Avatar, EmptyState, icons
+  layout/                   one pane or two: fold-aware layout, shell,
+                            opening destinations
   data/destinations.ts      the seven destinations
   state/AppState.tsx        saved places and trips (in memory, seeded)
   theme/theme.ts            colours, fonts, radii
+modules/atlas-fold/         native view reporting the fold and cameras (iOS)
 assets/photos/              the seven bundled photos
 app.config.ts               app name, ids, icon, splash, build number
 vibeview.json               VibeView build and dev configuration
@@ -139,7 +168,8 @@ name rather than by coordinate.
 | `destination-row-<id>` | a Weekend escapes row |
 | `explore-title`, `explore-scroll`, `weekend-list`, `explore-no-results` | Explore landmarks |
 | `destination-name`, `destination-rating`, `destination-price` | Destination text |
-| `back-button`, `share-button` | Destination hero buttons |
+| `back-button`, `share-button` | Destination hero buttons (the pane has no Back) |
+| `detail-pane-scroll`, `pane-divider` | two-pane layout: the destination pane and the gap at the fold |
 | `save-button` | Destination Save toggle (label `Save` / `Saved`) |
 | `plan-trip-button` | Destination Plan trip button |
 | `experience-<title>` | a Top experiences tile |

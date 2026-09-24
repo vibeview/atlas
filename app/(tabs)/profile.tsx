@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Screen } from '../../src/components/Screen';
 import { Avatar } from '../../src/components/Avatar';
 import { ChevronRightIcon } from '../../src/components/icons';
 import { useAppState } from '../../src/state/AppState';
@@ -30,7 +30,7 @@ export default function ProfileScreen() {
   ];
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top']}>
+    <Screen>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.identity}>
           <Avatar size={64} />
@@ -76,12 +76,11 @@ export default function ProfileScreen() {
           <Text style={styles.signOutText}>Sign out</Text>
         </Pressable>
       </ScrollView>
-    </SafeAreaView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.mist },
   content: { paddingHorizontal: spacing.screen, paddingBottom: 28 },
   identity: { alignItems: 'center', marginTop: 18, marginBottom: 14 },
   name: {

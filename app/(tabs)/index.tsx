@@ -1,8 +1,7 @@
-import { useRouter } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Screen } from '../../src/components/Screen';
 import { Avatar } from '../../src/components/Avatar';
 import { Chip } from '../../src/components/Chip';
 import { DestinationCard } from '../../src/components/DestinationCard';
@@ -16,6 +15,8 @@ import {
   type Category,
   type Destination,
 } from '../../src/data/destinations';
+import { useTopTrailingClearance } from '../../src/layout/AdaptiveLayout';
+import { useHighlightedId, useOpenDestination } from '../../src/layout/useOpenDestination';
 import { useAppState } from '../../src/state/AppState';
 import { colors, font, radius, spacing } from '../../src/theme/theme';
 
@@ -35,7 +36,11 @@ function matches(d: Destination, query: string, category: 'all' | Category): boo
 }
 
 export default function ExploreScreen() {
-  const router = useRouter();
+  const open = useOpenDestination();
+  const highlighted = useHighlightedId();
+  // Keep the rows beside a corner status bar (iPhone Duo) clear of it.
+  const clearance = useTopTrailingClearance();
+  const beside = { marginRight: Math.max(0, clearance - spacing.screen + 8) };
   const { isSaved, toggleSaved } = useAppState();
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<'all' | Category>('all');
@@ -49,17 +54,15 @@ export default function ExploreScreen() {
     [query, category],
   );
 
-  const open = (id: string) => router.push(`/destination/${id}`);
-
   return (
-    <SafeAreaView style={styles.safe} edges={['top']}>
+    <Screen>
       <ScrollView
         testID="explore-scroll"
         contentContainerStyle={styles.content}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.header}>
+        <View style={[styles.header, beside]}>
           <View>
             <Text style={styles.date}>{formatToday()}</Text>
             <Text testID="explore-title" style={styles.title}>
@@ -69,7 +72,7 @@ export default function ExploreScreen() {
           <Avatar />
         </View>
 
-        <View style={styles.search}>
+        <View style={[styles.search, beside]}>
           <SearchIcon />
           <TextInput
             testID="search-input"
@@ -114,6 +117,7 @@ export default function ExploreScreen() {
                   key={d.id}
                   destination={d}
                   saved={isSaved(d.id)}
+                  selected={highlighted === d.id}
                   onPress={() => open(d.id)}
                   onToggleSaved={() => toggleSaved(d.id)}
                 />
@@ -127,7 +131,12 @@ export default function ExploreScreen() {
             <Text style={styles.sectionTitle}>Weekend escapes</Text>
             <View testID="weekend-list">
               {weekend.map((d) => (
-                <DestinationRow key={d.id} destination={d} onPress={() => open(d.id)} />
+                <DestinationRow
+                  key={d.id}
+                  destination={d}
+                  selected={highlighted === d.id}
+                  onPress={() => open(d.id)}
+                />
               ))}
             </View>
           </>
@@ -139,12 +148,11 @@ export default function ExploreScreen() {
           </Text>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.mist },
   content: { paddingHorizontal: spacing.screen, paddingBottom: 28 },
   header: {
     flexDirection: 'row',

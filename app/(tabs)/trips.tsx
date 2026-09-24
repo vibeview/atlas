@@ -1,21 +1,22 @@
 import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
 import React from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Screen } from '../../src/components/Screen';
 import { EmptyState } from '../../src/components/EmptyState';
 import { ChevronRightIcon, MapIcon } from '../../src/components/icons';
 import { destinationsById } from '../../src/data/destinations';
+import { useHighlightedId, useOpenDestination } from '../../src/layout/useOpenDestination';
 import { useAppState } from '../../src/state/AppState';
 import { colors, font, radius, spacing } from '../../src/theme/theme';
 
 export default function TripsScreen() {
-  const router = useRouter();
+  const open = useOpenDestination();
+  const highlighted = useHighlightedId();
   const { trips } = useAppState();
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top']}>
+    <Screen>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text testID="trips-title" style={styles.title}>
@@ -43,8 +44,9 @@ export default function TripsScreen() {
                   testID={`trip-${trip.destinationId}`}
                   accessibilityLabel={`${trip.title} · ${trip.dates}`}
                   accessibilityRole="button"
-                  onPress={() => router.push(`/destination/${trip.destinationId}`)}
-                  style={styles.row}
+                  accessibilityState={{ selected: highlighted === trip.destinationId }}
+                  onPress={() => open(trip.destinationId)}
+                  style={[styles.row, highlighted === trip.destinationId && styles.rowSelected]}
                 >
                   {destination ? (
                     <Image source={destination.photo} style={styles.thumb} contentFit="cover" />
@@ -62,12 +64,11 @@ export default function TripsScreen() {
           </View>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.mist },
   content: { paddingHorizontal: spacing.screen, paddingBottom: 28 },
   header: { marginTop: 10, marginBottom: 14 },
   title: {
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: colors.hairline,
   },
+  rowSelected: { backgroundColor: colors.lagoonTint },
   thumb: {
     width: 48,
     height: 48,

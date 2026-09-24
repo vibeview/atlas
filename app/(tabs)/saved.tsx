@@ -1,13 +1,13 @@
-import { useRouter } from 'expo-router';
 import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Screen } from '../../src/components/Screen';
 import { Chip } from '../../src/components/Chip';
 import { DestinationCard } from '../../src/components/DestinationCard';
 import { EmptyState } from '../../src/components/EmptyState';
 import { HeartIcon } from '../../src/components/icons';
 import { destinationsById } from '../../src/data/destinations';
+import { useHighlightedId, useOpenDestination } from '../../src/layout/useOpenDestination';
 import { useAppState } from '../../src/state/AppState';
 import { colors, font, spacing } from '../../src/theme/theme';
 
@@ -24,7 +24,8 @@ const COLLECTION_MEMBERS: Record<string, string[]> = {
 };
 
 export default function SavedScreen() {
-  const router = useRouter();
+  const open = useOpenDestination();
+  const highlighted = useHighlightedId();
   const { saved, isSaved, toggleSaved } = useAppState();
   const [collection, setCollection] = useState('all');
 
@@ -37,7 +38,7 @@ export default function SavedScreen() {
   }, [saved, collection]);
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top']}>
+    <Screen>
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <Text testID="saved-title" style={styles.title}>
@@ -86,19 +87,19 @@ export default function SavedScreen() {
                 variant="grid"
                 destination={d}
                 saved={isSaved(d.id)}
-                onPress={() => router.push(`/destination/${d.id}`)}
+                selected={highlighted === d.id}
+                onPress={() => open(d.id)}
                 onToggleSaved={() => toggleSaved(d.id)}
               />
             ))}
           </View>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: colors.mist },
   content: { paddingHorizontal: spacing.screen, paddingBottom: 28 },
   header: { marginTop: 10 },
   title: {

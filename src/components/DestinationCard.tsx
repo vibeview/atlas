@@ -12,6 +12,8 @@ type Props = {
   saved: boolean;
   onPress: () => void;
   onToggleSaved: () => void;
+  /** Shown in the detail pane of the two-pane layout. */
+  selected?: boolean;
   /** `rail` is the fixed-width horizontal card; `grid` fills its column. */
   variant?: 'rail' | 'grid';
 };
@@ -21,6 +23,7 @@ export function DestinationCard({
   saved,
   onPress,
   onToggleSaved,
+  selected = false,
   variant = 'rail',
 }: Props) {
   return (
@@ -28,6 +31,7 @@ export function DestinationCard({
       testID={`destination-card-${destination.id}`}
       accessibilityLabel={`${destination.name}, ${destination.country}`}
       accessibilityRole="button"
+      accessibilityState={{ selected }}
       onPress={onPress}
       style={[styles.card, variant === 'rail' ? styles.rail : styles.grid]}
     >
@@ -60,6 +64,8 @@ export function DestinationCard({
         </Text>
         <Text style={styles.country}>{destination.country}</Text>
       </View>
+
+      {selected && <View pointerEvents="none" style={styles.selectedRing} />}
     </Pressable>
   );
 }
@@ -78,6 +84,12 @@ const styles = StyleSheet.create({
     // Two columns inside a wrapping row with a 10pt gap.
     width: '48.5%',
     aspectRatio: 3 / 4,
+  },
+  selectedRing: {
+    ...StyleSheet.absoluteFill,
+    borderRadius: radius.lg,
+    borderWidth: 2.5,
+    borderColor: colors.lagoon,
   },
   ratingPill: {
     position: 'absolute',
