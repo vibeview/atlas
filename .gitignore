@@ -42,3 +42,6 @@ yarn-error.*
 .vibeview/
 
 scripts/node_modules/
+
+# Roku package output
+roku/out/

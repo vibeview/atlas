@@ -1,7 +1,9 @@
 // Writes the TV app's copy of the content: sized photos and the data file.
 // Usage: node export.mjs   (from scripts/, or `npm --prefix scripts run export`)
 // Outputs are committed; each app builds only from its own folder.
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, mkdtempSync, statSync, rmSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -58,8 +60,96 @@ export async function exportTv({ root }) {
   return { files };
 }
 
+// ---- Roku ----
+
+// Spec "Roku budget": the finished zip stays under Roku's sideload limit.
+export const ROKU_ZIP_LIMIT = 3_500_000;
+const ROKU = {
+  backdrop: { width: 960, height: 540 },
+  featuredBackdrop: { width: 1280, height: 720 },
+  tile: { width: 480, height: 270 },
+};
+// Same three places as tv/src/lib/saved.ts SEED_SAVED (a test keeps them equal).
+export const SEED_SAVED = ['santorini', 'hoi-an', 'lofoten'];
+
+/** tv/src/lib/search.ts fold(): lower case, accents removed. BrightScript can't normalise Unicode. */
+export function fold(s) {
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().trim();
+}
+
+const INK = '11,16,22';
+const linear = (id, { x2 = 1, y2 = 0 }, stops) =>
+  `<linearGradient id="${id}" x1="0" y1="0" x2="${x2}" y2="${y2}">${stops
+    .map(([o, rgb, a]) => `<stop offset="${o}" stop-color="rgb(${rgb})" stop-opacity="${a}"/>`)
+    .join('')}</linearGradient>`;
+
+/** One RGBA PNG per gradient layer set; Posters scale them up, so they stay small in texture memory. */
+async function writeScrim(dest, width, height, layers) {
+  const defs = layers.map((l, i) => linear(`g${i}`, l.dir, l.stops)).join('');
+  const rects = layers.map((_, i) => `<rect width="100%" height="100%" fill="url(#g${i})"/>`).join('');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><defs>${defs}</defs>${rects}</svg>`;
+  writeFileSync(dest, await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer());
+}
+
+// The tv/ app's gradients (components/Backdrop.tsx, screens/DestinationScreen.tsx, components/Tile.tsx).
+const SCRIMS = {
+  'scrim-home.png': [480, 270, [
+    { dir: { x2: 1, y2: 0 }, stops: [[0, INK, 0.92], [0.38, INK, 0.55], [0.7, INK, 0]] },
+    { dir: { x2: 0, y2: 1 }, stops: [[0, INK, 0.55], [0.18, INK, 0], [0.5, INK, 0], [0.86, INK, 1]] },
+  ]],
+  'scrim-detail.png': [480, 270, [{ dir: { x2: 1, y2: 0 }, stops: [[0, INK, 0.95], [0.5, INK, 0.8], [1, INK, 0.15]] }]],
+  'scrim-tile.png': [160, 90, [{ dir: { x2: 0, y2: 1 }, stops: [[0.45, '0,0,0', 0], [1, '0,0,0', 0.72]] }]],
+};
+
+export async function exportRoku({ root, limit = ROKU_ZIP_LIMIT }) {
+  const data = JSON.parse(readFileSync(join(root, 'content', 'destinations.json'), 'utf8'));
+  const rokuDir = join(root, 'roku');
+  const imageDir = join(rokuDir, 'images');
+  const assetDir = join(imageDir, 'destinations');
+  const dataDir = join(rokuDir, 'data');
+  mkdirSync(assetDir, { recursive: true });
+  mkdirSync(dataDir, { recursive: true });
+  const files = [];
+  const featured = new Set(data.rows.find((r) => r.id === 'popular')?.slugs ?? []);
+  for (const d of data.destinations) {
+    const master = join(root, 'content', 'photos', `${d.slug}.jpg`);
+    const sizes = { backdrop: featured.has(d.slug) ? ROKU.featuredBackdrop : ROKU.backdrop, tile: ROKU.tile };
+    for (const [kind, size] of Object.entries(sizes)) {
+      const dest = join(assetDir, `${d.slug}-${kind}.jpg`);
+      await writeJpeg(master, dest, size);
+      files.push(dest);
+    }
+  }
+  for (const [name, [w, h, layers]] of Object.entries(SCRIMS)) {
+    const dest = join(imageDir, name);
+    await writeScrim(dest, w, h, layers);
+    files.push(dest);
+  }
+  const out = {
+    ...data,
+    seedSaved: SEED_SAVED,
+    destinations: data.destinations.map((d) => ({ ...d, search: `${fold(d.name)}|${fold(d.country)}` })),
+  };
+  const json = join(dataDir, 'destinations.json');
+  writeFileSync(json, JSON.stringify(out, null, 2) + '\n');
+  files.push(json);
+
+  const tmp = mkdtempSync(join(tmpdir(), 'atlas-roku-zip-'));
+  try {
+    const zip = join(tmp, 'atlas.zip');
+    execFileSync('sh', [join(rokuDir, 'package.sh'), zip], { stdio: 'pipe' });
+    const zipBytes = statSync(zip).size;
+    if (zipBytes > limit) throw new Error(`Roku zip is ${zipBytes} bytes, over ${limit}`);
+    return { files, zipBytes };
+  } finally {
+    rmSync(tmp, { recursive: true, force: true });
+  }
+}
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-  const { files } = await exportTv({ root });
-  console.log(`wrote ${files.length} files`);
+  const tv = await exportTv({ root });
+  console.log(`tv: wrote ${tv.files.length} files`);
+  const roku = await exportRoku({ root });
+  console.log(`roku: wrote ${roku.files.length} files; zip ${roku.zipBytes} bytes (limit ${ROKU_ZIP_LIMIT})`);
 }
