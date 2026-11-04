@@ -79,7 +79,19 @@ const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ink },
   content: { flex: 1, flexDirection: 'row', paddingHorizontal: px(safe.x), paddingTop: px(150), paddingBottom: px(safe.y) },
   main: { width: px(1000) },
-  side: { marginLeft: px(110), width: px(600), paddingTop: px(60) },
+  // A panel, not text on the photo: the right side of a backdrop is where the
+  // picture is brightest, and the lines must stay readable on every photo.
+  side: {
+    marginLeft: px(90),
+    width: px(640),
+    marginTop: px(40),
+    alignSelf: 'flex-start',
+    paddingHorizontal: px(40),
+    paddingTop: px(36),
+    paddingBottom: px(18),
+    borderRadius: px(20),
+    backgroundColor: 'rgba(11,16,22,0.8)',
+  },
   country: { color: colors.textSoft, fontFamily: font.bold, fontSize: px(type.meta), letterSpacing: px(3) },
   name: { color: colors.text, fontFamily: font.extrabold, fontSize: px(type.heroName), lineHeight: px(type.heroName * 1.1), marginTop: px(6) },
   metaRow: { flexDirection: 'row', alignItems: 'center', marginTop: px(16) },
