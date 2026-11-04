@@ -33,7 +33,12 @@ export function MainScreen({ navigation }: ScreenProps<'Main'>) {
   // Saved emptied from the destination: the current nav item takes focus.
   const [navPreferred, setNavPreferred] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  // While a return settles, the focus engine may park focus on a nav item
+  // (the opened tile can be gone after an unsave). That focus must not switch
+  // tabs.
+  const settling = useRef(false);
   const settle = useCallback(() => {
+    settling.current = true;
     setPreferred(null);
     setNavPreferred(false);
     if (timer.current) clearTimeout(timer.current);
@@ -44,6 +49,7 @@ export function MainScreen({ navigation }: ScreenProps<'Main'>) {
       const slug = o.tab === 'Saved' ? returnTarget(savedNow.current, o.slug, o.index) : o.slug;
       if (slug) setPreferred({ tab: o.tab, slug });
       else setNavPreferred(true);
+      settling.current = false;
     }, 450);
   }, []);
   useEffect(() => {
@@ -87,6 +93,10 @@ export function MainScreen({ navigation }: ScreenProps<'Main'>) {
     }, [tab, settle]),
   );
 
+  const showTab = useCallback((t: Tab) => {
+    if (!settling.current) setTab(t);
+  }, []);
+
   const pref = (t: Tab) => (preferred && preferred.tab === t ? preferred.slug : null);
   const show = (t: Tab) => [StyleSheet.absoluteFill, tab === t ? null : styles.hidden];
   return (
@@ -100,7 +110,7 @@ export function MainScreen({ navigation }: ScreenProps<'Main'>) {
       <View style={show('Saved')}>
         <SavedContent onOpen={open} preferredSlug={pref('Saved')} />
       </View>
-      <NavBar current={tab} onShow={setTab} preferCurrent={navPreferred} />
+      <NavBar current={tab} onShow={showTab} preferCurrent={navPreferred} />
     </View>
   );
 }

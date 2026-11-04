@@ -41,6 +41,9 @@ export function SearchContent({ onOpen, preferredSlug }: Props) {
           autoCorrect={false}
           autoCapitalize="none"
           disableFullscreenUI
+          // Android TV: the keyboard opens on Select, not on focus, so the
+          // D-pad can move past the field to the results.
+          showSoftInputOnFocus={false}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           style={[styles.field, focused && styles.fieldFocused, Platform.OS === 'android' && styles.fieldAndroid]}
