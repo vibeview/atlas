@@ -13,9 +13,7 @@ import { StatusBar } from 'react-native';
 
 import type { RootStackParamList } from './navigation';
 import { DestinationScreen } from './screens/DestinationScreen';
-import { HomeScreen } from './screens/HomeScreen';
-import { SavedScreen } from './screens/SavedScreen';
-import { SearchScreen } from './screens/SearchScreen';
+import { MainScreen } from './screens/MainScreen';
 import { SavedProvider } from './state/SavedProvider';
 import { colors } from './theme';
 
@@ -39,13 +37,11 @@ export default function App() {
       <StatusBar hidden />
       <NavigationContainer theme={theme}>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Main"
           screenOptions={{ headerShown: false, animation: 'fade', contentStyle: { backgroundColor: colors.ink } }}
         >
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Destination" component={DestinationScreen} />
-          <Stack.Screen name="Search" component={SearchScreen} />
-          <Stack.Screen name="Saved" component={SavedScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </SavedProvider>

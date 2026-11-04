@@ -1,11 +1,8 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
-import { NavBar } from '../components/NavBar';
-import { useArrivalFocus } from '../components/useArrivalFocus';
 import { TileGrid } from '../components/TileGrid';
 import { bySlug } from '../data/model';
-import type { ScreenProps } from '../navigation';
 import { useSaved } from '../state/SavedProvider';
 import { colors, font, px, safe, type } from '../theme';
 
@@ -14,13 +11,13 @@ import { colors, font, px, safe, type } from '../theme';
 const liftOuter = { marginHorizontal: -px(40), marginTop: -px(24) };
 const lift = { paddingHorizontal: px(40), paddingTop: px(24), paddingBottom: px(60) };
 
-export function SavedScreen({ navigation }: ScreenProps<'Saved'>) {
+type Props = { onOpen(slug: string): void; preferredSlug: string | null };
+
+export function SavedContent({ onOpen, preferredSlug }: Props) {
   const { saved } = useSaved();
-  const arrived = useArrivalFocus();
   const items = saved.map((slug) => bySlug[slug]).filter(Boolean);
   return (
     <View style={styles.screen}>
-      <NavBar current="Saved" focusOnArrival={arrived && items.length === 0} />
       <View style={styles.body}>
         <Text style={styles.heading}>Saved places</Text>
         {items.length === 0 ? (
@@ -30,8 +27,8 @@ export function SavedScreen({ navigation }: ScreenProps<'Saved'>) {
             <TileGrid
               items={items}
               idPrefix="saved-tile"
-              preferredSlug={arrived ? items[0].slug : undefined}
-              onOpen={(slug) => navigation.navigate('Destination', { slug })}
+              preferredSlug={preferredSlug ?? undefined}
+              onOpen={onOpen}
             />
           </ScrollView>
         )}
@@ -42,7 +39,7 @@ export function SavedScreen({ navigation }: ScreenProps<'Saved'>) {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ink },
-  body: { flex: 1, paddingHorizontal: px(safe.x), paddingTop: px(48) },
+  body: { flex: 1, paddingHorizontal: px(safe.x), paddingTop: px(160) },
   heading: { color: colors.text, fontFamily: font.extrabold, fontSize: px(56), marginBottom: px(36) },
   empty: { color: colors.textSoft, fontFamily: font.medium, fontSize: px(type.body) },
 });

@@ -1,12 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { NavBar } from '../components/NavBar';
-import { useArrivalFocus } from '../components/useArrivalFocus';
 import { TileGrid } from '../components/TileGrid';
 import { destinations } from '../data/model';
 import { searchDestinations } from '../lib/search';
-import type { ScreenProps } from '../navigation';
 import { colors, font, px, safe, type } from '../theme';
 
 // The grid's ScrollView clips its content: give the focused tile's 10% lift
@@ -20,17 +17,15 @@ const lift = { paddingHorizontal: px(40), paddingTop: px(24), paddingBottom: px(
  * the results show when it closes. On Android TV the keyboard docks and the
  * results stay visible above it.
  */
-export function SearchScreen({ navigation }: ScreenProps<'Search'>) {
+type Props = { onOpen(slug: string): void; preferredSlug: string | null };
+
+export function SearchContent({ onOpen, preferredSlug }: Props) {
   const [query, setQuery] = useState('');
   const [focused, setFocused] = useState(false);
-  // TextInput has no hasTVPreferredFocus: on arrival focus goes to Search in
-  // the nav, one press above the field.
-  const arrived = useArrivalFocus();
   const results = useMemo(() => searchDestinations(destinations, query), [query]);
 
   return (
     <View style={styles.screen}>
-      <NavBar current="Search" focusOnArrival={arrived} />
       <View style={styles.body}>
         <TextInput
           testID="search-field"
@@ -56,7 +51,7 @@ export function SearchScreen({ navigation }: ScreenProps<'Search'>) {
           ) : results.length === 0 ? (
             <Text style={styles.hint}>No places match “{query.trim()}”.</Text>
           ) : (
-            <TileGrid items={results} idPrefix="search-tile" onOpen={(slug) => navigation.navigate('Destination', { slug })} />
+            <TileGrid items={results} idPrefix="search-tile" onOpen={onOpen} preferredSlug={preferredSlug ?? undefined} />
           )}
         </ScrollView>
       </View>
@@ -66,7 +61,8 @@ export function SearchScreen({ navigation }: ScreenProps<'Search'>) {
 
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.ink },
-  body: { flex: 1, paddingHorizontal: px(safe.x), paddingTop: px(48) },
+  // The nav bar sits over every tab; content starts below it.
+  body: { flex: 1, paddingHorizontal: px(safe.x), paddingTop: px(160) },
   field: {
     width: px(900),
     color: colors.text,
