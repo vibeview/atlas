@@ -57,7 +57,9 @@ const styles = StyleSheet.create({
     elevation: 12,
     zIndex: 2,
   },
-  photo: { ...StyleSheet.absoluteFill as object },
+  // Explicit size: Android release builds otherwise draw bundled images at
+  // their density-scaled size, zoomed in from the top-left corner.
+  photo: { position: 'absolute', left: 0, top: 0, width: px(tile.width), height: px(tile.height) },
   name: {
     position: 'absolute',
     left: px(20),

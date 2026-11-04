@@ -1,9 +1,14 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Image, StyleSheet, View } from 'react-native';
+import { Animated, Dimensions, Image, StyleSheet, View } from 'react-native';
 
 import { backdrops } from '../data/images';
 import { colors } from '../theme';
+
+// Explicit size, not absoluteFill: Android release builds otherwise draw
+// bundled images at their density-scaled size, zoomed in from the corner.
+const { width, height } = Dimensions.get('window');
+export const FULL = { position: 'absolute' as const, left: 0, top: 0, width, height };
 
 /**
  * Two stacked photos: the new one fades in over the old. Never accessible:
@@ -22,8 +27,8 @@ export function Backdrop({ slug }: { slug: string }) {
 
   return (
     <View style={StyleSheet.absoluteFill} pointerEvents="none" accessible={false} importantForAccessibility="no-hide-descendants">
-      <Image source={backdrops[shown.under]} style={StyleSheet.absoluteFill} resizeMode="cover" accessible={false} />
-      <Animated.Image source={backdrops[shown.over]} style={[StyleSheet.absoluteFill, { opacity: fade }]} resizeMode="cover" accessible={false} />
+      <Image source={backdrops[shown.under]} style={FULL} resizeMode="cover" accessible={false} />
+      <Animated.Image source={backdrops[shown.over]} style={[FULL, { opacity: fade }]} resizeMode="cover" accessible={false} />
       <LinearGradient
         colors={['rgba(11,16,22,0.92)', 'rgba(11,16,22,0.55)', 'rgba(11,16,22,0)']}
         locations={[0, 0.38, 0.7]}

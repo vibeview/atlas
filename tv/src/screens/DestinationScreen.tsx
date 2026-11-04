@@ -2,6 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useRef, useState } from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
+import { FULL } from '../components/Backdrop';
 import { Button } from '../components/Button';
 import { ExperienceRow } from '../components/ExperienceRow';
 import { backdrops } from '../data/images';
@@ -36,7 +37,7 @@ export function DestinationScreen({ route }: ScreenProps<'Destination'>) {
 
   return (
     <View style={styles.screen}>
-      <Image source={backdrops[d.slug]} style={StyleSheet.absoluteFill} resizeMode="cover" accessible={false} />
+      <Image source={backdrops[d.slug]} style={FULL} resizeMode="cover" accessible={false} />
       <LinearGradient
         colors={['rgba(11,16,22,0.95)', 'rgba(11,16,22,0.8)', 'rgba(11,16,22,0.15)']}
         locations={[0, 0.5, 1]}

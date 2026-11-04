@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { Pressable, StyleSheet, Text, TVFocusGuideView, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import type { RootStackParamList } from '../navigation';
 import { colors, font, px, safe, type } from '../theme';
@@ -40,11 +40,12 @@ export function NavBar({ current }: { current: Item['key'] }) {
   return (
     <View style={styles.bar}>
       <Text style={styles.brand}>Atlas</Text>
-      <TVFocusGuideView autoFocus style={styles.items}>
+      {/* No autoFocus here: on launch, focus belongs to the first Featured tile. */}
+      <View style={styles.items}>
         {ITEMS.map((item) => (
           <NavItem key={item.key} item={item} current={item.key === current} onPress={() => go(item.key)} />
         ))}
-      </TVFocusGuideView>
+      </View>
     </View>
   );
 }
