@@ -1,8 +1,9 @@
 import { useFocusEffect } from '@react-navigation/native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { BackHandler, Platform, StyleSheet, TVEventControl, View } from 'react-native';
+import { BackHandler, Platform, StyleSheet, TVEventControl, View, useTVEventHandler } from 'react-native';
 
 import { getFocused } from '../components/backdropStore';
+import { isPress } from '../lib/remote';
 import { returnTarget } from '../lib/saved';
 import { useSaved } from '../state/SavedProvider';
 import { NavBar, type Tab } from '../components/NavBar';
@@ -52,6 +53,14 @@ export function MainScreen({ navigation }: ScreenProps<'Main'>) {
       settling.current = false;
     }, 450);
   }, []);
+  // A remote press inside the window means the person has taken over: the
+  // re-assert would pull focus back from where they just moved it (and the
+  // guard would swallow their nav move), so the window ends at once.
+  useTVEventHandler((evt) => {
+    if (!settling.current || !isPress(evt?.eventType)) return;
+    if (timer.current) clearTimeout(timer.current);
+    settling.current = false;
+  });
   useEffect(() => {
     settle(); // launch: the listener below may attach after the first focus event
     const unsubscribe = navigation.addListener('focus', settle);
