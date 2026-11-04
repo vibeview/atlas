@@ -1,5 +1,4 @@
-import { useFocusEffect } from '@react-navigation/native';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Backdrop } from '../components/Backdrop';
@@ -36,14 +35,26 @@ function HomeBackdrop() {
 }
 
 export function HomeScreen({ navigation }: ScreenProps<'Home'>) {
-  // Coming back from a destination, its tile takes focus again.
-  const opened = useRef<string | null>(null);
-  const [preferred, setPreferred] = useState(FIRST);
-  useFocusEffect(
-    useCallback(() => {
-      if (opened.current) setPreferred(opened.current);
-    }, []),
-  );
+  // The tile that takes focus: the first Featured tile on launch, the tile that
+  // was opened on return. hasTVPreferredFocus only acts when the prop changes,
+  // so it is cleared and set again once the screen transition has settled
+  // (the pattern Marquee uses).
+  const opened = useRef<string>(FIRST);
+  const [preferred, setPreferred] = useState<string | null>(null);
+  useEffect(() => {
+    let t: ReturnType<typeof setTimeout> | undefined;
+    const settle = () => {
+      setPreferred(null);
+      if (t) clearTimeout(t);
+      t = setTimeout(() => setPreferred(opened.current), 450);
+    };
+    settle(); // launch: the listener below may attach after the first focus event
+    const unsubscribe = navigation.addListener('focus', settle);
+    return () => {
+      unsubscribe();
+      if (t) clearTimeout(t);
+    };
+  }, [navigation]);
   const open = useCallback(
     (slug: string) => {
       opened.current = slug;
@@ -59,7 +70,7 @@ export function HomeScreen({ navigation }: ScreenProps<'Home'>) {
       <TitleBlock />
       <ScrollView style={styles.rows} contentContainerStyle={styles.rowsContent} showsVerticalScrollIndicator={false}>
         {rows.map((row) => (
-          <Row key={row.id} row={row} onOpen={open} preferredSlug={row.slugs.includes(preferred) ? preferred : undefined} />
+          <Row key={row.id} row={row} onOpen={open} preferredSlug={preferred && row.slugs.includes(preferred) ? preferred : undefined} />
         ))}
       </ScrollView>
     </View>

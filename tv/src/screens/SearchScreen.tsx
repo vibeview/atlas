@@ -8,6 +8,11 @@ import { searchDestinations } from '../lib/search';
 import type { ScreenProps } from '../navigation';
 import { colors, font, px, safe, type } from '../theme';
 
+// The grid's ScrollView clips its content: give the focused tile's 10% lift
+// room on every side.
+
+const lift = { paddingHorizontal: px(40), paddingTop: px(24), paddingBottom: px(60) };
+
 /**
  * A real text field, so every typing path reaches it (VibeView types only into
  * real fields). On tvOS selecting the field opens Apple's full-screen keyboard;
@@ -38,7 +43,7 @@ export function SearchScreen({ navigation }: ScreenProps<'Search'>) {
           onBlur={() => setFocused(false)}
           style={[styles.field, focused && styles.fieldFocused, Platform.OS === 'android' && styles.fieldAndroid]}
         />
-        <ScrollView style={styles.results} showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerStyle={lift} style={[styles.results, { marginHorizontal: -px(40) }]} showsVerticalScrollIndicator={false}>
           {query.trim() === '' ? (
             <Text style={styles.hint}>Type a place or a country.</Text>
           ) : results.length === 0 ? (
@@ -69,6 +74,6 @@ const styles = StyleSheet.create({
   },
   fieldFocused: { borderColor: colors.focusBorder },
   fieldAndroid: { paddingVertical: px(12) },
-  results: { marginTop: px(48) },
+  results: { marginTop: px(24) },
   hint: { color: colors.textSoft, fontFamily: font.medium, fontSize: px(type.body) },
 });

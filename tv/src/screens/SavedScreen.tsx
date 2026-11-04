@@ -8,6 +8,11 @@ import type { ScreenProps } from '../navigation';
 import { useSaved } from '../state/SavedProvider';
 import { colors, font, px, safe, type } from '../theme';
 
+// The grid's ScrollView clips its content: give the focused tile's 10% lift
+// room on every side.
+const liftOuter = { marginHorizontal: -px(40), marginTop: -px(24) };
+const lift = { paddingHorizontal: px(40), paddingTop: px(24), paddingBottom: px(60) };
+
 export function SavedScreen({ navigation }: ScreenProps<'Saved'>) {
   const { saved } = useSaved();
   const items = saved.map((slug) => bySlug[slug]).filter(Boolean);
@@ -19,7 +24,7 @@ export function SavedScreen({ navigation }: ScreenProps<'Saved'>) {
         {items.length === 0 ? (
           <Text style={styles.empty}>Nothing saved yet. Press Save on a place to keep it here.</Text>
         ) : (
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView style={liftOuter} contentContainerStyle={lift} showsVerticalScrollIndicator={false}>
             <TileGrid
               items={items}
               idPrefix="saved-tile"
