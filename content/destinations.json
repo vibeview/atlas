@@ -2,7 +2,7 @@
   "rows": [
     {
       "id": "popular",
-      "title": "Popular this week",
+      "title": "Featured",
       "slugs": [
         "kyoto",
         "santorini",
@@ -54,8 +54,8 @@
       "slug": "kyoto",
       "name": "Kyoto",
       "country": "Japan",
-      "tagline": "Old imperial capital of wooden streets and temple gardens",
-      "description": "Kyoto was the seat of the emperor from 794 to 1868. Walk Ninenzaka and Sannenzaka early, before the shops on the slope to Kiyomizu-dera open. Near Nanzen-ji, order yudofu, tofu simmered in kelp broth.",
+      "tagline": "Seat of the emperors for more than a thousand years",
+      "description": "The city kept its wooden machiya townhouses because it was spared the heavy bombing of 1945. Gion and Higashiyama still have whole streets of them.",
       "tags": [
         "Temples",
         "Gardens",
@@ -67,13 +67,13 @@
       "rating": 4.9,
       "experiences": [
         {
-          "title": "Fushimi Inari at dawn",
-          "line": "Walk the torii tunnels up Mount Inari before the trains fill",
+          "title": "Fushimi Inari early",
+          "line": "Torii tunnels up Mount Inari, best before the crowds arrive",
           "icon": "hike"
         },
         {
           "title": "Arashiyama bamboo grove",
-          "line": "Go early, then cross Togetsukyō Bridge over the Katsura",
+          "line": "Then cross Togetsukyō Bridge over the Katsura",
           "icon": "walk"
         },
         {
@@ -94,7 +94,7 @@
       "name": "Santorini",
       "country": "Greece",
       "tagline": "Cliff villages on the rim of a flooded caldera",
-      "description": "The island is what remains of a volcano that blew apart in the Late Bronze Age. A cliff path of about 10 km runs along the caldera edge from Fira to Oia. Order fava, a yellow split-pea purée, with a glass of Assyrtiko.",
+      "description": "The cliffs are the inner wall of a volcano that collapsed in the Late Bronze Age. Excavators at Akrotiri found jars of fava seed, the legume the island still grows.",
       "tags": [
         "Caldera",
         "Wine",
@@ -111,9 +111,9 @@
           "icon": "hike"
         },
         {
-          "title": "Akrotiri excavations",
-          "line": "A Bronze Age town preserved under volcanic ash",
-          "icon": "culture"
+          "title": "Kamari beach",
+          "line": "Dark volcanic sand below the rock of Mesa Vouno",
+          "icon": "beach"
         },
         {
           "title": "Palea Kameni hot springs",
@@ -132,8 +132,8 @@
       "slug": "bali",
       "name": "Bali",
       "country": "Indonesia",
-      "tagline": "Rice terraces inland, reef breaks on the south coast",
-      "description": "Ubud sits in the hills north of Denpasar, among rice terraces still watered by the subak canal system. The Bukit Peninsula in the south has the reef breaks at Uluwatu and Padang Padang. For lunch, find a warung serving babi guling, spit-roast pork.",
+      "tagline": "Rice terraces inland, reef breaks to the south",
+      "description": "Bali is a Hindu island in a mostly Muslim country, and offerings in palm-leaf trays sit on doorsteps every morning. The subak canals that water its rice terraces date back at least to the 9th century.",
       "tags": [
         "Rice terraces",
         "Surf",
@@ -145,13 +145,13 @@
       "rating": 4.6,
       "experiences": [
         {
-          "title": "Jatiluwih rice terraces",
-          "line": "Trails through the UNESCO-listed subak rice fields",
+          "title": "Tegallalang terraces",
+          "line": "Stepped rice fields in a valley north of Ubud",
           "icon": "walk"
         },
         {
-          "title": "Uluwatu Temple at sunset",
-          "line": "A clifftop temple, then the kecak dance at dusk",
+          "title": "Uluwatu Temple",
+          "line": "A clifftop temple, with the kecak dance staged at sunset",
           "icon": "culture"
         },
         {
@@ -171,8 +171,8 @@
       "slug": "lago-di-braies",
       "name": "Lago di Braies",
       "country": "Italy",
-      "tagline": "A green lake under the cliffs of the Croda del Becco",
-      "description": "The lake lies at 1,496 m in the Fanes-Sennes-Braies nature park in South Tyrol. A flat path of about 3.5 km loops the shore in roughly an hour. Wooden rowing boats leave from the boathouse in summer.",
+      "tagline": "A lake at 1,496 m in the Fanes-Sennes-Braies park",
+      "description": "The Croda del Becco, 2,810 m, rises from the south shore. In winter the lake freezes over and the rowing boats come out of the water.",
       "tags": [
         "Alpine lake",
         "Hiking",
@@ -185,17 +185,17 @@
       "experiences": [
         {
           "title": "Lakeshore loop",
-          "line": "About an hour on a flat path around the water",
+          "line": "A flat hour on a 3.5 km path around the water",
           "icon": "walk"
         },
         {
           "title": "Rowing from the boathouse",
-          "line": "Wooden boats from the jetty, in summer only",
+          "line": "Wooden boats from the jetty, summer only",
           "icon": "boat"
         },
         {
           "title": "Start of the Alta Via 1",
-          "line": "Trail 1 climbs from the south shore to Rifugio Biella",
+          "line": "Trail 1 climbs from the lake to Rifugio Biella",
           "icon": "hike"
         }
       ],
@@ -210,8 +210,8 @@
       "slug": "zermatt",
       "name": "Zermatt",
       "country": "Switzerland",
-      "tagline": "A car-free village under the Matterhorn",
-      "description": "Cars stop at Täsch, and a shuttle train covers the last few kilometres. The Gornergrat rack railway climbs to 3,089 m, facing the Matterhorn and the Gorner Glacier. In winter the ski area links over the border to Cervinia in Italy.",
+      "tagline": "Car-free village under the Matterhorn",
+      "description": "Petrol cars stop at Täsch, and the village runs on small electric vehicles. The first ascent of the Matterhorn set out from here in 1865.",
       "tags": [
         "Matterhorn",
         "Skiing",
@@ -249,8 +249,8 @@
       "slug": "tulum",
       "name": "Tulum",
       "country": "Mexico",
-      "tagline": "Maya ruins on a cliff above the Caribbean",
-      "description": "The walled Maya site stands on a 12 m cliff above the beach. Inland, the limestone is full of cenotes, flooded sinkholes you can swim in. The Sian Ka'an biosphere reserve begins just south of town.",
+      "tagline": "Maya walls on a cliff above the Caribbean",
+      "description": "Tulum was one of the last cities the Maya built, and people still lived in it when Spanish ships arrived. This coast has no rivers: rain drains straight into the limestone and fills the cenotes.",
       "tags": [
         "Ruins",
         "Cenotes",
@@ -273,7 +273,7 @@
         },
         {
           "title": "Sian Ka'an by boat",
-          "line": "Lagoons and mangrove channels in the reserve",
+          "line": "Lagoons and mangrove channels in the biosphere reserve",
           "icon": "boat"
         }
       ],
@@ -288,8 +288,8 @@
       "slug": "porto",
       "name": "Porto",
       "country": "Portugal",
-      "tagline": "Tiled houses stacked above the Douro",
-      "description": "The Ribeira quarter climbs from the river in rows of tiled and painted houses. Walk the upper deck of the iron bridge to Vila Nova de Gaia, where the port wine lodges line the quay. Order a francesinha, a meat sandwich under melted cheese and beer sauce.",
+      "tagline": "Port lodges on one bank, tiled churches on the other",
+      "description": "The two-deck Dom Luís I bridge, opened in 1886, carries the metro on top and cars below. Across it in Vila Nova de Gaia, port wine ages in the riverside lodges.",
       "tags": [
         "River",
         "Port wine",
@@ -306,9 +306,9 @@
           "icon": "culture"
         },
         {
-          "title": "Port lodge tasting",
-          "line": "A cellar tour and a tawny tasting in Gaia",
-          "icon": "wine"
+          "title": "Francesinha lunch",
+          "line": "A meat sandwich under melted cheese and beer sauce",
+          "icon": "food"
         },
         {
           "title": "Six bridges cruise",
@@ -327,8 +327,8 @@
       "slug": "istanbul",
       "name": "Istanbul",
       "country": "Türkiye",
-      "tagline": "A city on two continents, split by the Bosphorus",
-      "description": "The old city sits on a peninsula between the Golden Horn and the Sea of Marmara. Hagia Sophia and the Blue Mosque face each other across Sultanahmet Square. Take the city ferry from Eminönü to Kadıköy on the Asian shore.",
+      "tagline": "A ferry city on the Bosphorus",
+      "description": "Hagia Sophia, finished in 537, was a church for nine centuries before it became a mosque in 1453. Commuter ferries cross from Europe to Asia in about 20 minutes.",
       "tags": [
         "History",
         "Ferries",
@@ -340,9 +340,9 @@
       "rating": 4.7,
       "experiences": [
         {
-          "title": "Ferry to Kadıköy",
-          "line": "A 20-minute crossing from Europe to Asia",
-          "icon": "boat"
+          "title": "Galata Tower",
+          "line": "The 14th-century Genoese tower above Karaköy",
+          "icon": "view"
         },
         {
           "title": "Grand Bazaar",
@@ -366,8 +366,8 @@
       "slug": "marrakech",
       "name": "Marrakech",
       "country": "Morocco",
-      "tagline": "A red-walled medina at the foot of the High Atlas",
-      "description": "The medina is ringed by about 19 km of rammed-earth walls. At dusk, Jemaa el-Fnaa fills with food stalls serving harira and grilled meat. On clear winter days the snow on the High Atlas shows from the rooftops.",
+      "tagline": "A red-walled medina on the plain below the High Atlas",
+      "description": "The medina walls run for 19 km, built of rammed earth that gives the city its colour. The 12th-century minaret of the Koutoubia, 77 m tall, shows above most of the old town.",
       "tags": [
         "Medina",
         "Food",
@@ -379,8 +379,8 @@
       "rating": 4.5,
       "experiences": [
         {
-          "title": "Jemaa el-Fnaa at dusk",
-          "line": "Stalls set up as the light goes; start with harira",
+          "title": "Jemaa el-Fnaa stalls",
+          "line": "Evening food stalls; order harira and grilled merguez",
           "icon": "food"
         },
         {
@@ -405,8 +405,8 @@
       "slug": "hoi-an",
       "name": "Hội An",
       "country": "Vietnam",
-      "tagline": "A river port of yellow shophouses and silk lanterns",
-      "description": "Hội An traded with Japan, China and Europe from the 15th to the 19th century, and its old town is a UNESCO site. The Japanese Covered Bridge dates from the 1590s. Try cao lầu, thick noodles with pork and greens in very little broth.",
+      "tagline": "Trading port of yellow shophouses and paper lanterns",
+      "description": "Japanese and Chinese merchants traded here from the 15th to the 19th century, and the old town is a UNESCO site. The Thu Bồn floods most autumns, and some houses mark each year's water level on their walls.",
       "tags": [
         "Old town",
         "Food",
@@ -418,13 +418,13 @@
       "rating": 4.7,
       "experiences": [
         {
-          "title": "Thu Bồn by lantern boat",
-          "line": "An evening boat with paper lanterns on the river",
+          "title": "Lantern boat on the river",
+          "line": "An evening boat with paper lanterns on the Thu Bồn",
           "icon": "boat"
         },
         {
           "title": "Cao lầu at a street stall",
-          "line": "The noodle dish the town claims as its own",
+          "line": "Thick noodles with pork and greens, very little broth",
           "icon": "food"
         },
         {
@@ -444,8 +444,8 @@
       "slug": "prague",
       "name": "Prague",
       "country": "Czechia",
-      "tagline": "A medieval centre on both banks of the Vltava",
-      "description": "Prague Castle covers the hill above Malá Strana, with a Gothic cathedral at its core. The astronomical clock on Old Town Hall has been running since 1410. Cross the Vltava on the 14th-century stone bridge at first light.",
+      "tagline": "Gothic spires on both banks of the Vltava",
+      "description": "Charles Bridge was begun in 1357, and 30 statues line its stone parapets. Up on the hill above Malá Strana, the castle is one of the largest castle complexes in the world.",
       "tags": [
         "Old town",
         "Beer",
@@ -458,7 +458,7 @@
       "experiences": [
         {
           "title": "Astronomical clock",
-          "line": "The medieval clock on the Old Town Hall tower",
+          "line": "The clock on the Old Town Hall, installed in 1410",
           "icon": "culture"
         },
         {
@@ -483,8 +483,8 @@
       "slug": "cartagena",
       "name": "Cartagena",
       "country": "Colombia",
-      "tagline": "A walled colonial port on the Caribbean",
-      "description": "About 11 km of stone walls enclose the old city, built to defend the Spanish port. Getsemaní, just outside the walls, has the street food and the murals. Boats leave the Muelle de la Bodeguita for the Rosario Islands.",
+      "tagline": "Colonial balconies inside Caribbean sea walls",
+      "description": "Spain walled the port after repeated pirate raids, and the work took nearly two centuries to finish. Getsemaní, just outside the walls, has the street murals.",
       "tags": [
         "Old town",
         "Islands",
@@ -496,8 +496,8 @@
       "rating": 4.5,
       "experiences": [
         {
-          "title": "Sunset on the walls",
-          "line": "Walk the ramparts above the Caribbean at dusk",
+          "title": "Walk the ramparts",
+          "line": "Along the wall from Las Bóvedas toward the Clock Tower",
           "icon": "walk"
         },
         {
@@ -507,7 +507,7 @@
         },
         {
           "title": "Rosario Islands",
-          "line": "Snorkel the coral reefs, about an hour by boat",
+          "line": "Snorkel the coral reefs, an hour or so by boat",
           "icon": "swim"
         }
       ],
@@ -523,7 +523,7 @@
       "name": "Amalfi Coast",
       "country": "Italy",
       "tagline": "Cliff towns on the south side of the Sorrento peninsula",
-      "description": "The SS163 road follows the cliffs for about 50 km from Vietri sul Mare to Positano. Above Amalfi, the villa gardens of Ravello look straight down the coast. Lemons for limoncello grow on terraces held up by dry-stone walls.",
+      "description": "Amalfi was a maritime republic trading across the Mediterranean from the 9th to the 11th century. Lemons for limoncello grow on terraces held up by dry-stone walls above the towns.",
       "tags": [
         "Coast",
         "Hiking",
@@ -540,8 +540,8 @@
           "icon": "hike"
         },
         {
-          "title": "Amalfi to Positano by ferry",
-          "line": "The cliff towns seen from the water",
+          "title": "Positano by sea",
+          "line": "Seasonal ferries, spring to autumn, along the cliffs",
           "icon": "boat"
         },
         {
@@ -561,8 +561,8 @@
       "slug": "dubrovnik",
       "name": "Dubrovnik",
       "country": "Croatia",
-      "tagline": "A walled limestone city on the Adriatic",
-      "description": "The city walls run almost 2 km around the old town, and you can walk the full circuit. Stradun, the main street, is paved with limestone worn smooth and pale. A cable car climbs Mount Srđ for the view back over the roofs.",
+      "tagline": "Limestone streets inside a complete ring of walls",
+      "description": "Most of the old town was rebuilt in stone after the earthquake of 1667. Stradun, the main street, has been worn smooth and pale by centuries of feet.",
       "tags": [
         "Old town",
         "Sea",
@@ -600,8 +600,8 @@
       "slug": "cape-town",
       "name": "Cape Town",
       "country": "South Africa",
-      "tagline": "A city at the foot of Table Mountain",
-      "description": "The flat top of Table Mountain stands about 1,085 m above the city. The Cape Peninsula runs south to Cape Point, with penguins at Boulders Beach on the way. Constantia, inside the city limits, has wine farms that date from the 1680s.",
+      "tagline": "Table Mountain above, the Atlantic below",
+      "description": "The Dutch East India Company set up a supply station here in 1652 to feed its ships. Robben Island, 11 km offshore, held political prisoners until 1991.",
       "tags": [
         "Mountain",
         "Wine",
@@ -624,7 +624,7 @@
         },
         {
           "title": "Constantia wine farms",
-          "line": "Tastings on estates dating from the 1680s",
+          "line": "Tastings on some of the country's oldest estates",
           "icon": "wine"
         }
       ],
@@ -639,8 +639,8 @@
       "slug": "ha-long-bay",
       "name": "Hạ Long Bay",
       "country": "Vietnam",
-      "tagline": "Limestone towers rising from a green bay",
-      "description": "Some 1,600 limestone islands and islets rise from the Gulf of Tonkin here. Overnight boats anchor among them, away from the harbour lights. Kayaks pass under the rock arch of Luồn Cave into an enclosed lagoon.",
+      "tagline": "Karst towers in the Gulf of Tonkin",
+      "description": "UNESCO counts some 1,600 islands and islets in the bay, most of them uninhabited. Most boats leave from Tuần Châu harbour, on an island joined to the mainland by a causeway.",
       "tags": [
         "Bay",
         "Cruises",
@@ -678,8 +678,8 @@
       "slug": "big-sur",
       "name": "Big Sur",
       "country": "United States",
-      "tagline": "Highway 1 between the Santa Lucia range and the Pacific",
-      "description": "Big Sur is about 145 km of coast between Carmel and San Simeon, followed by Highway 1. Along most of it the Santa Lucia Mountains drop straight into the ocean. Fog often covers the coast on summer mornings, so spring and autumn tend to be clearer.",
+      "tagline": "The Santa Lucia Mountains meeting the Pacific",
+      "description": "Highway 1 along this coast opened in 1937, built partly with convict labour. Landslides close sections of it for months at a time, so check the road status before driving through.",
       "tags": [
         "Coast",
         "Road trip",
@@ -718,7 +718,7 @@
       "name": "Zanzibar",
       "country": "Tanzania",
       "tagline": "Coral-stone streets and an Indian Ocean reef",
-      "description": "Stone Town, a UNESCO site, is built of coral stone, and many houses keep their carved wooden doors. Cloves from the farms inland made the island rich in the 19th century. On the east coast the tide pulls back far enough to walk out toward the reef.",
+      "description": "In the 19th century, clove plantations worked by enslaved people made the island the world's largest clove producer. Stone Town's Anglican cathedral stands on the site of the slave market closed in 1873.",
       "tags": [
         "Old town",
         "Spice farms",
@@ -756,8 +756,8 @@
       "slug": "banff",
       "name": "Banff",
       "country": "Canada",
-      "tagline": "Canada's first national park, in the Rockies",
-      "description": "Banff became Canada's first national park in 1885. Lake Louise and Moraine Lake get their turquoise from glacial silt. The Icefields Parkway runs north from Lake Louise toward Jasper.",
+      "tagline": "Turquoise lakes in the Canadian Rockies",
+      "description": "Hot springs found on Sulphur Mountain in 1883 led to Canada's first national park two years later. Lake Louise and Moraine Lake take their colour from glacial rock flour.",
       "tags": [
         "Lakes",
         "Hiking",
@@ -770,7 +770,7 @@
       "experiences": [
         {
           "title": "Lake Agnes Tea House",
-          "line": "A 3.5 km climb from Lake Louise to a hut by a tarn",
+          "line": "A summer-only hut, 3.5 km uphill from Lake Louise",
           "icon": "hike"
         },
         {
@@ -779,9 +779,9 @@
           "icon": "view"
         },
         {
-          "title": "Banff Upper Hot Springs",
-          "line": "A hot pool on Sulphur Mountain at 1,585 m",
-          "icon": "swim"
+          "title": "Icefields Parkway",
+          "line": "Bow Lake and Peyto Lake on the road toward Jasper",
+          "icon": "view"
         }
       ],
       "photo": {
@@ -796,7 +796,7 @@
       "name": "Torres del Paine",
       "country": "Chile",
       "tagline": "Granite towers above glacial lakes in Patagonia",
-      "description": "The three granite towers that name the park rise straight out of the Patagonian steppe. The W Trek takes four to five days, from the towers west to Grey Glacier. Guanacos graze close to the park roads.",
+      "description": "The three granite towers that name the park rise above the Patagonian steppe. Guanacos graze close to the park roads.",
       "tags": [
         "Trekking",
         "Glaciers",
@@ -804,7 +804,7 @@
       ],
       "bestMonths": "November to March",
       "timeZone": "UTC-3",
-      "airport": "Puerto Natales (PNT), about 2 h by road",
+      "airport": "Puerto Natales (PNT, seasonal) or Punta Arenas (PUQ), 2 to 5 h by road",
       "rating": 4.9,
       "experiences": [
         {
@@ -819,7 +819,7 @@
         },
         {
           "title": "French Valley",
-          "line": "The middle arm of the W, under hanging glaciers",
+          "line": "The middle arm of the W Trek, under hanging glaciers",
           "icon": "hike"
         }
       ],
@@ -834,8 +834,8 @@
       "slug": "hallstatt",
       "name": "Hallstatt",
       "country": "Austria",
-      "tagline": "A salt-mining village on the Hallstätter See",
-      "description": "Salt has been mined in the mountain above the village for some 7,000 years. Space is so tight that the church bone house holds more than 600 painted skulls. The 5fingers platform on the Krippenstein hangs over a 400 m drop.",
+      "tagline": "Salt-mining village on the Hallstätter See",
+      "description": "Salt has been mined in the mountain since the Bronze Age. The early Iron Age Hallstatt culture is named after the graves found above the village. The churchyard is so small that graves were reused, and the bone house holds more than 600 painted skulls.",
       "tags": [
         "Lake",
         "Salt mine",
@@ -843,7 +843,7 @@
       ],
       "bestMonths": "May to June, September to October",
       "timeZone": "UTC+1, UTC+2 in summer",
-      "airport": "Salzburg (SZG), about 1 h by road",
+      "airport": "Salzburg (SZG), about 1 h 15 min by road",
       "rating": 4.7,
       "experiences": [
         {
@@ -873,8 +873,8 @@
       "slug": "lofoten",
       "name": "Lofoten",
       "country": "Norway",
-      "tagline": "Fishing villages under granite peaks in the Arctic",
-      "description": "The islands lie north of the Arctic Circle, yet the Gulf Stream keeps the harbours free of ice. Red rorbu cabins stand on stilts over the water at Reine and Hamnøy. From late May to mid-July the sun does not set.",
+      "tagline": "Granite peaks rising from the Norwegian Sea",
+      "description": "The islands lie above the Arctic Circle, yet the Gulf Stream keeps their harbours free of ice. From late winter into spring, cod hangs on wooden racks to dry into stockfish.",
       "tags": [
         "Fishing villages",
         "Hiking",
@@ -892,7 +892,7 @@
         },
         {
           "title": "Kayak from Henningsvær",
-          "line": "Paddle between skerries and racks of drying cod",
+          "line": "Paddle between the skerries off the harbour",
           "icon": "boat"
         },
         {
@@ -912,8 +912,8 @@
       "slug": "plitvice",
       "name": "Plitvice Lakes",
       "country": "Croatia",
-      "tagline": "Terraced lakes in the karst of central Croatia",
-      "description": "Sixteen lakes step down a valley, held back by travertine barriers that are still growing. Wooden boardwalks cross the water between the falls. Veliki slap, the tallest waterfall, drops 78 m.",
+      "tagline": "Sixteen lakes joined by waterfalls",
+      "description": "Travertine barriers, built up from moss and calcium carbonate, hold the lakes back and are still growing. The park was declared in 1949, the first in Croatia.",
       "tags": [
         "Lakes",
         "Waterfalls",
@@ -951,8 +951,8 @@
       "slug": "queenstown",
       "name": "Queenstown",
       "country": "New Zealand",
-      "tagline": "A lake town facing the Remarkables",
-      "description": "Queenstown sits on the shore of Lake Wakatipu, across the water from the Remarkables range. A gondola climbs from the town centre to a lookout over the lake. Milford Sound is a long day trip by road through Te Anau.",
+      "tagline": "Ski fields and vineyards around Lake Wakatipu",
+      "description": "The town grew out of the 1862 gold rush on the Shotover River. Lake Wakatipu runs 80 km in a long zigzag between the mountains.",
       "tags": [
         "Lake",
         "Skiing",

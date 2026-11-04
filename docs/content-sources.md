@@ -1,7 +1,8 @@
 # Content sources
 
 Sources for the facts in `content/destinations.json`: airport and transfer,
-time zone, and best months. All checked on 2026-11-04.
+time zone and best months in the first table, and the dated or numbered facts
+in descriptions and experiences in the second. All checked on 2026-11-04.
 
 Ratings are illustrative app data, not sourced. Transfer times are typical
 figures for normal traffic. Best months are the dry or mild season most
@@ -90,10 +91,10 @@ names the zone and links the tz source file that defines it. Notes:
 | Banff | Time zone | UTC-6 (permanent from 2026-11-01) | https://www.alberta.ca/albertas-new-time-system | 2026-11-04 |
 | Banff | Time zone (tz database) | `America/Edmonton` at -06 all year | https://data.iana.org/time-zones/tzdb/northamerica; release notes: https://data.iana.org/time-zones/tzdb/NEWS | 2026-11-04 |
 | Banff | Best months | June to September, December to March | https://parks.canada.ca/pn-np/ab/banff/visit | 2026-11-04 |
-| Torres del Paine | Airport and transfer | Puerto Natales (PNT), about 2 h by road | https://www.swoop-patagonia.com/blog/148047-puerto-natales-airport | 2026-11-04 |
+| Torres del Paine | Airport and transfer | Puerto Natales (PNT, seasonal) or Punta Arenas (PUQ), 2 to 5 h by road | https://www.swoop-patagonia.com/blog/148047-puerto-natales-airport (PNT seasonal, domestic only; PUQ to Puerto Natales about 3 h, then about 2 h to the park) | 2026-11-04 |
 | Torres del Paine | Time zone | UTC-3 | IANA tz `America/Punta_Arenas`: https://data.iana.org/time-zones/tzdb/southamerica; decree thread: https://mm.icann.org/pipermail/tz/2022-April/031372.html | 2026-11-04 |
 | Torres del Paine | Best months | November to March | https://helpcenter.lastorres.com/en/help-center-las-torres-patagonia/best-times-of-year-to-visit | 2026-11-04 |
-| Hallstatt | Airport and transfer | Salzburg (SZG), about 1 h by road | https://viatovia.com/blog/salzburg-airport-to-hallstatt | 2026-11-04 |
+| Hallstatt | Airport and transfer | Salzburg (SZG), about 1 h 15 min by road | https://departly.pages.dev/to/austria/hallstatt/ (SZG ~70 km, 1 h 15 by road); https://www.european-traveler.com/austria/driving-to-unesco-listed-hallstatt-in-austria/ (Salzburg city, about 75 km, just over an hour) | 2026-11-04 |
 | Hallstatt | Time zone | UTC+1, UTC+2 in summer | IANA tz `Europe/Vienna`: https://data.iana.org/time-zones/tzdb/europe | 2026-11-04 |
 | Hallstatt | Best months | May to June, September to October | https://www.hallstatt.net/ | 2026-11-04 |
 | Lofoten | Airport and transfer | Harstad/Narvik Evenes (EVE), about 3 h by road to Svolvær | https://norwayexplained.com/how-to-get-from-harstad-narvik-evenes-airport-to-harstad-narvik-lofoten-and-vesteralen/ | 2026-11-04 |
@@ -106,6 +107,49 @@ names the zone and links the tz source file that defines it. Notes:
 | Queenstown | Time zone | UTC+12, UTC+13 in summer | IANA tz `Pacific/Auckland`: https://data.iana.org/time-zones/tzdb/australasia | 2026-11-04 |
 | Queenstown | Best months | December to March, June to August | https://www.lonelyplanet.com/new-zealand/queenstown | 2026-11-04 |
 
+## Facts in descriptions and experiences
+
+| Destination | Fact | Value | Source URL | Checked on |
+|---|---|---|---|---|
+| Kyoto | Spared large-scale bombing in 1945; many prewar machiya survive | spared | https://en.wikipedia.org/wiki/Kyoto | 2026-11-04 |
+| Santorini | Santorini fava is the seed of *Lathyrus clymenum*; jars of it found at Akrotiri | fava seed, Akrotiri | https://en.wikipedia.org/wiki/Lathyrus_clymenum | 2026-11-04 |
+| Bali | Subak irrigation dates to the 9th century | 9th century | https://whc.unesco.org/en/list/1194/ | 2026-11-04 |
+| Bali | Kecak at Uluwatu Temple is performed at sunset | sunset | https://wingedboots.co.uk/things-to-do/visit-uluwatu-temple-at-sunset-for-a-kecak-dance | 2026-11-04 |
+| Lago di Braies | Croda del Becco (Seekofel) height | 2,810 m | https://en.wikipedia.org/wiki/Seekofel | 2026-11-04 |
+| Lago di Braies | Lake elevation | 1,496 m | https://en.wikipedia.org/wiki/Lago_di_Braies | 2026-11-04 |
+| Zermatt | First ascent of the Matterhorn from Zermatt | 1865 | https://en.wikipedia.org/wiki/Zermatt | 2026-11-04 |
+| Tulum | One of the last Maya cities, inhabited at Spanish contact; 12 m cliffs | 12 m | https://en.wikipedia.org/wiki/Tulum | 2026-11-04 |
+| Porto | Dom Luís I bridge opened 1886; metro on the upper deck, road below | 1886 | https://en.wikipedia.org/wiki/Dom_Lu%C3%ADs_I_Bridge | 2026-11-04 |
+| Istanbul | Hagia Sophia completed 537, converted to a mosque 1453 | 537, 1453 | https://en.wikipedia.org/wiki/Hagia_Sophia | 2026-11-04 |
+| Marrakech | Rammed-earth walls, about 19 km | 19 km | https://en.wikipedia.org/wiki/Walls_of_Marrakesh | 2026-11-04 |
+| Marrakech | Koutoubia minaret, 12th century, about 77 m | 77 m | https://en.wikipedia.org/wiki/Koutoubia_Mosque | 2026-11-04 |
+| Marrakech | Medina on the Haouz plain, between the High Atlas and the Jebilet | plain below the Atlas | https://www.larousse.fr/encyclopedie/divers/Maroc_g%C3%A9ographie_physique/185525 | 2026-11-04 |
+| Hội An | Trading port 15th to 19th century; UNESCO old town | 15th to 19th century | https://whc.unesco.org/en/list/948/ | 2026-11-04 |
+| Hội An | Houses mark flood levels on their walls (Quân Thắng house) | flood marks | https://vietcetera.com/en/the-300-year-old-house-tracing-hoi-ans-flood-history | 2026-11-04 |
+| Prague | Charles Bridge begun 1357; 30 statues | 1357, 30 | https://en.wikipedia.org/wiki/Charles_Bridge | 2026-11-04 |
+| Prague | Castle is among the largest castle complexes in the world | largest complex | https://en.wikipedia.org/wiki/Prague_Castle | 2026-11-04 |
+| Prague | Astronomical clock installed 1410 | 1410 | https://en.wikipedia.org/wiki/Prague_astronomical_clock | 2026-11-04 |
+| Cartagena | Walls built 1614 to 1796 against pirate raids, about 11 km | nearly two centuries | https://en.wikipedia.org/wiki/Cartagena,_Colombia | 2026-11-04 |
+| Amalfi Coast | Maritime republic, Mediterranean trade 9th to 11th century | 9th to 11th century | https://en.wikipedia.org/wiki/Duchy_of_Amalfi | 2026-11-04 |
+| Amalfi Coast | Coastal ferries are seasonal (roughly April to October) | spring to autumn | https://positano.com/en/ferry-schedule | 2026-11-04 |
+| Dubrovnik | Old town rebuilt after the 1667 earthquake | 1667 | https://en.wikipedia.org/wiki/1667_Dubrovnik_earthquake | 2026-11-04 |
+| Cape Town | Dutch East India Company supply station, 1652 | 1652 | https://en.wikipedia.org/wiki/Cape_Colony | 2026-11-04 |
+| Cape Town | Robben Island 11 km from Cape Town; last political prisoners released 1991 | 11 km, 1991 | https://en.wikipedia.org/wiki/Robben_Island | 2026-11-04 |
+| Hạ Long Bay | Some 1,600 islands and islets, mostly uninhabited | 1,600 | https://whc.unesco.org/en/list/672/ | 2026-11-04 |
+| Hạ Long Bay | Tuần Châu joined to the mainland by a causeway; main cruise harbour | causeway | https://en.wikipedia.org/wiki/Tu%E1%BA%A7n_Ch%C3%A2u | 2026-11-04 |
+| Big Sur | Highway 1 opened 1937, built partly with convict labour | 1937 | https://en.wikipedia.org/wiki/Big_Sur_Coast_Highway | 2026-11-04 |
+| Big Sur | Landslides close sections for months; road status | Caltrans QuickMap | https://quickmap.dot.ca.gov/ | 2026-11-04 |
+| Zanzibar | 19th-century clove plantations worked by enslaved people; dominant world producer | largest producer | https://en.wikipedia.org/wiki/Slavery_in_Zanzibar | 2026-11-04 |
+| Zanzibar | Anglican cathedral on the slave market site, market closed 1873 | 1873 | https://en.wikipedia.org/wiki/Christ_Church,_Zanzibar | 2026-11-04 |
+| Banff | Hot springs found 1883, national park 1885 | 1883, 1885 | https://en.wikipedia.org/wiki/Banff_National_Park | 2026-11-04 |
+| Banff | Lake Agnes Tea House open in summer only (about early June to early October) | summer only | https://www.lakeagnesteahouse.com/about | 2026-11-04 |
+| Hallstatt | Salt mined since the Bronze Age; Hallstatt culture named after the burial ground above the village | Bronze Age | https://en.wikipedia.org/wiki/Hallstatt_culture | 2026-11-04 |
+| Hallstatt | Bone house: graves reused for lack of space, 610 painted skulls | 600+ | https://www.hallstatt.net/about-hallstatt/sehenswertes-en-US/catholic-church-of-hallstatt/bone-house-of-hallstatt/ | 2026-11-04 |
+| Lofoten | Cod dries on racks from late winter into spring (stockfish) | late winter to spring | https://en.wikipedia.org/wiki/Stockfish | 2026-11-04 |
+| Plitvice Lakes | 16 lakes, travertine barriers; national park 1949 | 16, 1949 | https://en.wikipedia.org/wiki/Plitvice_Lakes_National_Park | 2026-11-04 |
+| Queenstown | Gold found on the Shotover River, November 1862 | 1862 | https://teara.govt.nz/en/1966/queenstown | 2026-11-04 |
+| Queenstown | Lake Wakatipu about 80 km long, zigzag shape | 80 km | https://en.wikipedia.org/wiki/Lake_Wakatipu | 2026-11-04 |
+
 ## Weaker sources
 
 These rows rest on travel guides or on official pages that describe the
@@ -114,15 +158,12 @@ turns up:
 
 - Best months for Kyoto, Santorini, Zermatt, Porto, Istanbul, Marrakech,
   Prague, Banff, Hallstatt and Plitvice: the linked tourism-board page
-  describes the seasons but does not state these months. The months are the common shoulder or dry season
-  across travel guides. Amalfi Coast, Dubrovnik, Cape Town and Queenstown
+  describes the seasons but does not state these months. The months are the
+  common shoulder or dry season across travel guides. Amalfi Coast, Dubrovnik, Cape Town and Queenstown
   link a Lonely Planet destination page.
 - Transfer times for Bali, Lago di Braies, Tulum, Marrakech, Hallstatt and
   Big Sur come from transfer companies and travel guides. They differ by
   10 to 30 minutes between sources.
-- Puerto Natales (PNT) has domestic flights only, mostly in the October to
-  April season. Out of season, use Punta Arenas (PUQ), about 3 h by road to
-  Puerto Natales.
 - A few pages (Kansai Airport, newzealand.com, Le Sirenuse, vietnamdrive.com,
-  Medias24) block scripted requests (HTTP 403). Open them in a browser to
+  Medias24, whc.unesco.org, teara.govt.nz) block scripted requests (HTTP 403). Open them in a browser to
   check.
