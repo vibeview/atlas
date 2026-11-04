@@ -47,7 +47,10 @@ export function SearchContent({ onOpen, preferredSlug }: Props) {
         />
         <ScrollView contentContainerStyle={lift} style={[styles.results, { marginHorizontal: -px(40) }]} showsVerticalScrollIndicator={false}>
           {query.trim() === '' ? (
-            <Text style={styles.hint}>Type a place or a country.</Text>
+            <>
+              <Text style={styles.heading}>All places</Text>
+              <TileGrid items={destinations} idPrefix="search-tile" onOpen={onOpen} preferredSlug={preferredSlug ?? undefined} />
+            </>
           ) : results.length === 0 ? (
             <Text style={styles.hint}>No places match “{query.trim()}”.</Text>
           ) : (
@@ -78,5 +81,6 @@ const styles = StyleSheet.create({
   fieldFocused: { borderColor: colors.focusBorder },
   fieldAndroid: { paddingVertical: px(12) },
   results: { marginTop: px(24) },
+  heading: { color: colors.text, fontFamily: font.semibold, fontSize: px(type.rowTitle), marginBottom: px(20) },
   hint: { color: colors.textSoft, fontFamily: font.medium, fontSize: px(type.body) },
 });
