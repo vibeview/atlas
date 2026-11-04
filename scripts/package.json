@@ -1,0 +1,13 @@
+{
+  "name": "atlas-content-scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node check-content.mjs",
+    "export": "node export.mjs",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "sharp": "0.34.4"
+  }
+}

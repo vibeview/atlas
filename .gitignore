@@ -40,3 +40,5 @@ yarn-error.*
 
 # VibeView live-session state (local machine state)
 .vibeview/
+
+scripts/node_modules/
