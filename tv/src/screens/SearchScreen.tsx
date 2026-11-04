@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { NavBar } from '../components/NavBar';
+import { useArrivalFocus } from '../components/useArrivalFocus';
 import { TileGrid } from '../components/TileGrid';
 import { destinations } from '../data/model';
 import { searchDestinations } from '../lib/search';
@@ -22,11 +23,14 @@ const lift = { paddingHorizontal: px(40), paddingTop: px(24), paddingBottom: px(
 export function SearchScreen({ navigation }: ScreenProps<'Search'>) {
   const [query, setQuery] = useState('');
   const [focused, setFocused] = useState(false);
+  // TextInput has no hasTVPreferredFocus: on arrival focus goes to Search in
+  // the nav, one press above the field.
+  const arrived = useArrivalFocus();
   const results = useMemo(() => searchDestinations(destinations, query), [query]);
 
   return (
     <View style={styles.screen}>
-      <NavBar current="Search" />
+      <NavBar current="Search" focusOnArrival={arrived} />
       <View style={styles.body}>
         <TextInput
           testID="search-field"
@@ -42,7 +46,6 @@ export function SearchScreen({ navigation }: ScreenProps<'Search'>) {
           autoCorrect={false}
           autoCapitalize="none"
           disableFullscreenUI
-          hasTVPreferredFocus
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           style={[styles.field, focused && styles.fieldFocused, Platform.OS === 'android' && styles.fieldAndroid]}

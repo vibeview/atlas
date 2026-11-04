@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { forwardRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, TVFocusGuideView, View } from 'react-native';
@@ -13,15 +13,16 @@ const ITEMS: Item[] = [
   { key: 'Saved', id: 'nav-saved', label: 'Saved' },
 ];
 
-type ItemProps = { item: Item; current: boolean; onPress(): void };
+type ItemProps = { item: Item; current: boolean; preferred?: boolean; onPress(): void };
 
-const NavItem = forwardRef<View, ItemProps>(function NavItem({ item, current, onPress }, ref) {
+const NavItem = forwardRef<View, ItemProps>(function NavItem({ item, current, preferred, onPress }, ref) {
   const [focused, setFocused] = useState(false);
   return (
     <Pressable
       ref={ref}
       testID={item.id}
       accessibilityLabel={item.label}
+      hasTVPreferredFocus={preferred}
       onPress={onPress}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
@@ -38,16 +39,19 @@ const NavItem = forwardRef<View, ItemProps>(function NavItem({ item, current, on
  * here even when no nav item is straight above. No autoFocus: on launch,
  * focus belongs to the first tile.
  */
-export function NavBar({ current }: { current: Item['key'] }) {
+export function NavBar({ current, focusOnArrival }: { current: Item['key']; focusOnArrival?: boolean }) {
   const nav = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [target, setTarget] = useState<View | null>(null);
+  // Screens under the top one stay mounted; their guides must not catch focus
+  // and send it to a screen that is not on show.
+  const onShow = useIsFocused();
   const go = (key: Item['key']) => {
     if (key === current) return;
     if (key === 'Home') nav.popToTop();
     else nav.navigate(key);
   };
   return (
-    <TVFocusGuideView style={styles.bar} destinations={target ? [target] : undefined}>
+    <TVFocusGuideView style={styles.bar} destinations={onShow && target ? [target] : undefined}>
       <Text style={styles.brand}>Atlas</Text>
       {ITEMS.map((item) => (
         <NavItem
@@ -55,6 +59,7 @@ export function NavBar({ current }: { current: Item['key'] }) {
           ref={item.key === current ? setTarget : undefined}
           item={item}
           current={item.key === current}
+          preferred={focusOnArrival && item.key === current}
           onPress={() => go(item.key)}
         />
       ))}

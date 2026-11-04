@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { NavBar } from '../components/NavBar';
+import { useArrivalFocus } from '../components/useArrivalFocus';
 import { TileGrid } from '../components/TileGrid';
 import { bySlug } from '../data/model';
 import type { ScreenProps } from '../navigation';
@@ -15,10 +16,11 @@ const lift = { paddingHorizontal: px(40), paddingTop: px(24), paddingBottom: px(
 
 export function SavedScreen({ navigation }: ScreenProps<'Saved'>) {
   const { saved } = useSaved();
+  const arrived = useArrivalFocus();
   const items = saved.map((slug) => bySlug[slug]).filter(Boolean);
   return (
     <View style={styles.screen}>
-      <NavBar current="Saved" />
+      <NavBar current="Saved" focusOnArrival={arrived && items.length === 0} />
       <View style={styles.body}>
         <Text style={styles.heading}>Saved places</Text>
         {items.length === 0 ? (
@@ -28,7 +30,7 @@ export function SavedScreen({ navigation }: ScreenProps<'Saved'>) {
             <TileGrid
               items={items}
               idPrefix="saved-tile"
-              preferredSlug={items[0].slug}
+              preferredSlug={arrived ? items[0].slug : undefined}
               onOpen={(slug) => navigation.navigate('Destination', { slug })}
             />
           </ScrollView>
