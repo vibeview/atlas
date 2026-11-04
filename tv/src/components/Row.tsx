@@ -11,19 +11,21 @@ type Props = {
   onOpen(slug: string): void;
   /** The tile that should take focus: the first Featured tile, or the one just closed. */
   preferredSlug?: string;
-  /** Called when any tile in the row takes focus (Home scrolls the row to the top). */
-  onRowFocus?(): void;
-  onLayout?(y: number): void;
 };
+
+// react-native-tvos: with the parent ScrollView's snapToAlignment="item", the
+// focus engine lands a row's top edge at the top of the scroll view. The prop
+// is in react-native-tvos's View but not in its TypeScript types.
+const snapToTop = { scrollSnapAlign: 'start' } as object;
 
 /**
  * One row of six tiles. A plain ScrollView + map, never a virtualised list,
  * so every tile is in the UI tree for focus walks and replay. The focus guide
  * returns focus to the last tile used when you come back to the row.
  */
-export function Row({ row, onOpen, preferredSlug, onRowFocus, onLayout }: Props) {
+export function Row({ row, onOpen, preferredSlug }: Props) {
   return (
-    <View style={styles.row} onLayout={(e) => onLayout?.(e.nativeEvent.layout.y)}>
+    <View style={styles.row} {...snapToTop}>
       <Text style={styles.title}>{row.title}</Text>
       <TVFocusGuideView autoFocus>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.track}>
@@ -33,10 +35,7 @@ export function Row({ row, onOpen, preferredSlug, onRowFocus, onLayout }: Props)
                 destination={bySlug[slug]}
                 idPrefix="tile"
                 preferred={slug === preferredSlug}
-                onFocus={() => {
-                  setFocused(slug);
-                  onRowFocus?.();
-                }}
+                onFocus={() => setFocused(slug)}
                 onPress={() => onOpen(slug)}
               />
             </View>

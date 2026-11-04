@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { Backdrop } from '../components/Backdrop';
@@ -33,38 +33,27 @@ function HomeBackdrop() {
 type Props = { onOpen(slug: string): void; preferredSlug: string | null };
 
 /**
- * Backdrop, title block and the four rows. When a row takes focus it scrolls
- * to the top of the rows area, so the row above is cut off whole instead of
- * leaving a strip of its tiles under the title block.
+ * Backdrop, title block and the four rows. snapToAlignment="item" (a
+ * react-native-tvos ScrollView mode) lets the focus engine put the focused
+ * row at the top of the rows area, so the row above is cut off whole instead
+ * of leaving a strip of its tiles under the title block.
  */
 export function HomeContent({ onOpen, preferredSlug }: Props) {
-  const scroll = useRef<ScrollView>(null);
-  const rowY = useRef<number[]>([]);
-  const current = useRef(0);
-  const focusRow = useCallback((i: number) => {
-    if (i === current.current) return;
-    current.current = i;
-    scroll.current?.scrollTo({ y: rowY.current[i] ?? 0, animated: true });
-  }, []);
-
   return (
     <View style={styles.screen}>
       <HomeBackdrop />
       <TitleBlock />
       <ScrollView
-        ref={scroll}
         style={styles.rows}
         contentContainerStyle={styles.rowsContent}
         showsVerticalScrollIndicator={false}
-        scrollEnabled={false}
+        snapToAlignment="item"
       >
-        {rows.map((row, i) => (
+        {rows.map((row) => (
           <Row
             key={row.id}
             row={row}
             onOpen={onOpen}
-            onRowFocus={() => focusRow(i)}
-            onLayout={(y) => (rowY.current[i] = y)}
             preferredSlug={preferredSlug && row.slugs.includes(preferredSlug) ? preferredSlug : undefined}
           />
         ))}

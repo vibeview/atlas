@@ -90,6 +90,7 @@ function AndroidSearchField({ value, onChangeText }: Props) {
       testID="search-field"
       accessibilityLabel="Search places"
       accessibilityRole="search"
+      accessibilityValue={{ text: value }}
       hasTVPreferredFocus={returnFocus}
       onPress={() => setEditing(true)}
       onFocus={() => setFocused(true)}
