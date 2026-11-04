@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The top bar on every tab. Like the tvOS and Google TV tab bars, moving
+     focus onto an item shows its tab; Select is not needed. -->
+<component name="NavBar" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/NavBar.brs" />
+  <interface>
+    <!-- The tab on show (set by the scene). -->
+    <field id="current" type="string" value="home" onChange="onCurrent" />
+    <!-- Ask the bar to focus an item: a tab name. -->
+    <field id="focusTab" type="string" alwaysNotify="true" onChange="onFocusTab" />
+    <!-- Out: the tab whose item the person moved focus onto. -->
+    <field id="shown" type="string" alwaysNotify="true" />
+  </interface>
+  <children>
+    <Label id="nav-brand" text="Atlas" translation="[96, 54]" height="58" vertAlign="center" />
+    <NavItem id="nav-home" text="Home" />
+    <NavItem id="nav-search" text="Search" />
+    <NavItem id="nav-saved" text="Saved" />
+  </children>
+</component>

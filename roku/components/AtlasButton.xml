@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A rounded button: lagoon fill for the main action, a faint fill
+     otherwise; focus turns it white. "active" shows the label in amber. -->
+<component name="AtlasButton" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/AtlasButton.brs" />
+  <interface>
+    <field id="text" type="string" onChange="onText" />
+    <field id="tone" type="string" value="secondary" onChange="render" />
+    <field id="active" type="boolean" value="false" onChange="render" />
+    <field id="buttonWidth" type="float" value="0" />
+  </interface>
+  <children>
+    <Poster uri="pkg:/images/button.9.png" />
+    <Label vertAlign="center" horizAlign="center" />
+  </children>
+</component>

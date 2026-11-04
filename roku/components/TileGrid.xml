@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tiles in lines of `columns`, wrapping. Used by Search and Saved. Slides
+     vertically so the focused line stays inside `viewHeight`. Presses off its
+     edges are left to the view that holds it. -->
+<component name="TileGrid" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/TileGrid.brs" />
+  <interface>
+    <field id="prefix" type="string" value="search-tile" />
+    <field id="columns" type="integer" value="4" />
+    <field id="tileWidth" type="float" value="400" />
+    <field id="tileHeight" type="float" value="225" />
+    <field id="labelSize" type="integer" value="26" />
+    <field id="gapX" type="float" value="32" />
+    <field id="gapY" type="float" value="44" />
+    <field id="viewHeight" type="float" value="760" />
+    <field id="items" type="array" onChange="build" />
+    <!-- Focus the tile at this index (clamped). -->
+    <field id="focusIndex" type="integer" alwaysNotify="true" onChange="onFocusIndex" />
+    <field id="index" type="integer" value="0" />
+    <field id="count" type="integer" value="0" />
+    <!-- Out: { slug, index } of the tile opened with OK. -->
+    <field id="selected" type="assocarray" alwaysNotify="true" />
+  </interface>
+  <children>
+    <Group>
+      <Group />
+    </Group>
+  </children>
+</component>

@@ -1,0 +1,990 @@
+{
+  "rows": [
+    {
+      "id": "popular",
+      "title": "Featured",
+      "slugs": [
+        "kyoto",
+        "santorini",
+        "bali",
+        "lago-di-braies",
+        "zermatt",
+        "tulum"
+      ]
+    },
+    {
+      "id": "cities",
+      "title": "Cities",
+      "slugs": [
+        "porto",
+        "istanbul",
+        "marrakech",
+        "hoi-an",
+        "prague",
+        "cartagena"
+      ]
+    },
+    {
+      "id": "coast",
+      "title": "Coast & islands",
+      "slugs": [
+        "amalfi-coast",
+        "dubrovnik",
+        "cape-town",
+        "ha-long-bay",
+        "big-sur",
+        "zanzibar"
+      ]
+    },
+    {
+      "id": "mountains",
+      "title": "Mountains & lakes",
+      "slugs": [
+        "banff",
+        "torres-del-paine",
+        "hallstatt",
+        "lofoten",
+        "plitvice",
+        "queenstown"
+      ]
+    }
+  ],
+  "destinations": [
+    {
+      "slug": "kyoto",
+      "name": "Kyoto",
+      "country": "Japan",
+      "tagline": "Seat of the emperors for more than a thousand years",
+      "description": "The city kept its wooden machiya townhouses because it was spared the heavy bombing of 1945. Gion and Higashiyama still have whole streets of them.",
+      "tags": [
+        "Temples",
+        "Gardens",
+        "Kaiseki"
+      ],
+      "bestMonths": "March to May, October to November",
+      "timeZone": "UTC+9",
+      "airport": "Osaka Kansai (KIX), 75 min by Haruka train",
+      "rating": 4.9,
+      "experiences": [
+        {
+          "title": "Fushimi Inari early",
+          "line": "Torii tunnels up Mount Inari, best before the crowds arrive",
+          "icon": "hike"
+        },
+        {
+          "title": "Arashiyama bamboo grove",
+          "line": "Then cross Togetsukyō Bridge over the Katsura",
+          "icon": "walk"
+        },
+        {
+          "title": "Nishiki Market lunch",
+          "line": "A covered food street; try tamagoyaki and Kyoto pickles",
+          "icon": "food"
+        }
+      ],
+      "photo": {
+        "unsplashId": "CGe2xCWbLnI",
+        "photographer": "MINGHAO HE",
+        "url": "https://unsplash.com/photos/CGe2xCWbLnI",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "santorini",
+      "name": "Santorini",
+      "country": "Greece",
+      "tagline": "Cliff villages on the rim of a flooded caldera",
+      "description": "The cliffs are the inner wall of a volcano that collapsed in the Late Bronze Age. Excavators at Akrotiri found jars of fava seed, the legume the island still grows.",
+      "tags": [
+        "Caldera",
+        "Wine",
+        "Hiking"
+      ],
+      "bestMonths": "May to June, September to October",
+      "timeZone": "UTC+2, UTC+3 in summer",
+      "airport": "Santorini (JTR), 15 min by road to Fira",
+      "rating": 4.7,
+      "experiences": [
+        {
+          "title": "Fira to Oia on foot",
+          "line": "The caldera path, three to four hours along the cliff top",
+          "icon": "hike"
+        },
+        {
+          "title": "Kamari beach",
+          "line": "Dark volcanic sand below the rock of Mesa Vouno",
+          "icon": "beach"
+        },
+        {
+          "title": "Palea Kameni hot springs",
+          "line": "Swim from the boat into warm, rust-coloured water",
+          "icon": "boat"
+        }
+      ],
+      "photo": {
+        "unsplashId": "MdTtpxGlrz8",
+        "photographer": "Dan",
+        "url": "https://unsplash.com/photos/MdTtpxGlrz8",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "bali",
+      "name": "Bali",
+      "country": "Indonesia",
+      "tagline": "Rice terraces inland, reef breaks to the south",
+      "description": "Bali is a Hindu island in a mostly Muslim country, and offerings in palm-leaf trays sit on doorsteps every morning. The subak canals that water its rice terraces date back at least to the 9th century.",
+      "tags": [
+        "Rice terraces",
+        "Surf",
+        "Temples"
+      ],
+      "bestMonths": "April to October",
+      "timeZone": "UTC+8",
+      "airport": "Bali Ngurah Rai (DPS), about 90 min by road to Ubud",
+      "rating": 4.6,
+      "experiences": [
+        {
+          "title": "Tegallalang terraces",
+          "line": "Stepped rice fields in a valley north of Ubud",
+          "icon": "walk"
+        },
+        {
+          "title": "Uluwatu Temple",
+          "line": "A clifftop temple, with the kecak dance staged at sunset",
+          "icon": "culture"
+        },
+        {
+          "title": "Mount Batur sunrise",
+          "line": "A two-hour climb in the dark to the crater rim",
+          "icon": "hike"
+        }
+      ],
+      "photo": {
+        "unsplashId": "-2WlTWZLnRc",
+        "photographer": "Niklas Weiss",
+        "url": "https://unsplash.com/photos/-2WlTWZLnRc",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "lago-di-braies",
+      "name": "Lago di Braies",
+      "country": "Italy",
+      "tagline": "A lake at 1,496 m in the Fanes-Sennes-Braies park",
+      "description": "The Croda del Becco, 2,810 m, rises from the south shore. In winter the lake freezes over and the rowing boats come out of the water.",
+      "tags": [
+        "Alpine lake",
+        "Hiking",
+        "Rowing"
+      ],
+      "bestMonths": "June to September",
+      "timeZone": "UTC+1, UTC+2 in summer",
+      "airport": "Innsbruck (INN), about 2 h by car",
+      "rating": 4.8,
+      "experiences": [
+        {
+          "title": "Lakeshore loop",
+          "line": "A flat hour on a 3.5 km path around the water",
+          "icon": "walk"
+        },
+        {
+          "title": "Rowing from the boathouse",
+          "line": "Wooden boats from the jetty, summer only",
+          "icon": "boat"
+        },
+        {
+          "title": "Start of the Alta Via 1",
+          "line": "Trail 1 climbs from the lake to Rifugio Biella",
+          "icon": "hike"
+        }
+      ],
+      "photo": {
+        "unsplashId": "JEBqFu2AOOA",
+        "photographer": "Samuele Errico Piccarini",
+        "url": "https://unsplash.com/photos/JEBqFu2AOOA",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "zermatt",
+      "name": "Zermatt",
+      "country": "Switzerland",
+      "tagline": "Car-free village under the Matterhorn",
+      "description": "Petrol cars stop at Täsch, and the village runs on small electric vehicles. The first ascent of the Matterhorn set out from here in 1865.",
+      "tags": [
+        "Matterhorn",
+        "Skiing",
+        "Rail"
+      ],
+      "bestMonths": "December to April, July to September",
+      "timeZone": "UTC+1, UTC+2 in summer",
+      "airport": "Zurich (ZRH), about 3.5 h by train via Visp",
+      "rating": 4.9,
+      "experiences": [
+        {
+          "title": "Gornergrat railway",
+          "line": "Rack railway from the village up to 3,089 m",
+          "icon": "train"
+        },
+        {
+          "title": "Five Lakes Walk",
+          "line": "Blauherd to Sunnegga, past the Matterhorn in Stellisee",
+          "icon": "hike"
+        },
+        {
+          "title": "Klein Matterhorn",
+          "line": "Cable cars up to the glacier station at 3,883 m",
+          "icon": "view"
+        }
+      ],
+      "photo": {
+        "unsplashId": "qnPEmE8M1c4",
+        "photographer": "Luke Tanis",
+        "url": "https://unsplash.com/photos/qnPEmE8M1c4",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "tulum",
+      "name": "Tulum",
+      "country": "Mexico",
+      "tagline": "Maya walls on a cliff above the Caribbean",
+      "description": "Tulum was one of the last cities the Maya built, and people still lived in it when Spanish ships arrived. This coast has no rivers: rain drains straight into the limestone and fills the cenotes.",
+      "tags": [
+        "Ruins",
+        "Cenotes",
+        "Beach"
+      ],
+      "bestMonths": "November to April",
+      "timeZone": "UTC-5",
+      "airport": "Tulum (TQO), about 40 min by road",
+      "rating": 4.5,
+      "experiences": [
+        {
+          "title": "Gran Cenote",
+          "line": "Clear water and caverns, a short ride up the Cobá road",
+          "icon": "swim"
+        },
+        {
+          "title": "Tulum ruins",
+          "line": "The walled site, then the beach below El Castillo",
+          "icon": "culture"
+        },
+        {
+          "title": "Sian Ka'an by boat",
+          "line": "Lagoons and mangrove channels in the biosphere reserve",
+          "icon": "boat"
+        }
+      ],
+      "photo": {
+        "unsplashId": "GS9O2wOz0DA",
+        "photographer": "Austin Kindred",
+        "url": "https://unsplash.com/photos/GS9O2wOz0DA",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "porto",
+      "name": "Porto",
+      "country": "Portugal",
+      "tagline": "Port lodges on one bank, tiled churches on the other",
+      "description": "The two-deck Dom Luís I bridge, opened in 1886, carries the metro on top and cars below. Across it in Vila Nova de Gaia, port wine ages in the riverside lodges.",
+      "tags": [
+        "River",
+        "Port wine",
+        "Azulejos"
+      ],
+      "bestMonths": "May to June, September to October",
+      "timeZone": "UTC+0, UTC+1 in summer",
+      "airport": "Porto (OPO), 30 min by metro (line E)",
+      "rating": 4.7,
+      "experiences": [
+        {
+          "title": "São Bento station",
+          "line": "About 20,000 azulejo tiles in the entrance hall",
+          "icon": "culture"
+        },
+        {
+          "title": "Francesinha lunch",
+          "line": "A meat sandwich under melted cheese and beer sauce",
+          "icon": "food"
+        },
+        {
+          "title": "Six bridges cruise",
+          "line": "A short river trip under the Douro bridges",
+          "icon": "boat"
+        }
+      ],
+      "photo": {
+        "unsplashId": "1at9oH2BOxM",
+        "photographer": "Julio SJ",
+        "url": "https://unsplash.com/photos/1at9oH2BOxM",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "istanbul",
+      "name": "Istanbul",
+      "country": "Türkiye",
+      "tagline": "A ferry city on the Bosphorus",
+      "description": "Hagia Sophia, finished in 537, was a church for nine centuries before it became a mosque in 1453. Commuter ferries cross from Europe to Asia in about 20 minutes.",
+      "tags": [
+        "History",
+        "Ferries",
+        "Food"
+      ],
+      "bestMonths": "April to May, September to October",
+      "timeZone": "UTC+3",
+      "airport": "Istanbul (IST), about 1 h by road to Sultanahmet",
+      "rating": 4.7,
+      "experiences": [
+        {
+          "title": "Galata Tower",
+          "line": "The 14th-century Genoese tower above Karaköy",
+          "icon": "view"
+        },
+        {
+          "title": "Grand Bazaar",
+          "line": "About 60 covered streets, begun in the 1450s",
+          "icon": "walk"
+        },
+        {
+          "title": "Balık ekmek at Eminönü",
+          "line": "Grilled mackerel in bread by the Galata Bridge",
+          "icon": "food"
+        }
+      ],
+      "photo": {
+        "unsplashId": "1o-GiUs-6x4",
+        "photographer": "Osman Özavcı",
+        "url": "https://unsplash.com/photos/1o-GiUs-6x4",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "marrakech",
+      "name": "Marrakech",
+      "country": "Morocco",
+      "tagline": "A red-walled medina on the plain below the High Atlas",
+      "description": "The medina walls run for 19 km, built of rammed earth that gives the city its colour. The 12th-century minaret of the Koutoubia, 77 m tall, shows above most of the old town.",
+      "tags": [
+        "Medina",
+        "Food",
+        "Gardens"
+      ],
+      "bestMonths": "March to May, October to November",
+      "timeZone": "UTC+0",
+      "airport": "Marrakech Menara (RAK), 20 min by road to the medina",
+      "rating": 4.5,
+      "experiences": [
+        {
+          "title": "Jemaa el-Fnaa stalls",
+          "line": "Evening food stalls; order harira and grilled merguez",
+          "icon": "food"
+        },
+        {
+          "title": "Bahia Palace",
+          "line": "Courtyards of zellij tile under painted cedar ceilings",
+          "icon": "culture"
+        },
+        {
+          "title": "Walks from Imlil",
+          "line": "Atlas valley paths below Toubkal, 90 min by road",
+          "icon": "hike"
+        }
+      ],
+      "photo": {
+        "unsplashId": "CFKksjYRSQ8",
+        "photographer": "Paul Macallan",
+        "url": "https://unsplash.com/photos/CFKksjYRSQ8",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "hoi-an",
+      "name": "Hội An",
+      "country": "Vietnam",
+      "tagline": "Trading port of yellow shophouses and paper lanterns",
+      "description": "Japanese and Chinese merchants traded here from the 15th to the 19th century, and the old town is a UNESCO site. The Thu Bồn floods most autumns, and some houses mark each year's water level on their walls.",
+      "tags": [
+        "Old town",
+        "Food",
+        "Tailors"
+      ],
+      "bestMonths": "February to April",
+      "timeZone": "UTC+7",
+      "airport": "Da Nang (DAD), about 45 min by road",
+      "rating": 4.7,
+      "experiences": [
+        {
+          "title": "Lantern boat on the river",
+          "line": "An evening boat with paper lanterns on the Thu Bồn",
+          "icon": "boat"
+        },
+        {
+          "title": "Cao lầu at a street stall",
+          "line": "Thick noodles with pork and greens, very little broth",
+          "icon": "food"
+        },
+        {
+          "title": "Ride to An Bàng beach",
+          "line": "A flat 5 km bike ride through rice fields to the sea",
+          "icon": "bike"
+        }
+      ],
+      "photo": {
+        "unsplashId": "TguuCt67ark",
+        "photographer": "Phú Nguyễn Đạt",
+        "url": "https://unsplash.com/photos/TguuCt67ark",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "prague",
+      "name": "Prague",
+      "country": "Czechia",
+      "tagline": "Gothic spires on both banks of the Vltava",
+      "description": "Charles Bridge was begun in 1357, and 30 statues line its stone parapets. Up on the hill above Malá Strana, the castle is one of the largest castle complexes in the world.",
+      "tags": [
+        "Old town",
+        "Beer",
+        "Architecture"
+      ],
+      "bestMonths": "May to June, September",
+      "timeZone": "UTC+1, UTC+2 in summer",
+      "airport": "Prague (PRG), 40 min by Airport Express bus",
+      "rating": 4.6,
+      "experiences": [
+        {
+          "title": "Astronomical clock",
+          "line": "The clock on the Old Town Hall, installed in 1410",
+          "icon": "culture"
+        },
+        {
+          "title": "Petřín hill",
+          "line": "Orchard paths from Malá Strana to the lookout tower",
+          "icon": "view"
+        },
+        {
+          "title": "Vyšehrad ramparts",
+          "line": "Fortress walls above the river, south of the centre",
+          "icon": "walk"
+        }
+      ],
+      "photo": {
+        "unsplashId": "6En4WYsNYXM",
+        "photographer": "William Zhang",
+        "url": "https://unsplash.com/photos/6En4WYsNYXM",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "cartagena",
+      "name": "Cartagena",
+      "country": "Colombia",
+      "tagline": "Colonial balconies inside Caribbean sea walls",
+      "description": "Spain walled the port after repeated pirate raids, and the work took nearly two centuries to finish. Getsemaní, just outside the walls, has the street murals.",
+      "tags": [
+        "Old town",
+        "Islands",
+        "Food"
+      ],
+      "bestMonths": "December to April",
+      "timeZone": "UTC-5",
+      "airport": "Cartagena (CTG), 10 min by road",
+      "rating": 4.5,
+      "experiences": [
+        {
+          "title": "Walk the ramparts",
+          "line": "Along the wall from Las Bóvedas toward the Clock Tower",
+          "icon": "walk"
+        },
+        {
+          "title": "Castillo de San Felipe",
+          "line": "The Spanish fortress on San Lázaro hill and its tunnels",
+          "icon": "culture"
+        },
+        {
+          "title": "Rosario Islands",
+          "line": "Snorkel the coral reefs, an hour or so by boat",
+          "icon": "swim"
+        }
+      ],
+      "photo": {
+        "unsplashId": "oY-wv4XitLY",
+        "photographer": "Carlos Sarmiento",
+        "url": "https://unsplash.com/photos/oY-wv4XitLY",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "amalfi-coast",
+      "name": "Amalfi Coast",
+      "country": "Italy",
+      "tagline": "Cliff towns on the south side of the Sorrento peninsula",
+      "description": "Amalfi was a maritime republic trading across the Mediterranean from the 9th to the 11th century. Lemons for limoncello grow on terraces held up by dry-stone walls above the towns.",
+      "tags": [
+        "Coast",
+        "Hiking",
+        "Lemons"
+      ],
+      "bestMonths": "May to June, September to October",
+      "timeZone": "UTC+1, UTC+2 in summer",
+      "airport": "Naples (NAP), about 90 min by road to Positano",
+      "rating": 4.8,
+      "experiences": [
+        {
+          "title": "Path of the Gods",
+          "line": "Agerola to Nocelle, high above the sea",
+          "icon": "hike"
+        },
+        {
+          "title": "Positano by sea",
+          "line": "Seasonal ferries, spring to autumn, along the cliffs",
+          "icon": "boat"
+        },
+        {
+          "title": "Ravello gardens",
+          "line": "Terraces at Villa Cimbrone, 350 m above the sea",
+          "icon": "view"
+        }
+      ],
+      "photo": {
+        "unsplashId": "dqQPL0hMGOE",
+        "photographer": "Sander Crombach",
+        "url": "https://unsplash.com/photos/dqQPL0hMGOE",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "dubrovnik",
+      "name": "Dubrovnik",
+      "country": "Croatia",
+      "tagline": "Limestone streets inside a complete ring of walls",
+      "description": "Most of the old town was rebuilt in stone after the earthquake of 1667. Stradun, the main street, has been worn smooth and pale by centuries of feet.",
+      "tags": [
+        "Old town",
+        "Sea",
+        "Walls"
+      ],
+      "bestMonths": "May to June, September to October",
+      "timeZone": "UTC+1, UTC+2 in summer",
+      "airport": "Dubrovnik (DBV), 30 to 40 min by airport bus",
+      "rating": 4.6,
+      "experiences": [
+        {
+          "title": "City walls circuit",
+          "line": "Towers and ramparts on a 2 km loop above the sea",
+          "icon": "walk"
+        },
+        {
+          "title": "Kayak to Lokrum",
+          "line": "Paddle out to the island facing the old harbour",
+          "icon": "boat"
+        },
+        {
+          "title": "Srđ cable car",
+          "line": "Up to 405 m for the view over the old town",
+          "icon": "view"
+        }
+      ],
+      "photo": {
+        "unsplashId": "M0uDTaOUZmw",
+        "photographer": "Ivan Ivankovic",
+        "url": "https://unsplash.com/photos/M0uDTaOUZmw",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "cape-town",
+      "name": "Cape Town",
+      "country": "South Africa",
+      "tagline": "Table Mountain above, the Atlantic below",
+      "description": "The Dutch East India Company set up a supply station here in 1652 to feed its ships. Robben Island, 11 km offshore, held political prisoners until 1991.",
+      "tags": [
+        "Mountain",
+        "Wine",
+        "Beaches"
+      ],
+      "bestMonths": "November to March",
+      "timeZone": "UTC+2",
+      "airport": "Cape Town (CPT), 25 min by road to the city centre",
+      "rating": 4.8,
+      "experiences": [
+        {
+          "title": "Platteklip Gorge",
+          "line": "The direct route up the front of Table Mountain",
+          "icon": "hike"
+        },
+        {
+          "title": "Boulders Beach penguins",
+          "line": "African penguins on granite coves near Simon's Town",
+          "icon": "beach"
+        },
+        {
+          "title": "Constantia wine farms",
+          "line": "Tastings on some of the country's oldest estates",
+          "icon": "wine"
+        }
+      ],
+      "photo": {
+        "unsplashId": "NUDN48Obnfg",
+        "photographer": "Shaun Meintjes",
+        "url": "https://unsplash.com/photos/NUDN48Obnfg",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "ha-long-bay",
+      "name": "Hạ Long Bay",
+      "country": "Vietnam",
+      "tagline": "Karst towers in the Gulf of Tonkin",
+      "description": "UNESCO counts some 1,600 islands and islets in the bay, most of them uninhabited. Most boats leave from Tuần Châu harbour, on an island joined to the mainland by a causeway.",
+      "tags": [
+        "Bay",
+        "Cruises",
+        "Kayaking"
+      ],
+      "bestMonths": "March to April, October to November",
+      "timeZone": "UTC+7",
+      "airport": "Hanoi Nội Bài (HAN), about 2.5 h by road",
+      "rating": 4.6,
+      "experiences": [
+        {
+          "title": "A night on the bay",
+          "line": "An overnight boat anchored among the karsts",
+          "icon": "boat"
+        },
+        {
+          "title": "Kayak through Luồn Cave",
+          "line": "Paddle under the rock arch into the lagoon behind it",
+          "icon": "boat"
+        },
+        {
+          "title": "Sửng Sốt Cave",
+          "line": "Large chambers on Bồ Hòn island, up a stone stairway",
+          "icon": "walk"
+        }
+      ],
+      "photo": {
+        "unsplashId": "p3zbb3Efczw",
+        "photographer": "Lewis J Goetz",
+        "url": "https://unsplash.com/photos/p3zbb3Efczw",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "big-sur",
+      "name": "Big Sur",
+      "country": "United States",
+      "tagline": "The Santa Lucia Mountains meeting the Pacific",
+      "description": "Highway 1 along this coast opened in 1937, built partly with convict labour. Landslides close sections of it for months at a time, so check the road status before driving through.",
+      "tags": [
+        "Coast",
+        "Road trip",
+        "Hiking"
+      ],
+      "bestMonths": "April to May, September to October",
+      "timeZone": "UTC-8, UTC-7 in summer",
+      "airport": "Monterey (MRY), about 45 min by road",
+      "rating": 4.8,
+      "experiences": [
+        {
+          "title": "Bixby Creek Bridge",
+          "line": "The 1932 concrete arch, seen from the north pullout",
+          "icon": "view"
+        },
+        {
+          "title": "McWay Falls overlook",
+          "line": "A waterfall onto the sand, at the end of a short trail",
+          "icon": "view"
+        },
+        {
+          "title": "Point Lobos",
+          "line": "The Cypress Grove trail above coves with sea otters",
+          "icon": "walk"
+        }
+      ],
+      "photo": {
+        "unsplashId": "ejIIuNOR1ro",
+        "photographer": "Dan Hadar",
+        "url": "https://unsplash.com/photos/ejIIuNOR1ro",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "zanzibar",
+      "name": "Zanzibar",
+      "country": "Tanzania",
+      "tagline": "Coral-stone streets and an Indian Ocean reef",
+      "description": "In the 19th century, clove plantations worked by enslaved people made the island the world's largest clove producer. Stone Town's Anglican cathedral stands on the site of the slave market closed in 1873.",
+      "tags": [
+        "Old town",
+        "Spice farms",
+        "Beaches"
+      ],
+      "bestMonths": "June to October",
+      "timeZone": "UTC+3",
+      "airport": "Zanzibar (ZNZ), 15 min by road to Stone Town",
+      "rating": 4.6,
+      "experiences": [
+        {
+          "title": "Forodhani night market",
+          "line": "Grilled seafood on the Stone Town waterfront",
+          "icon": "food"
+        },
+        {
+          "title": "Spice farm walk",
+          "line": "Clove and nutmeg trees on the farms outside town",
+          "icon": "culture"
+        },
+        {
+          "title": "Mnemba Atoll",
+          "line": "Snorkel the reef by boat from Matemwe",
+          "icon": "swim"
+        }
+      ],
+      "photo": {
+        "unsplashId": "e6dRLBx6Kg8",
+        "photographer": "Humphrey M",
+        "url": "https://unsplash.com/photos/e6dRLBx6Kg8",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "banff",
+      "name": "Banff",
+      "country": "Canada",
+      "tagline": "Turquoise lakes in the Canadian Rockies",
+      "description": "Hot springs found on Sulphur Mountain in 1883 led to Canada's first national park two years later. Lake Louise and Moraine Lake take their colour from glacial rock flour.",
+      "tags": [
+        "Lakes",
+        "Hiking",
+        "Skiing"
+      ],
+      "bestMonths": "June to September, December to March",
+      "timeZone": "UTC-6",
+      "airport": "Calgary (YYC), about 90 min by road",
+      "rating": 4.9,
+      "experiences": [
+        {
+          "title": "Lake Agnes Tea House",
+          "line": "A summer-only hut, 3.5 km uphill from Lake Louise",
+          "icon": "hike"
+        },
+        {
+          "title": "Banff Gondola",
+          "line": "Eight minutes up to the summit ridge boardwalk",
+          "icon": "view"
+        },
+        {
+          "title": "Icefields Parkway",
+          "line": "Bow Lake and Peyto Lake on the road toward Jasper",
+          "icon": "view"
+        }
+      ],
+      "photo": {
+        "unsplashId": "Tr-faG4v38w",
+        "photographer": "M B",
+        "url": "https://unsplash.com/photos/Tr-faG4v38w",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "torres-del-paine",
+      "name": "Torres del Paine",
+      "country": "Chile",
+      "tagline": "Granite towers above glacial lakes in Patagonia",
+      "description": "The three granite towers that name the park rise above the Patagonian steppe. Guanacos graze close to the park roads.",
+      "tags": [
+        "Trekking",
+        "Glaciers",
+        "Wildlife"
+      ],
+      "bestMonths": "November to March",
+      "timeZone": "UTC-3",
+      "airport": "Puerto Natales (PNT, seasonal) or Punta Arenas (PUQ), 2 to 5 h by road",
+      "rating": 4.9,
+      "experiences": [
+        {
+          "title": "Mirador Base Las Torres",
+          "line": "A long day hike to the lake under the three towers",
+          "icon": "hike"
+        },
+        {
+          "title": "Grey Glacier by boat",
+          "line": "Across Lago Grey to the face of the ice",
+          "icon": "boat"
+        },
+        {
+          "title": "French Valley",
+          "line": "The middle arm of the W Trek, under hanging glaciers",
+          "icon": "hike"
+        }
+      ],
+      "photo": {
+        "unsplashId": "2djuNopVV8g",
+        "photographer": "Adam Young",
+        "url": "https://unsplash.com/photos/2djuNopVV8g",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "hallstatt",
+      "name": "Hallstatt",
+      "country": "Austria",
+      "tagline": "Salt-mining village on the Hallstätter See",
+      "description": "Salt has been mined in the mountain since the Bronze Age. The early Iron Age Hallstatt culture is named after the graves found above the village. The churchyard is so small that graves were reused, and the bone house holds more than 600 painted skulls.",
+      "tags": [
+        "Lake",
+        "Salt mine",
+        "Hiking"
+      ],
+      "bestMonths": "May to June, September to October",
+      "timeZone": "UTC+1, UTC+2 in summer",
+      "airport": "Salzburg (SZG), about 1 h 15 min by road",
+      "rating": 4.7,
+      "experiences": [
+        {
+          "title": "Hallstatt salt mine",
+          "line": "Ride the miners' wooden slides inside the mountain",
+          "icon": "culture"
+        },
+        {
+          "title": "5fingers platform",
+          "line": "Cable car up the Krippenstein to a steel lookout",
+          "icon": "view"
+        },
+        {
+          "title": "Ferry from the station",
+          "line": "The lake crossing from the railway into the village",
+          "icon": "boat"
+        }
+      ],
+      "photo": {
+        "unsplashId": "UJEOLuvPPHM",
+        "photographer": "Leonhard Niederwimmer",
+        "url": "https://unsplash.com/photos/UJEOLuvPPHM",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "lofoten",
+      "name": "Lofoten",
+      "country": "Norway",
+      "tagline": "Granite peaks rising from the Norwegian Sea",
+      "description": "The islands lie above the Arctic Circle, yet the Gulf Stream keeps their harbours free of ice. From late winter into spring, cod hangs on wooden racks to dry into stockfish.",
+      "tags": [
+        "Fishing villages",
+        "Hiking",
+        "Northern lights"
+      ],
+      "bestMonths": "June to August, February to March",
+      "timeZone": "UTC+1, UTC+2 in summer",
+      "airport": "Harstad/Narvik Evenes (EVE), about 3 h by road to Svolvær",
+      "rating": 4.8,
+      "experiences": [
+        {
+          "title": "Reinebringen",
+          "line": "Stone steps up to the view over Reine and its fjord",
+          "icon": "hike"
+        },
+        {
+          "title": "Kayak from Henningsvær",
+          "line": "Paddle between the skerries off the harbour",
+          "icon": "boat"
+        },
+        {
+          "title": "Aurora at Skagsanden",
+          "line": "An open beach on Flakstadøya for clear winter nights",
+          "icon": "view"
+        }
+      ],
+      "photo": {
+        "unsplashId": "kA1hQl26Xbo",
+        "photographer": "André Mašek",
+        "url": "https://unsplash.com/photos/kA1hQl26Xbo",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "plitvice",
+      "name": "Plitvice Lakes",
+      "country": "Croatia",
+      "tagline": "Sixteen lakes joined by waterfalls",
+      "description": "Travertine barriers, built up from moss and calcium carbonate, hold the lakes back and are still growing. The park was declared in 1949, the first in Croatia.",
+      "tags": [
+        "Lakes",
+        "Waterfalls",
+        "Walking"
+      ],
+      "bestMonths": "April to June, September to October",
+      "timeZone": "UTC+1, UTC+2 in summer",
+      "airport": "Zagreb (ZAG), about 2 h by road",
+      "rating": 4.8,
+      "experiences": [
+        {
+          "title": "Lower Lakes boardwalk",
+          "line": "Walkways over the water to the foot of Veliki slap",
+          "icon": "walk"
+        },
+        {
+          "title": "Boat across Kozjak",
+          "line": "The electric boat over the largest lake in the park",
+          "icon": "boat"
+        },
+        {
+          "title": "Upper Lakes trail",
+          "line": "Past Galovac and on up to Prošćansko jezero",
+          "icon": "hike"
+        }
+      ],
+      "photo": {
+        "unsplashId": "a4wXBFSeOdU",
+        "photographer": "Martin Buchbauer",
+        "url": "https://unsplash.com/photos/a4wXBFSeOdU",
+        "checkedOn": "2026-11-04"
+      }
+    },
+    {
+      "slug": "queenstown",
+      "name": "Queenstown",
+      "country": "New Zealand",
+      "tagline": "Ski fields and vineyards around Lake Wakatipu",
+      "description": "The town grew out of the 1862 gold rush on the Shotover River. Lake Wakatipu runs 80 km in a long zigzag between the mountains.",
+      "tags": [
+        "Lake",
+        "Skiing",
+        "Hiking"
+      ],
+      "bestMonths": "December to March, June to August",
+      "timeZone": "UTC+12, UTC+13 in summer",
+      "airport": "Queenstown (ZQN), about 15 min by road",
+      "rating": 4.7,
+      "experiences": [
+        {
+          "title": "Ben Lomond summit",
+          "line": "A full-day climb from the gondola top to 1,748 m",
+          "icon": "hike"
+        },
+        {
+          "title": "Milford Sound cruise",
+          "line": "A boat along the fiord under Mitre Peak",
+          "icon": "boat"
+        },
+        {
+          "title": "Gibbston wine",
+          "line": "Pinot noir cellar doors along the Kawarau Gorge",
+          "icon": "wine"
+        }
+      ],
+      "photo": {
+        "unsplashId": "W47UMydgshw",
+        "photographer": "Michael Amadeus",
+        "url": "https://unsplash.com/photos/W47UMydgshw",
+        "checkedOn": "2026-11-04"
+      }
+    }
+  ]
+}

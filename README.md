@@ -13,7 +13,8 @@ It is also a worked example of an adaptive React Native layout for iPhone Duo.
 Copy the parts you need; do not expect much from the app itself.
 
 React Native + Expo (SDK 58 preview), TypeScript, Expo Router. One codebase,
-iOS and Android.
+iOS and Android. The same app for Apple TV and Android TV lives in [`tv/`](tv/),
+a sibling Expo project on react-native-tvos (see [TV](#tv)).
 
 <p align="center">
   <img src="docs/screenshots/duo-open-two-pane.png" alt="Atlas on iPhone Duo's inner display: the Explore tab beside the Kyoto destination, one on each side of the fold" width="100%">
@@ -92,6 +93,47 @@ navigator and the destination pane without ever remounting the navigator.
 The full inner display needs a build against the iOS 27.1 SDK (Xcode 27.1).
 Built with an older SDK, Atlas runs on iPhone Duo in compatibility mode, in
 a phone-sized window, and keeps the one-pane layout.
+
+## TV
+
+[`tv/`](tv/) is Atlas for Apple TV and Android TV: one Expo +
+react-native-tvos project, built and verified on VibeView cloud devices.
+It has 24 destinations in four rows, and every screen is driven with the
+remote.
+
+[`roku/`](roku/) is the same app for Roku: a plain BrightScript and
+SceneGraph channel with the same screens, focus rules and element ids, so a
+test recorded on Apple TV finds the same elements on Roku.
+
+<p align="center">
+  <img src="tv/docs/screenshots/atv-home.webp" alt="Atlas on Apple TV: Kyoto's photo fills the screen behind its name, with the Featured row of photo tiles below and the Kyoto tile focused" width="100%">
+</p>
+<p align="center">
+  <img src="tv/docs/screenshots/atv-destination-kyoto.webp" alt="The Kyoto screen on Apple TV: description, best time, time zone and nearest airport, Plan trip and Save buttons, and three top experiences" width="49%">
+  <img src="tv/docs/screenshots/andtv-search-all.webp" alt="Search on Android TV: the search field above a grid of all places" width="49%">
+</p>
+
+- **Home:** the focused place's photo fills the screen behind its name and
+  tagline, over four rows of photo tiles (Featured, Cities, Coast &
+  islands, Mountains & lakes). A row you move into scrolls to the top.
+- **Top bar:** Home, Search and Saved. As on tvOS and Google TV, focusing an
+  item shows its tab. Back on Search or Saved returns to Home.
+- **Destination:** description, best time, time zone and nearest airport,
+  then Plan trip and Save, and three top experiences.
+- **Search** filters as you type, ignoring accents, so "hoi an" finds Hội
+  An. It lists every place until you type.
+- **Saved** starts with three places and resets on every launch.
+
+Focus is always the platform's own focus engine (tvOS focus, Android
+focus). The app never draws a highlight the device's UI tree doesn't
+report, so agents and recorded tests target exactly what is on screen.
+
+The TV content (data, copy and photo masters) lives in [`content/`](content/).
+After `npm --prefix scripts ci`, `npm --prefix scripts run check` validates it, and `npm --prefix scripts run
+export` writes the sized copies into `tv/`. Facts are sourced in
+[`docs/content-sources.md`](docs/content-sources.md). Build and run
+instructions are in [`tv/README.md`](tv/README.md), and what was checked on
+which device is in [`tv/docs/verification.md`](tv/docs/verification.md).
 
 ## Run it locally
 
@@ -255,11 +297,19 @@ modules/atlas-fold/         native view reporting the fold and cameras (iOS)
 plugins/                    Expo config plugins for cloud builds and signing
 assets/photos/              the seven bundled photos
 docs/screenshots/           the images in this README
+docs/content-sources.md     sources for every fact in the TV content
 app.config.ts               app name, ids, icon, splash, build number
 vibeview.json               VibeView build and dev configuration
+content/                    TV content: destinations.json, schema, photo masters
+scripts/                    content check, export to tv/ and roku/, TV art
+tv/                         Atlas for Apple TV and Android TV (own package.json)
+roku/                       Atlas for Roku (BrightScript and SceneGraph)
 ```
 
 ## Photo credits
+
+The TV photos (`content/photos/` and their copies in `tv/`) are listed with
+photographer and source in [CREDITS.md](CREDITS.md).
 
 The seven photos in `assets/photos/` are from [Unsplash](https://unsplash.com)
 and used under the [Unsplash License](https://unsplash.com/license), resized
@@ -277,4 +327,5 @@ to 720 pixels wide.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+The code is MIT; see [LICENSE](LICENSE). The photos are not covered by the
+MIT licence: they stay under the [Unsplash License](https://unsplash.com/license).

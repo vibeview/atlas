@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The scene owns the tabs (Home, Search, Saved) under one top bar, the
+     Destination screen, and the saved list. Views not on show are
+     visible=false. -->
+<component name="AtlasScene" extends="Scene">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/AtlasScene.brs" />
+  <children>
+    <HomeView id="home" />
+    <SearchView id="search" visible="false" />
+    <SavedView id="saved" visible="false" />
+    <NavBar id="nav" />
+    <DestinationView id="destination" visible="false" />
+  </children>
+</component>

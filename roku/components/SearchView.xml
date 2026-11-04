@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Search: Roku's MiniKeyboard on the left, every place until you type, then
+     the places whose name or country contains the text. -->
+<component name="SearchView" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/SearchView.brs" />
+  <interface>
+    <field id="destinations" type="array" onChange="filter" />
+    <!-- "keyboard" or "current" (the zone and tile last focused). -->
+    <field id="focusRequest" type="string" alwaysNotify="true" onChange="onFocusRequest" />
+    <field id="selected" type="assocarray" alwaysNotify="true" />
+  </interface>
+  <children>
+    <MiniKeyboard id="search-keyboard" translation="[96, 160]" />
+    <Label id="search-heading" text="All places" translation="[760, 160]" />
+    <Label id="search-empty" translation="[760, 160]" width="1064" wrap="true" visible="false" />
+    <TileGrid id="search-results" translation="[760, 222]" prefix="search-tile" columns="3"
+      tileWidth="320" tileHeight="180" labelSize="24" gapX="24" gapY="36" viewHeight="780" />
+  </children>
+</component>
