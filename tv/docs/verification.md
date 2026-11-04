@@ -33,5 +33,15 @@ Also checked:
 - **Row ends:** right at the end of a row stays put. Down from the end of a row lands on the next row's remembered tile, or its first tile the first time.
 - **Captures:** each was checked at the sizes vibeview.io shows them (460 and 330 CSS px wide).
 
+## Cross-TV replay
+
+One test recorded on Apple TV (open Kyoto, Save, Back, move to the Saved
+tab, then three checks: the button reads Saved, the Saved tab is focused,
+Kyoto is in Saved), run unchanged on all three TVs in Smart mode. It passes
+on Apple TV, Android TV and Roku. The recorded presses replay on every
+platform: each Select finds its element by id (`tile-kyoto`, `btn-save`),
+and the arrow presses replay as recorded. The checks only confirm; none
+of them has to move focus.
+
 Screenshots: `screenshots/atv-*.webp` (Apple TV) and `screenshots/andtv-*.webp`
 (Android TV).
