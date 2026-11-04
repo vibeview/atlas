@@ -101,6 +101,10 @@ react-native-tvos project, built and verified on VibeView cloud devices.
 It has 24 destinations in four rows, and every screen is driven with the
 remote.
 
+[`roku/`](roku/) is the same app for Roku: a plain BrightScript and
+SceneGraph channel with the same screens, focus rules and element ids, so a
+test recorded on Apple TV finds the same elements on Roku.
+
 <p align="center">
   <img src="tv/docs/screenshots/atv-home.webp" alt="Atlas on Apple TV: Kyoto's photo fills the screen behind its name, with the Featured row of photo tiles below and the Kyoto tile focused" width="100%">
 </p>
@@ -297,8 +301,9 @@ docs/content-sources.md     sources for every fact in the TV content
 app.config.ts               app name, ids, icon, splash, build number
 vibeview.json               VibeView build and dev configuration
 content/                    TV content: destinations.json, schema, photo masters
-scripts/                    content check, export to tv/, TV art
+scripts/                    content check, export to tv/ and roku/, TV art
 tv/                         Atlas for Apple TV and Android TV (own package.json)
+roku/                       Atlas for Roku (BrightScript and SceneGraph)
 ```
 
 ## Photo credits

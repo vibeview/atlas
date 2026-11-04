@@ -33,7 +33,5 @@ sub onGridSelected()
     m.top.selected = m.grid.selected
 end sub
 
-' Presses off the grid's edges (up off the first line, back) go to the scene.
-function onKeyEvent(key as string, press as boolean) as boolean
-    return false
-end function
+' No onKeyEvent: presses off the grid's edges (up off the first line, back)
+' pass straight on to the scene.
