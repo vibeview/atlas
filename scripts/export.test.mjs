@@ -105,18 +105,20 @@ test('roku: Featured backdrops are 1280×720, the rest 960×540, tiles 480×270'
   assert.deepEqual(await size('hoi-an-tile.jpg'), [480, 270]);
 });
 
-test('roku: data carries a folded search key and the seed list', async () => {
+test('roku: data carries folded search keys and the seed list', async () => {
   const root = await rokuRoot();
   await exportRoku({ root });
   const data = JSON.parse(readFileSync(join(root, 'roku', 'data', 'destinations.json'), 'utf8'));
-  assert.equal(data.destinations.find((d) => d.slug === 'hoi-an').search, 'hoi an|vietnam');
+  const hoiAn = data.destinations.find((d) => d.slug === 'hoi-an');
+  assert.equal(hoiAn.searchName, 'hoi an');
+  assert.equal(hoiAn.searchCountry, 'vietnam');
   assert.deepEqual(data.seedSaved, ['santorini', 'hoi-an', 'lofoten']);
 });
 
 test('roku: scrims are written as PNGs with alpha', async () => {
   const root = await rokuRoot();
   await exportRoku({ root });
-  for (const f of ['scrim-home.png', 'scrim-detail.png', 'scrim-tile.png']) {
+  for (const f of ['scrim-home.png', 'scrim-detail.png', 'scrim-tile.png', 'pill.9.png', 'button.9.png', 'shadow.9.png']) {
     const m = await sharp(join(root, 'roku', 'images', f)).metadata();
     assert.equal(m.format, 'png');
     assert.equal(m.channels, 4);

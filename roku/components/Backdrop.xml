@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Home's full-screen photo. Two Posters at most (current and incoming): the
+     incoming one fades in once its image has loaded, then becomes the
+     current one. A scrim keeps the title block and rows readable. -->
+<component name="Backdrop" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/Backdrop.brs" />
+  <interface>
+    <field id="slug" type="string" onChange="onSlug" />
+  </interface>
+  <children>
+    <Group id="backdrop-layers">
+      <Poster id="backdrop-a" width="1920" height="1080" loadWidth="1280" loadHeight="720" loadDisplayMode="limitSize" />
+      <Poster id="backdrop-b" width="1920" height="1080" loadWidth="1280" loadHeight="720" loadDisplayMode="limitSize" opacity="0" />
+    </Group>
+    <Poster uri="pkg:/images/scrim-home.png" width="1920" height="1080" />
+    <Animation id="backdrop-fade" duration="0.35" easeFunction="linear">
+      <FloatFieldInterpolator id="backdrop-fade-in" key="[0.0, 1.0]" keyValue="[0.0, 1.0]" />
+    </Animation>
+  </children>
+</component>

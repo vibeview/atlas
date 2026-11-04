@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Home: the focused place's backdrop and title block over four rows of
+     tiles. The focused row slides to the top of the rows area, so the row
+     above is cut off whole. -->
+<component name="HomeView" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/HomeView.brs" />
+  <interface>
+    <field id="rows" type="array" />
+    <field id="bySlug" type="assocarray" onChange="build" />
+    <!-- "first" (launch) or "current" (the tile last focused). -->
+    <field id="focusRequest" type="string" alwaysNotify="true" onChange="onFocusRequest" />
+    <!-- Out: { slug, index } of the tile opened with OK. -->
+    <field id="selected" type="assocarray" alwaysNotify="true" />
+  </interface>
+  <children>
+    <Backdrop id="home-backdrop" />
+    <Label id="home-country" translation="[96, 196]" />
+    <Label id="home-name" translation="[96, 226]" width="1124" />
+    <Label id="home-tagline" translation="[96, 358]" width="1300" />
+    <Label id="home-tags" translation="[96, 428]" />
+    <Group id="home-rows-area" translation="[0, 590]" clippingRect="[0, -30, 1920, 520]">
+      <Group id="home-rows" />
+    </Group>
+    <Animation id="home-scroll" duration="0.2" easeFunction="outCubic">
+      <Vector2DFieldInterpolator id="home-scroll-to" key="[0.0, 1.0]" fieldToInterp="home-rows.translation" />
+    </Animation>
+  </children>
+</component>

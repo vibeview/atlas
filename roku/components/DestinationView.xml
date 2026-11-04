@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One place: backdrop, facts, Plan trip and Save, and its top experiences. -->
+<component name="DestinationView" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/DestinationView.brs" />
+  <interface>
+    <field id="destination" type="assocarray" onChange="onDestination" />
+    <field id="saved" type="boolean" onChange="onSaved" />
+    <field id="focusRequest" type="string" alwaysNotify="true" onChange="onFocusRequest" />
+    <field id="saveToggled" type="boolean" alwaysNotify="true" />
+    <field id="closeRequested" type="boolean" alwaysNotify="true" />
+  </interface>
+  <children>
+    <!-- Same load settings as Home's backdrop, so the texture is shared. -->
+    <Poster id="destination-backdrop" width="1920" height="1080" loadWidth="1280" loadHeight="720" loadDisplayMode="limitSize" />
+    <Poster uri="pkg:/images/scrim-detail.png" width="1920" height="1080" />
+    <Label id="destination-country" translation="[96, 150]" />
+    <Label id="destination-name" translation="[96, 180]" width="1000" />
+    <Label id="destination-tags" translation="[96, 318]" width="1000" />
+    <Label id="destination-description" translation="[96, 384]" width="960" wrap="true" maxLines="4" lineSpacing="2" />
+    <Group id="destination-facts" translation="[96, 548]" />
+    <AtlasButton id="btn-plan-trip" text="Plan trip" tone="primary" translation="[96, 704]" />
+    <AtlasButton id="btn-save" text="Save" />
+    <Label id="destination-toast" text="Added to your trips" visible="false" height="76" vertAlign="center" />
+    <Rectangle id="destination-panel" translation="[1186, 190]" width="640" color="0x0B1016CC" />
+    <Group id="destination-experiences" translation="[1226, 226]" />
+    <Timer id="destination-toast-timer" duration="3" repeat="false" />
+  </children>
+</component>

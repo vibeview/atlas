@@ -101,6 +101,32 @@ const SCRIMS = {
   'scrim-tile.png': [160, 90, [{ dir: { x2: 0, y2: 1 }, stops: [[0.45, '0,0,0', 0], [1, '0,0,0', 0.72]] }]],
 };
 
+/**
+ * A white rounded rectangle as a Roku 9-patch (`.9.png`): a 1 px transparent
+ * frame whose black top and left pixels mark the stretchable middle. Posters
+ * tint it with blendColor, so one file serves every pill and button.
+ */
+async function writeNinePatch(dest, radius) {
+  const inner = radius * 2 + 4;
+  const size = inner + 2;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><rect x="1" y="1" width="${inner}" height="${inner}" rx="${radius}" fill="#fff"/><rect x="${radius + 1}" y="0" width="4" height="1" fill="#000"/><rect x="0" y="${radius + 1}" width="1" height="4" fill="#000"/></svg>`;
+  writeFileSync(dest, await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer());
+}
+const NINE_PATCHES = { 'pill.9.png': 26, 'button.9.png': 14 };
+
+/** The focused tile's soft shadow (tv/ Tile: black 0.6, radius 28), as a blurred 9-patch. */
+async function writeShadow(dest) {
+  const pad = 32;
+  const inner = 40;
+  const size = inner + pad * 2;
+  const body = await sharp({ create: { width: size, height: size, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    .composite([{ input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><rect x="${pad}" y="${pad}" width="${inner}" height="${inner}" rx="14" fill="#000" fill-opacity="0.6"/></svg>`) }])
+    .blur(12).png().toBuffer();
+  const frame = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${size + 2}" height="${size + 2}"><rect x="${pad + 1 + 18}" y="0" width="4" height="1" fill="#000"/><rect x="0" y="${pad + 1 + 18}" width="1" height="4" fill="#000"/></svg>`);
+  const out = await sharp(frame).composite([{ input: body, left: 1, top: 1 }]).png({ compressionLevel: 9 }).toBuffer();
+  writeFileSync(dest, out);
+}
+
 export async function exportRoku({ root, limit = ROKU_ZIP_LIMIT }) {
   const data = JSON.parse(readFileSync(join(root, 'content', 'destinations.json'), 'utf8'));
   const rokuDir = join(root, 'roku');
@@ -125,10 +151,18 @@ export async function exportRoku({ root, limit = ROKU_ZIP_LIMIT }) {
     await writeScrim(dest, w, h, layers);
     files.push(dest);
   }
+  for (const [name, radius] of Object.entries(NINE_PATCHES)) {
+    const dest = join(imageDir, name);
+    await writeNinePatch(dest, radius);
+    files.push(dest);
+  }
+  const shadow = join(imageDir, 'shadow.9.png');
+  await writeShadow(shadow);
+  files.push(shadow);
   const out = {
     ...data,
     seedSaved: SEED_SAVED,
-    destinations: data.destinations.map((d) => ({ ...d, search: `${fold(d.name)}|${fold(d.country)}` })),
+    destinations: data.destinations.map((d) => ({ ...d, searchName: fold(d.name), searchCountry: fold(d.country) })),
   };
   const json = join(dataDir, 'destinations.json');
   writeFileSync(json, JSON.stringify(out, null, 2) + '\n');

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Saved: the places saved this session, seeded with three. -->
+<component name="SavedView" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/SavedView.brs" />
+  <interface>
+    <field id="items" type="array" onChange="onItems" />
+    <!-- "current", or "slug:<slug>" to focus that place. -->
+    <field id="focusRequest" type="string" alwaysNotify="true" onChange="onFocusRequest" />
+    <field id="selected" type="assocarray" alwaysNotify="true" />
+    <field id="count" type="integer" value="0" />
+  </interface>
+  <children>
+    <Label id="saved-heading" text="Saved places" translation="[96, 160]" />
+    <Label id="saved-empty" text="Nothing saved yet. Press Save on a place to keep it here." translation="[96, 258]" visible="false" />
+    <TileGrid id="saved-grid" translation="[96, 270]" prefix="saved-tile" columns="4" viewHeight="756" />
+  </children>
+</component>

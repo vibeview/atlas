@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A focusable photo tile with the place name on it. Holds real SceneGraph
+     focus; when focused it scales 1.1 with a white ring and a shadow. Children
+     have no ids so the UI tree shows one id per tile: tile-<slug>,
+     search-tile-<slug> or saved-tile-<slug>. -->
+<component name="Tile" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/Tile.brs" />
+  <interface>
+    <field id="prefix" type="string" value="tile" />
+    <field id="destination" type="assocarray" onChange="onDestination" />
+    <field id="tileWidth" type="float" value="400" onChange="layout" />
+    <field id="tileHeight" type="float" value="225" onChange="layout" />
+    <field id="labelSize" type="integer" value="26" onChange="onLabelSize" />
+  </interface>
+  <children>
+    <Poster uri="pkg:/images/shadow.9.png" visible="false" />
+    <Rectangle color="0xFFFFFFFF" visible="false" />
+    <Rectangle color="0x151C25FF" />
+    <!-- One load size for every tile, so Home, Search and Saved share a texture. -->
+    <Poster loadWidth="400" loadHeight="225" loadDisplayMode="limitSize" />
+    <Poster uri="pkg:/images/scrim-tile.png" />
+    <Label vertAlign="bottom" />
+  </children>
+</component>

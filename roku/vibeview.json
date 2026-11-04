@@ -1,0 +1,11 @@
+{
+  "defaultPlatform": "roku",
+  "platforms": {
+    "roku": {
+      "build": {
+        "command": "sh package.sh",
+        "artifact": "out/atlas.zip"
+      }
+    }
+  }
+}

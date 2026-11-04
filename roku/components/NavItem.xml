@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One top-bar item: a white pill when focused, a faint pill when it is the
+     tab on show, plain text otherwise. -->
+<component name="NavItem" extends="Group">
+  <script type="text/brightscript" uri="pkg:/components/theme.brs" />
+  <script type="text/brightscript" uri="pkg:/components/NavItem.brs" />
+  <interface>
+    <field id="text" type="string" onChange="onText" />
+    <field id="current" type="boolean" value="false" onChange="render" />
+    <field id="itemWidth" type="float" value="0" />
+  </interface>
+  <children>
+    <Poster uri="pkg:/images/pill.9.png" visible="false" />
+    <Label vertAlign="center" horizAlign="center" />
+  </children>
+</component>

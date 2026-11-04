@@ -88,7 +88,8 @@
         "url": "https://unsplash.com/photos/CGe2xCWbLnI",
         "checkedOn": "2026-11-04"
       },
-      "search": "kyoto|japan"
+      "searchName": "kyoto",
+      "searchCountry": "japan"
     },
     {
       "slug": "santorini",
@@ -128,7 +129,8 @@
         "url": "https://unsplash.com/photos/MdTtpxGlrz8",
         "checkedOn": "2026-11-04"
       },
-      "search": "santorini|greece"
+      "searchName": "santorini",
+      "searchCountry": "greece"
     },
     {
       "slug": "bali",
@@ -168,7 +170,8 @@
         "url": "https://unsplash.com/photos/-2WlTWZLnRc",
         "checkedOn": "2026-11-04"
       },
-      "search": "bali|indonesia"
+      "searchName": "bali",
+      "searchCountry": "indonesia"
     },
     {
       "slug": "lago-di-braies",
@@ -208,7 +211,8 @@
         "url": "https://unsplash.com/photos/JEBqFu2AOOA",
         "checkedOn": "2026-11-04"
       },
-      "search": "lago di braies|italy"
+      "searchName": "lago di braies",
+      "searchCountry": "italy"
     },
     {
       "slug": "zermatt",
@@ -248,7 +252,8 @@
         "url": "https://unsplash.com/photos/qnPEmE8M1c4",
         "checkedOn": "2026-11-04"
       },
-      "search": "zermatt|switzerland"
+      "searchName": "zermatt",
+      "searchCountry": "switzerland"
     },
     {
       "slug": "tulum",
@@ -288,7 +293,8 @@
         "url": "https://unsplash.com/photos/GS9O2wOz0DA",
         "checkedOn": "2026-11-04"
       },
-      "search": "tulum|mexico"
+      "searchName": "tulum",
+      "searchCountry": "mexico"
     },
     {
       "slug": "porto",
@@ -328,7 +334,8 @@
         "url": "https://unsplash.com/photos/1at9oH2BOxM",
         "checkedOn": "2026-11-04"
       },
-      "search": "porto|portugal"
+      "searchName": "porto",
+      "searchCountry": "portugal"
     },
     {
       "slug": "istanbul",
@@ -368,7 +375,8 @@
         "url": "https://unsplash.com/photos/1o-GiUs-6x4",
         "checkedOn": "2026-11-04"
       },
-      "search": "istanbul|turkiye"
+      "searchName": "istanbul",
+      "searchCountry": "turkiye"
     },
     {
       "slug": "marrakech",
@@ -408,7 +416,8 @@
         "url": "https://unsplash.com/photos/CFKksjYRSQ8",
         "checkedOn": "2026-11-04"
       },
-      "search": "marrakech|morocco"
+      "searchName": "marrakech",
+      "searchCountry": "morocco"
     },
     {
       "slug": "hoi-an",
@@ -448,7 +457,8 @@
         "url": "https://unsplash.com/photos/TguuCt67ark",
         "checkedOn": "2026-11-04"
       },
-      "search": "hoi an|vietnam"
+      "searchName": "hoi an",
+      "searchCountry": "vietnam"
     },
     {
       "slug": "prague",
@@ -488,7 +498,8 @@
         "url": "https://unsplash.com/photos/6En4WYsNYXM",
         "checkedOn": "2026-11-04"
       },
-      "search": "prague|czechia"
+      "searchName": "prague",
+      "searchCountry": "czechia"
     },
     {
       "slug": "cartagena",
@@ -528,7 +539,8 @@
         "url": "https://unsplash.com/photos/oY-wv4XitLY",
         "checkedOn": "2026-11-04"
       },
-      "search": "cartagena|colombia"
+      "searchName": "cartagena",
+      "searchCountry": "colombia"
     },
     {
       "slug": "amalfi-coast",
@@ -568,7 +580,8 @@
         "url": "https://unsplash.com/photos/dqQPL0hMGOE",
         "checkedOn": "2026-11-04"
       },
-      "search": "amalfi coast|italy"
+      "searchName": "amalfi coast",
+      "searchCountry": "italy"
     },
     {
       "slug": "dubrovnik",
@@ -608,7 +621,8 @@
         "url": "https://unsplash.com/photos/M0uDTaOUZmw",
         "checkedOn": "2026-11-04"
       },
-      "search": "dubrovnik|croatia"
+      "searchName": "dubrovnik",
+      "searchCountry": "croatia"
     },
     {
       "slug": "cape-town",
@@ -648,7 +662,8 @@
         "url": "https://unsplash.com/photos/NUDN48Obnfg",
         "checkedOn": "2026-11-04"
       },
-      "search": "cape town|south africa"
+      "searchName": "cape town",
+      "searchCountry": "south africa"
     },
     {
       "slug": "ha-long-bay",
@@ -688,7 +703,8 @@
         "url": "https://unsplash.com/photos/p3zbb3Efczw",
         "checkedOn": "2026-11-04"
       },
-      "search": "ha long bay|vietnam"
+      "searchName": "ha long bay",
+      "searchCountry": "vietnam"
     },
     {
       "slug": "big-sur",
@@ -728,7 +744,8 @@
         "url": "https://unsplash.com/photos/ejIIuNOR1ro",
         "checkedOn": "2026-11-04"
       },
-      "search": "big sur|united states"
+      "searchName": "big sur",
+      "searchCountry": "united states"
     },
     {
       "slug": "zanzibar",
@@ -768,7 +785,8 @@
         "url": "https://unsplash.com/photos/e6dRLBx6Kg8",
         "checkedOn": "2026-11-04"
       },
-      "search": "zanzibar|tanzania"
+      "searchName": "zanzibar",
+      "searchCountry": "tanzania"
     },
     {
       "slug": "banff",
@@ -808,7 +826,8 @@
         "url": "https://unsplash.com/photos/Tr-faG4v38w",
         "checkedOn": "2026-11-04"
       },
-      "search": "banff|canada"
+      "searchName": "banff",
+      "searchCountry": "canada"
     },
     {
       "slug": "torres-del-paine",
@@ -848,7 +867,8 @@
         "url": "https://unsplash.com/photos/2djuNopVV8g",
         "checkedOn": "2026-11-04"
       },
-      "search": "torres del paine|chile"
+      "searchName": "torres del paine",
+      "searchCountry": "chile"
     },
     {
       "slug": "hallstatt",
@@ -888,7 +908,8 @@
         "url": "https://unsplash.com/photos/UJEOLuvPPHM",
         "checkedOn": "2026-11-04"
       },
-      "search": "hallstatt|austria"
+      "searchName": "hallstatt",
+      "searchCountry": "austria"
     },
     {
       "slug": "lofoten",
@@ -928,7 +949,8 @@
         "url": "https://unsplash.com/photos/kA1hQl26Xbo",
         "checkedOn": "2026-11-04"
       },
-      "search": "lofoten|norway"
+      "searchName": "lofoten",
+      "searchCountry": "norway"
     },
     {
       "slug": "plitvice",
@@ -968,7 +990,8 @@
         "url": "https://unsplash.com/photos/a4wXBFSeOdU",
         "checkedOn": "2026-11-04"
       },
-      "search": "plitvice lakes|croatia"
+      "searchName": "plitvice lakes",
+      "searchCountry": "croatia"
     },
     {
       "slug": "queenstown",
@@ -1008,7 +1031,8 @@
         "url": "https://unsplash.com/photos/W47UMydgshw",
         "checkedOn": "2026-11-04"
       },
-      "search": "queenstown|new zealand"
+      "searchName": "queenstown",
+      "searchCountry": "new zealand"
     }
   ],
   "seedSaved": [
