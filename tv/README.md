@@ -19,11 +19,14 @@ uploads only this folder.
 | `preview` | Release build with the JavaScript inside, for share links, tests and samples |
 
 ```sh
-npm install
+npm ci
 vibeview build --cloud --profile preview --platform all   # Apple TV + Android TV
 vibeview dev --platform tvos --standalone                  # run the newest preview build
 vibeview dev --platform androidtv                          # Metro dev loop on a cloud Android TV
 ```
+
+`vibeview.json` carries no `appId`: your first build creates the app in your
+organization and writes its id back into the file.
 
 The Android TV build carries x86 and x86_64 code (`-PreactNativeArchitectures=x86,x86_64`).
 Those are the architectures of the Android TV emulators.

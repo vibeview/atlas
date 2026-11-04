@@ -125,7 +125,7 @@ focus). The app never draws a highlight the device's UI tree doesn't
 report, so agents and recorded tests target exactly what is on screen.
 
 The TV content (data, copy and photo masters) lives in [`content/`](content/).
-`npm --prefix scripts run check` validates it, and `npm --prefix scripts run
+After `npm --prefix scripts ci`, `npm --prefix scripts run check` validates it, and `npm --prefix scripts run
 export` writes the sized copies into `tv/`. Facts are sourced in
 [`docs/content-sources.md`](docs/content-sources.md). Build and run
 instructions are in [`tv/README.md`](tv/README.md), and what was checked on

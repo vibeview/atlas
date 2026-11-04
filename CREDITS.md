@@ -1,6 +1,6 @@
 # Photo credits
 
-Every photo in `content/photos/` and its exported copies in `tv/` and `roku/` comes from [Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license) (free photos only, never Unsplash+). The photos are **not** covered by this repository's MIT licence. Masters are resized to 1920 px wide.
+Every photo in `content/photos/` and its exported copies in `tv/` comes from [Unsplash](https://unsplash.com) under the [Unsplash License](https://unsplash.com/license) (free photos only, never Unsplash+). The photos are **not** covered by this repository's MIT licence. Masters are resized to 1920 px wide.
 
 | Place | Photo | Photographer | Shows | Checked |
 |---|---|---|---|---|

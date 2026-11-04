@@ -1,6 +1,6 @@
 # TV content
 
-`destinations.json` is the one source for the TV apps (`tv/`, `roku/`).
+`destinations.json` is the one source for the TV app in `tv/`.
 `scripts/export.mjs` writes sized copies into each app; never edit those by
 hand. Run `npm --prefix scripts run check` after any change.
 

@@ -18,8 +18,7 @@
             "artifact": "ios/build/Build/Products/Release-appletvsimulator/*.app"
           }
         }
-      },
-      "appId": "atlas-4izprndu"
+      }
     },
     "androidtv": {
       "build": {
@@ -36,8 +35,7 @@
             "artifact": "android/app/build/outputs/apk/release/*.apk"
           }
         }
-      },
-      "appId": "atlas-2tp7661r"
+      }
     }
   }
 }

@@ -12,9 +12,9 @@ const ITEMS: Item[] = [
   { key: 'Saved', id: 'nav-saved', label: 'Saved' },
 ];
 
-type ItemProps = { item: Item; current: boolean; onShow(): void };
+type ItemProps = { item: Item; current: boolean; preferred?: boolean; onShow(): void };
 
-const NavItem = forwardRef<View, ItemProps>(function NavItem({ item, current, onShow }, ref) {
+const NavItem = forwardRef<View, ItemProps>(function NavItem({ item, current, preferred, onShow }, ref) {
   const [focused, setFocused] = useState(false);
   return (
     <Pressable
@@ -22,6 +22,7 @@ const NavItem = forwardRef<View, ItemProps>(function NavItem({ item, current, on
       testID={item.id}
       accessibilityLabel={item.label}
       accessibilityState={{ selected: current }}
+      hasTVPreferredFocus={preferred}
       onPress={onShow}
       onFocus={() => {
         setFocused(true);
@@ -41,7 +42,7 @@ const NavItem = forwardRef<View, ItemProps>(function NavItem({ item, current, on
  * pointing at the current item, so pressing up from anywhere below lands on
  * it. No autoFocus: on launch, focus belongs to the first tile.
  */
-export function NavBar({ current, onShow }: { current: Tab; onShow(tab: Tab): void }) {
+export function NavBar({ current, onShow, preferCurrent }: { current: Tab; onShow(tab: Tab): void; preferCurrent?: boolean }) {
   const [target, setTarget] = useState<View | null>(null);
   // Under the Destination screen the bar stays mounted; its guide must not
   // catch focus and send it to a screen that is not on show.
@@ -55,6 +56,7 @@ export function NavBar({ current, onShow }: { current: Tab; onShow(tab: Tab): vo
           ref={item.key === current ? setTarget : undefined}
           item={item}
           current={item.key === current}
+          preferred={preferCurrent && item.key === current}
           onShow={() => onShow(item.key)}
         />
       ))}

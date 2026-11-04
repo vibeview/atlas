@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { BackHandler, Platform, StyleSheet, TVEventControl, View } from 'react-native';
 
 import { getFocused } from '../components/backdropStore';
+import { returnTarget } from '../lib/saved';
+import { useSaved } from '../state/SavedProvider';
 import { NavBar, type Tab } from '../components/NavBar';
 import type { ScreenProps } from '../navigation';
 import { colors } from '../theme';
@@ -22,27 +24,43 @@ export function MainScreen({ navigation }: ScreenProps<'Main'>) {
   // The tile that takes focus: the first Featured tile on launch, the tile
   // that was opened on return from a destination. hasTVPreferredFocus only
   // acts when the prop changes, so it is cleared and set again once the
-  // transition has settled (the pattern Marquee uses).
-  const opened = useRef<{ tab: Tab; slug: string }>({ tab: 'Home', slug: FIRST });
+  // transition has settled.
+  const { saved } = useSaved();
+  const savedNow = useRef(saved);
+  savedNow.current = saved;
+  const opened = useRef<{ tab: Tab; slug: string; index: number }>({ tab: 'Home', slug: FIRST, index: 0 });
   const [preferred, setPreferred] = useState<{ tab: Tab; slug: string } | null>(null);
+  // Saved emptied from the destination: the current nav item takes focus.
+  const [navPreferred, setNavPreferred] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const settle = useCallback(() => {
     setPreferred(null);
+    setNavPreferred(false);
     if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => setPreferred(opened.current), 450);
+    timer.current = setTimeout(() => {
+      const o = opened.current;
+      // An unsave on the destination removes the opened Saved tile: focus its
+      // neighbour, or the nav bar when nothing is left.
+      const slug = o.tab === 'Saved' ? returnTarget(savedNow.current, o.slug, o.index) : o.slug;
+      if (slug) setPreferred({ tab: o.tab, slug });
+      else setNavPreferred(true);
+    }, 450);
   }, []);
   useEffect(() => {
     settle(); // launch: the listener below may attach after the first focus event
     const unsubscribe = navigation.addListener('focus', settle);
+    // Leaving for a destination: a pending re-assert must not fire behind it.
+    const unblur = navigation.addListener('blur', () => timer.current && clearTimeout(timer.current));
     return () => {
       unsubscribe();
+      unblur();
       if (timer.current) clearTimeout(timer.current);
     };
   }, [navigation, settle]);
 
   const open = useCallback(
     (slug: string) => {
-      opened.current = { tab, slug };
+      opened.current = { tab, slug, index: tab === 'Saved' ? savedNow.current.indexOf(slug) : 0 };
       navigation.navigate('Destination', { slug });
     },
     [navigation, tab],
@@ -60,7 +78,7 @@ export function MainScreen({ navigation }: ScreenProps<'Main'>) {
       const sub = BackHandler.addEventListener('hardwareBackPress', () => {
         // The focused element is about to be hidden: give focus to the Home
         // tile used last.
-        opened.current = { tab: 'Home', slug: getFocused() || FIRST };
+        opened.current = { tab: 'Home', slug: getFocused() || FIRST, index: 0 };
         setTab('Home');
         settle();
         return true;
@@ -82,7 +100,7 @@ export function MainScreen({ navigation }: ScreenProps<'Main'>) {
       <View style={show('Saved')}>
         <SavedContent onOpen={open} preferredSlug={pref('Saved')} />
       </View>
-      <NavBar current={tab} onShow={setTab} />
+      <NavBar current={tab} onShow={setTab} preferCurrent={navPreferred} />
     </View>
   );
 }

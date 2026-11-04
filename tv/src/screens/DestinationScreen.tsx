@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useEffect, useRef, useState } from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Image, Platform, StyleSheet, Text, TVEventControl, View } from 'react-native';
 
 import { FULL } from '../components/Backdrop';
 import { Button } from '../components/Button';
@@ -24,6 +25,13 @@ export function DestinationScreen({ route }: ScreenProps<'Destination'>) {
   const d = bySlug[route.params.slug];
   const { isSaved, toggle } = useSaved();
   const saved = isSaved(d.slug);
+  // Menu always goes through React Navigation here, whichever tab opened the
+  // place (Main turns the key off again when it is back on Home).
+  useFocusEffect(
+    useCallback(() => {
+      if (Platform.isTV && Platform.OS === 'ios') TVEventControl.enableTVMenuKey();
+    }, []),
+  );
   const [planned, setPlanned] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => () => {

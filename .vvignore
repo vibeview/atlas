@@ -1,0 +1,5 @@
+# The phone app builds from the repo root: leave out the TV project and the
+# TV content (tv/ builds from its own folder).
+tv/
+content/
+scripts/

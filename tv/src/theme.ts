@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 /**
  * Atlas TV design tokens: the phone app's palette on a dark TV background.
  * Lagoon teal fills buttons only (too low-contrast as text on ink); amber is
- * for ratings and Saved. Sizes are in 1080p points and set the minimums the
+ * for Saved. Sizes are in 1080p points and set the minimums the
  * site's thumbnails need (spec "Look").
  */
 export const colors = {
