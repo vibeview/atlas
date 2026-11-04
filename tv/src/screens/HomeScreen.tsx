@@ -12,7 +12,7 @@ import { colors, font, px, safe, type } from '../theme';
 
 const FIRST = rows[0].slugs[0];
 
-/** Name, country, tagline and rating of the focused place, over the backdrop. */
+/** Name, country, tagline and tags of the focused place, over the backdrop. */
 function TitleBlock() {
   const d = bySlug[useFocusedSlug(FIRST)];
   return (
@@ -25,7 +25,6 @@ function TitleBlock() {
         {d.tagline}
       </Text>
       <View style={styles.metaRow}>
-        <Text style={styles.rating}>★ {d.rating.toFixed(1)}</Text>
         <Text style={styles.meta}>{d.tags.join('  ·  ')}</Text>
       </View>
     </View>
@@ -74,7 +73,6 @@ const styles = StyleSheet.create({
   name: { color: colors.text, fontFamily: font.extrabold, fontSize: px(type.heroName), lineHeight: px(type.heroName * 1.1), marginTop: px(6) },
   tagline: { color: colors.text, fontFamily: font.medium, fontSize: px(type.tagline), marginTop: px(4) },
   metaRow: { flexDirection: 'row', alignItems: 'center', marginTop: px(20) },
-  rating: { color: colors.amber, fontFamily: font.bold, fontSize: px(type.meta), marginRight: px(24) },
   meta: { color: colors.textSoft, fontFamily: font.semibold, fontSize: px(type.meta) },
   rows: { position: 'absolute', left: 0, right: 0, top: px(590), bottom: 0 },
   rowsContent: { paddingBottom: px(200) },

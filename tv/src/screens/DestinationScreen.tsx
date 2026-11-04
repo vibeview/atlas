@@ -49,8 +49,7 @@ export function DestinationScreen({ route }: ScreenProps<'Destination'>) {
           <Text style={styles.country}>{d.country.toUpperCase()}</Text>
           <Text style={styles.name}>{d.name}</Text>
           <View style={styles.metaRow}>
-            <Text style={styles.rating}>★ {d.rating.toFixed(1)}</Text>
-            <Text style={styles.meta}>{d.tags.join('  ·  ')}</Text>
+                <Text style={styles.meta}>{d.tags.join('  ·  ')}</Text>
           </View>
           <Text style={styles.description}>{d.description}</Text>
           <View style={styles.facts}>
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
   country: { color: colors.textSoft, fontFamily: font.bold, fontSize: px(type.meta), letterSpacing: px(3) },
   name: { color: colors.text, fontFamily: font.extrabold, fontSize: px(type.heroName), lineHeight: px(type.heroName * 1.1), marginTop: px(6) },
   metaRow: { flexDirection: 'row', alignItems: 'center', marginTop: px(16) },
-  rating: { color: colors.amber, fontFamily: font.bold, fontSize: px(type.meta), marginRight: px(24) },
   meta: { color: colors.textSoft, fontFamily: font.semibold, fontSize: px(type.meta) },
   description: { color: colors.text, fontFamily: font.medium, fontSize: px(type.body), lineHeight: px(type.body * 1.5), marginTop: px(28) },
   facts: { flexDirection: 'row', marginTop: px(36) },

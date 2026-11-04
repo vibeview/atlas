@@ -50,8 +50,8 @@ export async function checkContent(data, { photoDir }) {
     bySlug.set(s, d);
     if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(s)) problems.push(`${s}: slug must be lowercase-hyphenated`);
     for (const f of TEXT_FIELDS) if (typeof d[f] !== 'string' || !d[f].trim()) problems.push(`${s}: missing ${f}`);
-    if (typeof d.description === 'string' && sentences(d.description) !== 3)
-      problems.push(`${s}: description must be three sentences`);
+    if (typeof d.description === 'string' && ![2, 3].includes(sentences(d.description)))
+      problems.push(`${s}: description must be two or three sentences`);
     if (typeof d.timeZone === 'string' && !TIME_ZONE.test(d.timeZone))
       problems.push(`${s}: time zone "${d.timeZone}" must look like "UTC+2" or "UTC+2, UTC+3 in summer"`);
     if (!Array.isArray(d.tags) || d.tags.length < 2 || d.tags.length > 3) problems.push(`${s}: needs 2 or 3 tags`);
@@ -80,7 +80,10 @@ export async function checkContent(data, { photoDir }) {
   for (const slug of seenInRow.keys()) if (!bySlug.has(slug)) problems.push(`${slug}: in a row but not a destination`);
   for (const slug of bySlug.keys()) if (!seenInRow.has(slug)) problems.push(`${slug}: not in any row`);
   for (const id of PHONE_IDS) if (!bySlug.has(id)) problems.push(`${id}: phone destination missing from the TV set`);
-  const popular = rows.find((r) => r.id === 'popular')?.slugs ?? [];
+  // No live data behind the app, so the first row can't claim to measure anything.
+  const popularRow = rows.find((r) => r.id === 'popular');
+  if (popularRow && /popular|trending|this week/i.test(popularRow.title ?? '')) problems.push('popular: title must not claim live data ("Featured")');
+  const popular = popularRow?.slugs ?? [];
   if (popular.filter((x) => PHONE_IDS.includes(x)).length !== 6) problems.push('popular: must hold six of the phone destinations');
 
   return problems;

@@ -34,7 +34,7 @@ function valid() {
   const slugs = [...PHONE_IDS];
   for (let i = slugs.length; i < 24; i++) slugs.push(`place-${i}`);
   return {
-    rows: ROW_IDS.map((id, r) => ({ id, title: id, slugs: slugs.slice(r * 6, r * 6 + 6) })),
+    rows: ROW_IDS.map((id, r) => ({ id, title: ['Featured', 'Cities', 'Coast & islands', 'Mountains & lakes'][r], slugs: slugs.slice(r * 6, r * 6 + 6) })),
     destinations: slugs.map(destination),
   };
 }
@@ -71,10 +71,20 @@ test('rejects a missing field', async () => {
   assert.ok((await run(d)).some((p) => /airport/.test(p)));
 });
 
-test('rejects a description that is not three sentences', async () => {
+test('rejects a description that is not two or three sentences', async () => {
   const d = valid();
   d.destinations[0].description = 'Only one sentence.';
-  assert.ok((await run(d)).some((p) => /three sentences/.test(p)));
+  assert.ok((await run(d)).some((p) => /two or three sentences/.test(p)));
+  d.destinations[0].description = 'One. Two. Three. Four.';
+  assert.ok((await run(d)).some((p) => /two or three sentences/.test(p)));
+  d.destinations[0].description = 'One sentence here. Two sentences here.';
+  assert.deepEqual(await run(d), []);
+});
+
+test('rejects a popular row titled as if it measured popularity', async () => {
+  const d = valid();
+  d.rows[0].title = 'Popular this week';
+  assert.ok((await run(d)).some((p) => /popular.*title/.test(p)));
 });
 
 test('rejects banned phrases', async () => {
