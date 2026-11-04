@@ -1,0 +1,44 @@
+{
+  "defaultPlatform": "tvos",
+  "metroPort": 8081,
+  "metroCommand": "npm start",
+  "platforms": {
+    "tvos": {
+      "build": {
+        "env": {
+          "EXPO_TV": "1"
+        },
+        "profiles": {
+          "development": {
+            "command": "npm ci && npx expo prebuild --platform ios && xcodebuild -workspace ios/Atlas.xcworkspace -scheme Atlas -configuration Debug -sdk appletvsimulator -derivedDataPath ios/build CODE_SIGN_IDENTITY=-",
+            "artifact": "ios/build/Build/Products/Debug-appletvsimulator/*.app"
+          },
+          "preview": {
+            "command": "npm ci && npx expo prebuild --platform ios && xcodebuild -workspace ios/Atlas.xcworkspace -scheme Atlas -configuration Release -sdk appletvsimulator -derivedDataPath ios/build CODE_SIGN_IDENTITY=-",
+            "artifact": "ios/build/Build/Products/Release-appletvsimulator/*.app"
+          }
+        }
+      },
+      "appId": "atlas-4izprndu"
+    },
+    "androidtv": {
+      "deviceCategory": "tv",
+      "build": {
+        "env": {
+          "EXPO_TV": "1"
+        },
+        "profiles": {
+          "development": {
+            "command": "npm ci && npx expo prebuild --platform android --no-install && cd android && ./gradlew assembleDebug -PreactNativeArchitectures=x86,x86_64",
+            "artifact": "android/app/build/outputs/apk/debug/*.apk"
+          },
+          "preview": {
+            "command": "npm ci && npx expo prebuild --platform android --no-install && cd android && ./gradlew assembleRelease -PreactNativeArchitectures=x86,x86_64",
+            "artifact": "android/app/build/outputs/apk/release/*.apk"
+          }
+        }
+      },
+      "appId": "atlas-2tp7661r"
+    }
+  }
+}
