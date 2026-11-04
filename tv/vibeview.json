@@ -22,7 +22,6 @@
       "appId": "atlas-4izprndu"
     },
     "androidtv": {
-      "deviceCategory": "tv",
       "build": {
         "env": {
           "EXPO_TV": "1"
