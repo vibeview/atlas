@@ -33,6 +33,10 @@ export function SearchScreen({ navigation }: ScreenProps<'Search'>) {
           accessibilityLabel="Search places"
           value={query}
           onChangeText={setQuery}
+          // tvOS: Menu cancels the edit and the field goes back to its old text
+          // without a change event; take the field's final text so the
+          // results always match what the field shows.
+          onEndEditing={(e) => setQuery(e.nativeEvent.text)}
           placeholder="Search places or countries"
           placeholderTextColor={colors.textMuted}
           autoCorrect={false}
